@@ -52,7 +52,6 @@ client.on('messageCreate', async message => {
 
     // Jika pesan adalah perintah nuke
     if (message.content.startsWith('a.nuke')) {
-<<<<<<< HEAD
       // Periksa jika pengguna adalah admin
       if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
           return message.reply('Anda tidak memiliki izin untuk menjalankan perintah ini.');
@@ -97,52 +96,6 @@ client.on('messageCreate', async message => {
           newChannel.send({ embeds: [nukeEmbed] });
       }, 5000);
   }
-=======
-        // Periksa jika pengguna adalah admin
-        if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-            return message.reply('Anda tidak memiliki izin untuk menjalankan perintah ini.');
-        }
-
-        const channel = message.channel;
-
-        // Dapatkan semua izin channel
-        const channelPermissions = channel.permissionOverwrites.cache.map(perm => ({
-            id: perm.id,
-            allow: perm.allow.toArray(),
-            deny: perm.deny.toArray()
-        }));
-
-        // Buat embed konfirmasi
-        const embed = new MessageEmbed()
-            .setTitle('Nuke Channel')
-            .setDescription('Channel ini akan di-nuke dalam 5 detik.')
-            .setColor('RED');
-
-        await message.channel.send({ embeds: [embed] });
-
-        // Tunggu 5 detik sebelum melakukan nuke
-        setTimeout(async () => {
-            const newChannel = await channel.clone(); // Clone channel
-            await channel.delete(); // Hapus channel lama
-
-            // Pindahkan izin ke channel baru
-            for (const perm of channelPermissions) {
-                await newChannel.permissionOverwrites.create(perm.id, {
-                    allow: perm.allow,
-                    deny: perm.deny
-                });
-            }
-
-            // Kirim pesan konfirmasi di channel baru
-            const nukeEmbed = new MessageEmbed()
-                .setTitle('Channel Nuked')
-                .setDescription(`Channel ini telah di-nuke oleh ${message.author.tag}`)
-                .setColor('GREEN');
-
-            newChannel.send({ embeds: [nukeEmbed] });
-        }, 5000);
-    }
->>>>>>> 46f59678dec867e2ee5ffde8cc0c891bf208f4a2
 
     if (message.content.startsWith('a.giveaway')) {
       if (!message.member.permissions.has('ADMINISTRATOR')) {
