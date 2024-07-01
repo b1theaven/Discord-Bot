@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@discordjs/builders": "^1.6.3",
+    "@google-ai/generativelanguage": "^2.5.0",
+    "@google/generative-ai": "^0.13.0",
     "@napi-rs/canvas": "^0.1.53",
     "axios": "^0.21.1",
     "child_process": "^1.0.2",
@@ -19,7 +21,7 @@
     "discord-backup": "^3.0.1",
     "discord-badges": "^0.0.0",
     "discord-banners": "^1.0.1",
-    "discord.js": "^13.14.0",
+    "discord.js": "^13.17.1",
     "discord.js-pagination": "^1.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.17.1",
@@ -27,6 +29,7 @@
     "fivem": "^2.1.8",
     "fs": "^0.0.2",
     "gamedig": "^3.0.1",
+    "google-auth-library": "^9.11.0",
     "google-play-scraper": "^9.0.2",
     "got": "^11.7.0",
     "he": "^1.2.0",
@@ -52,10 +55,7 @@
     "twitter-api.js": "^0.0.12",
     "youtube-sr": "^4.3.10",
     "ytdl-core": "^4.11.5",
-    "ytsr": "^3.8.4",
-    "google-auth-library": "^9.11.0",
-    "@google-ai/generativelanguage": "^2.5.0",
-    "@google/generative-ai": "^0.13.0"
+    "ytsr": "^3.8.4"
   },
   "engines": {
     "node": "16.x"
@@ -68,5 +68,7 @@
     "node",
     "glitch",
     "express"
-  ]
+  ],
+  "author": "",
+  "devDependencies": {}
 }
