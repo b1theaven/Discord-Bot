@@ -54,6 +54,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```Giveaway```, berfungsi sebagai media untuk melakukan giveaway.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
+- ```Nuke```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
 
 ## Notes from Developer
 
