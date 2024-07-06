@@ -27,7 +27,7 @@ module.exports = {
         .setThumbnail(msg.guild.iconURL({dynamic: true}))
         .addFields(
             { name: "<:hammer:885195095840804885> Utility "+ lang(msg.guild, "COMMANDS"), value: stripIndents`
-> \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`movie\`, \`say\`` },
+> \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`movie\`, \`say\`, \`remindme\`` },
             { name: "<:shield:885185036419219496> Moderation", value: stripIndents`
 > \`setprefix\`, \`setlanguage\`, \`clear\`, \`addemoji\`, \`backup\`, \`kick\`, \`ban\`, \`giveaway\`, \`nuke\`, \`reminder\`` },
             { name: "<:information_source:885192830283313232> Information "+ lang(msg.guild, "COMMANDS"), value: stripIndents`

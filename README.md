@@ -23,6 +23,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```ping.js```, berfungsi untuk menampilkan ping user.
 - ```playstore.js```, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari.
 - ```reload.js```, berfungsi untuk memuat ulang commands yang ada pada bot.
+- ```remindme.js```, berfungsi untuk memberi reminder kepada bot untuk mengirimkannya pada user melalui DM.
 - ```reportbug.js```, berfungsi sebagai media untuk melakukan report bug.
 - ```revokeBan.js```, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
 - ```say.js```, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
