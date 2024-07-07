@@ -29,7 +29,9 @@ module.exports = {
             { name: "<:hammer:885195095840804885> Utility "+ lang(msg.guild, "COMMANDS"), value: stripIndents`
 > \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`movie\`, \`say\`, \`remindme\`` },
             { name: "<:shield:885185036419219496> Moderation", value: stripIndents`
-> \`setprefix\`, \`setlanguage\`, \`clear\`, \`addemoji\`, \`backup\`, \`kick\`, \`ban\`, \`giveaway\`, \`nuke\`, \`reminder\`` },
+> \`setprefix\`, \`setlanguage\`, \`clear\`, \`addemoji\`, \`backup\`, \`giveaway\`, \`nuke\`, \`reminder\`` },
+            { name: "<:chart:885185036419219496> Slash "+ lang(msg.guild, "COMMANDS"), value: stripIndents`
+> \`avatar\`, \`serveravatar\`, \`automod-flaggedword\`, \`automod-keyword\`, \`automod-mentionspam\`, \`ban\`, \`kick\`, \`setlanguage\`, \`setprefix\`, \`reloadcommands\`, \`youtubedownload\`` },
             { name: "<:information_source:885192830283313232> Information "+ lang(msg.guild, "COMMANDS"), value: stripIndents`
 > \`steam\`, \`playstore\`, \`topgginfo\`, \`device\`, \`worldclock\`, \`permissions\`, \`whois\`, \`stats\`` },
         )
