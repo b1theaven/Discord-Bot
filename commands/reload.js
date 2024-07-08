@@ -4,7 +4,7 @@ module.exports = {
   name: "reload",
   ownerOnly: true,
   run: async (client, message, args) => {
-    if(!args[0]) return message.channel.send({ content: "<prefix>reload all / <command name>"})
+    if(!args[0]) return message.channel.send({ content: "a.reload all / <command name>"})
     if(args[0] === "all") {
       const reloadEmbed = new MessageEmbed()
       .setColor("BLUE")

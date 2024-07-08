@@ -9,7 +9,7 @@ module.exports = {
   run: async (client, msg, args) => {
     
     let purge = args[0]
-    if(!purge) return msg.channel.send({ content: "<prefix>clear <amount>"})
+    if(!purge) return msg.channel.send({ content: "a.clear <amount>"})
     if(purge > 100) purge = 100;
     
     try {
