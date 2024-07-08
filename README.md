@@ -24,6 +24,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```playstore.js```, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari.
 - ```reload.js```, berfungsi untuk memuat ulang commands yang ada pada bot.
 - ```remindme.js```, berfungsi untuk memberi reminder kepada bot untuk mengirimkannya pada user melalui DM.
+- ```removeReminder.js```, berfungsi untuk menghapus reminder yang sudah dibuat.
 - ```reportbug.js```, berfungsi sebagai media untuk melakukan report bug.
 - ```revokeBan.js```, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
 - ```say.js```, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
