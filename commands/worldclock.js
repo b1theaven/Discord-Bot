@@ -15,7 +15,7 @@ module.exports = {
           var kst = new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" })
           var ist = new Date().toLocaleString("en-US", { timeZone: "Asia/Calcutta" })
           var wib = new Date().toLocaleString("en-US", { timeZone: "Asia/Jakarta" })
-          var wita = new Date().toLocaleString("en-US", { timeZone: "Asia/Irkutsk" })
+          var wita = new Date().toLocaleString("en-US", { timeZone: "Asia/Makassar" })
           var wit = new Date().toLocaleString("en-US", { timeZone: "Asia/Jayapura" })
           
 
