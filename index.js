@@ -1,12 +1,16 @@
 const Discord = require("discord.js");
-const schedule = require('node-schedule');
-const moment = require('moment-timezone');
+const fs = require("fs");
+const path = require('path')
+const giveawayCommand = require('./commands/giveaway');
 const ms = require('ms');
 const client = new Discord.Client({ intents: 32767 });
 const { DiscordBanners } = require('discord-banners');
 const discordBanners = new DiscordBanners(client);
-const fs = require("fs");
 const mongoose = require("mongoose");
+const { HYPIXEL, mongodburl} = require('./config.json');
+const Hypixel = require("hypixel-api-reborn");
+const hy = new Hypixel.Client(process.env.HYPIXEL);
+client.hypixel = hy;
 client.util = require("./util.js");
 const { get } = require("node-superfetch");
 const DBL = require("dblapi.js");
@@ -15,16 +19,16 @@ client.dbl = dbl;
 const { readdirSync } = require("fs");
 const express = require("express");
 const app = express();
-const prefixSchema = require('./models/prefix.js');
-const { loadLanguages } = require("./language.js");
+const prefixSchema = require('./models/prefix');
+const { loadLanguages } = require("./language");
 const { GoogleGenerativeAI } = require('@google/generative-ai')
 const NAME = "rizky"
-const langSchema = require("./models/language.js");
-const lang = require("./language.js");
+const langSchema = require("./models/language");
+const lang = require("./language");
 const KeyAI = new GoogleGenerativeAI(process.env.CHATBOT_APIKEY);
-const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events } = require("discord.js");
+const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const TICKET_CATEGORY_ID = '928313787998666792'; // Ganti dengan ID kategori untuk tiket
-const TICKET_LOG_CHANNEL_ID = '916823813386293259'; // Ganti dengan ID channel log tiket
+const TICKET_LOG_CHANNEL_ID = '1257199978628120586'; // Ganti dengan ID channel log tiket
 const mongoOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -41,118 +45,69 @@ setInterval(() => {
   console.log("Load all guild languages");
 }, 300 * 1000);
 
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+    giveawayCommand.scheduleGiveaways(client); // Schedule giveaways on bot start
+});
+
 client.on("ready", async () => {
     console.log("Online " + client.user.tag);
     client.user.setActivity(`AERO Team Official Bot`);
     loadLanguages(client);
     await mongoose.connect(mongodburl, mongoOptions);
     console.log("Connected to mongodb");
+  
 });
 
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
-
+  
     // Jika pesan adalah perintah nuke
     if (message.content.startsWith('a.nuke')) {
-      // Periksa jika pengguna adalah admin
-      if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-          return message.reply('Anda tidak memiliki izin untuk menjalankan perintah ini.');
-      }
-
-      const channel = message.channel;
-
-      // Dapatkan semua izin channel
-      const channelPermissions = channel.permissionOverwrites.cache.map(perm => ({
-          id: perm.id,
-          allow: perm.allow.toArray(),
-          deny: perm.deny.toArray()
-      }));
-
-      // Buat embed konfirmasi
-      const embed = new MessageEmbed()
-          .setTitle('Nuke Channel')
-          .setDescription('Channel ini akan di-nuke dalam 5 detik.')
-          .setColor('RED');
-
-      await message.channel.send({ embeds: [embed] });
-
-      // Tunggu 5 detik sebelum melakukan nuke
-      setTimeout(async () => {
-          const newChannel = await channel.clone(); // Clone channel
-          await channel.delete(); // Hapus channel lama
-
-          // Pindahkan izin ke channel baru
-          for (const perm of channelPermissions) {
-              await newChannel.permissionOverwrites.create(perm.id, {
-                  allow: perm.allow,
-                  deny: perm.deny
-              });
-          }
-
-          // Kirim pesan konfirmasi di channel baru
-          const nukeEmbed = new MessageEmbed()
-              .setTitle('Channel Nuked')
-              .setDescription(`Channel ini telah di-nuke oleh ${message.author.tag}`)
-              .setColor('GREEN');
-
-          newChannel.send({ embeds: [nukeEmbed] });
-      }, 5000);
-  }
-
-    if (message.content.startsWith('a.giveaway')) {
-      if (!message.member.permissions.has('ADMINISTRATOR')) {
-            return message.reply('You do not have the required permissions to use this command.');
-      }
-        const args = message.content.split(' ');
-        const duration = args[1];
-        const winnersCount = parseInt(args[2]);
-        const prize = args.slice(3).join(' ');
-
-        if (!duration || isNaN(winnersCount) || !prize) {
-            return message.channel.send('Format: a.giveaway <duration> <number_of_winners> <prize>');
+        // Periksa jika pengguna adalah admin
+        if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
+            return message.reply('Anda tidak memiliki izin untuk menjalankan perintah ini.');
         }
 
-        const endTime = Date.now() + ms(duration);
+        const channel = message.channel;
+
+        // Dapatkan semua izin channel
+        const channelPermissions = channel.permissionOverwrites.cache.map(perm => ({
+            id: perm.id,
+            allow: perm.allow.toArray(),
+            deny: perm.deny.toArray()
+        }));
+
+        // Buat embed konfirmasi
         const embed = new MessageEmbed()
-            .setTitle('🎉 **GIVEAWAY** 🎉')
-            .setDescription(`Prize: **${prize}**\nHosted by: ${message.author}\nReact with 🎉 to enter!`)
-            .setFooter(`Ends at`)
-            .setTimestamp(endTime)
-            .setColor('RANDOM');
+            .setTitle('Nuke Channel')
+            .setDescription('Channel ini akan di-nuke dalam 5 detik.')
+            .setColor('RED');
 
-        const giveawayMessage = await message.channel.send({ embeds: [embed] });
-        await giveawayMessage.react('🎉');
+        await message.channel.send({ embeds: [embed] });
 
+        // Tunggu 5 detik sebelum melakukan nuke
         setTimeout(async () => {
-            const fetchedMessage = await message.channel.messages.fetch(giveawayMessage.id);
-            const reactions = fetchedMessage.reactions.cache.get('🎉');
+            const newChannel = await channel.clone(); // Clone channel
+            await channel.delete(); // Hapus channel lama
 
-            if (!reactions) {
-                return message.channel.send('No one entered the giveaway.');
+            // Pindahkan izin ke channel baru
+            for (const perm of channelPermissions) {
+                await newChannel.permissionOverwrites.create(perm.id, {
+                    allow: perm.allow,
+                    deny: perm.deny
+                });
             }
 
-            const users = await reactions.users.fetch();
-            const filteredUsers = users.filter(user => !user.bot);
+            // Kirim pesan konfirmasi di channel baru
+            const nukeEmbed = new MessageEmbed()
+                .setTitle('Channel Nuked')
+                .setDescription(`Channel ini telah di-nuke oleh ${message.author.tag}`)
+                .setColor('GREEN');
 
-            if (filteredUsers.size === 0) {
-                return message.channel.send('No one entered the giveaway.');
-            }
-
-            const winners = filteredUsers.random(winnersCount);
-
-            message.channel.send(`🎉 Congratulations ${winners.map(u => `<@${u.id}>`).join(', ')}! You won **${prize}**!`);
-
-            const logChannel = client.channels.cache.get('893103214231187487'); // Ganti dengan ID channel log Anda
-            if (logChannel) {
-                const logEmbed = new MessageEmbed()
-                    .setTitle('Giveaway Ended')
-                    .setDescription(`Prize: **${prize}**\nWinners: ${winners.map(u => `<@${u.id}>`).join(', ')}\nHosted by: ${message.author}`)
-                    .setTimestamp()
-                    .setColor('RANDOM');
-                logChannel.send({ embeds: [logEmbed] });
-            }
-        }, ms(duration));
-    }
+            newChannel.send({ embeds: [nukeEmbed] });
+        }, 5000);
+    };
 });
 
 // Simpan daftar user yang memiliki tiket aktif
@@ -303,7 +258,7 @@ client.on("guildCreate", async(guild) => {
 
 // Message Delete Logging
 client.on('messageDelete', message => {
-  const logChannel = client.channels.cache.get('916823813386293259');
+  const logChannel = client.channels.cache.get('1257199978628120586');
   if (!logChannel) return;
 
   // Tambahkan pengecekan apakah pesan tersebut dihapus oleh bot sendiri
@@ -323,7 +278,7 @@ client.on('messageDelete', message => {
 // Message Update Logging
 client.on('messageUpdate', (oldMessage, newMessage) => {
   if (oldMessage.content === newMessage.content) return;
-  const logChannel = client.channels.cache.get('916823813386293259');
+  const logChannel = client.channels.cache.get('1257199978628120586');
   if (!logChannel) return;
 
   const embed = new MessageEmbed()
@@ -340,7 +295,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 // Voice State Update Logging
 client.on('voiceStateUpdate', (oldState, newState) => {
-  const logChannel = client.channels.cache.get('916823813386293259');
+  const logChannel = client.channels.cache.get('1257199978628120586');
   if (!logChannel) return;
 
   if (oldState.channelId !== newState.channelId) {
@@ -382,6 +337,7 @@ client.aliases = new Discord.Collection();
 client.cooldown = new Discord.Collection();
 client.events = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
+client.commands = new Map();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.log(err);
