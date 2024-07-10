@@ -17,6 +17,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```emojilist.js```, berfungsi untuk menampilkan emoji apa saja yang ada pada server.
 - ```eval.js```, berfungsi untuk mengevaluasi beberapa kode.
 - ```execute.js```, berfungsi untuk mengeksekusi perintah.
+- ```giveaway.js```, berfungsi sebagai media untuk melakukan giveaway.
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
 - ```permissions.js```, berfungsi untuk menampilkan permissions apa saja yang dimiliki oleh user.
@@ -54,7 +55,6 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Others
 
-- ```Giveaway```, berfungsi sebagai media untuk melakukan giveaway.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
 - ```Nuke```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
