@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const path = require('path')
+const setReminder = require('./commands/setReminder.js')
 const giveawayCommand = require('./commands/giveaway');
 const ms = require('ms');
 const client = new Discord.Client({ intents: 32767 });
@@ -47,7 +48,8 @@ setInterval(() => {
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    giveawayCommand.scheduleGiveaways(client); // Schedule giveaways on bot start
+    giveawayCommand.scheduleGiveaways(client);
+    setReminder.initializeReminders(client);
 });
 
 client.on("ready", async () => {

@@ -7,24 +7,26 @@ const remindersFile = path.resolve(__dirname, '../reminders.json');
 const reminders = new Map(); // Map to store interval IDs
 
 // Load existing reminders from the JSON file
-if (fs.existsSync(remindersFile)) {
-    const data = JSON.parse(fs.readFileSync(remindersFile, 'utf8'));
-    for (const [channelID, reminder] of Object.entries(data)) {
-        const remainingTime = reminder.timestamp + reminder.interval - Date.now();
-        const intervalID = setTimeout(() => {
-            const channel = client.channels.cache.get(channelID);
-            if (channel) {
-                channel.send({ content: reminder.message });
-            }
-            // Set interval to repeat the message
-            const repeatID = setInterval(() => {
+function initializeReminders(client) {
+    if (fs.existsSync(remindersFile)) {
+        const data = JSON.parse(fs.readFileSync(remindersFile, 'utf8'));
+        for (const [channelID, reminder] of Object.entries(data)) {
+            const remainingTime = reminder.timestamp + reminder.interval - Date.now();
+            const intervalID = setTimeout(() => {
+                const channel = client.channels.cache.get(channelID);
                 if (channel) {
                     channel.send({ content: reminder.message });
                 }
-            }, reminder.interval);
-            reminders.set(channelID, repeatID);
-        }, remainingTime > 0 ? remainingTime : 0);
-        reminders.set(channelID, intervalID);
+                // Set interval to repeat the message
+                const repeatID = setInterval(() => {
+                    if (channel) {
+                        channel.send({ content: reminder.message });
+                    }
+                }, reminder.interval);
+                reminders.set(channelID, repeatID);
+            }, remainingTime > 0 ? remainingTime : 0);
+            reminders.set(channelID, intervalID);
+        }
     }
 }
 
@@ -39,7 +41,7 @@ module.exports = {
         const [channelMention, intervalTime, ...messageContent] = args;
         const interval = parseInt(intervalTime) * 60 * 60 * 1000; // Convert hours to milliseconds
 
-        if (!channelMention || !interval || !messageContent.length) {
+        if (!channelMention || isNaN(interval) || !messageContent.length) {
             return msg.channel.send({ content: "Format: `a.setreminder <#channel> <interval_in_hours> <message>`" });
         }
 
@@ -58,9 +60,12 @@ module.exports = {
         reminders.set(targetChannel.id, intervalID);
 
         // Save the reminder to the JSON file with a timestamp
-        const savedReminders = JSON.parse(fs.readFileSync(remindersFile, 'utf8') || '{}');
+        let savedReminders = {};
+        if (fs.existsSync(remindersFile)) {
+            savedReminders = JSON.parse(fs.readFileSync(remindersFile, 'utf8'));
+        }
         savedReminders[targetChannel.id] = { interval, message: reminderMessage, timestamp: Date.now() };
-        fs.writeFileSync(remindersFile, JSON.stringify(savedReminders));
+        fs.writeFileSync(remindersFile, JSON.stringify(savedReminders, null, 4));
 
         const embed = new MessageEmbed()
             .setColor('GREEN')
@@ -68,7 +73,7 @@ module.exports = {
             .setDescription(`A reminder has been set to send the following message every ${intervalTime} hour(s) in ${targetChannel}:\n\n${reminderMessage}`);
 
         msg.channel.send({ embeds: [embed] });
-    }
+    },
+    reminders,
+    initializeReminders
 };
-
-module.exports.reminders = reminders;
