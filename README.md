@@ -32,6 +32,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```setlanguage.js```, berfungsi untuk mengganti bahasa pada bot.
 - ```setprefix.js```, berfungsi untuk mengganti prefix pada bot.
 - ```setReminder.js```, berfungsi untuk mengirimkan pesan yg akan berulang otomatis oleh bot disuatu channel tertentu.
+- ```snipe.js```, berfungsi untuk mengecek pesan terakhir yang dihapus di suatu channel.
 - ```stats.js```, berfungsi untuk mengetahui statistik bot saat ini.
 - ```steam.js```, berfungsi untuk mendeskripsikan aplikasi/game yang ingin dicari.
 - ```topgginfo.js```, berfungsi untuk mencari tahu informasi bot lain di website TOP.GG

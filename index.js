@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const path = require('path')
-const setReminder = require('./commands/setReminder.js')
+const remindMe = require('./commands/remindme');
+const setReminder = require('./commands/setReminder');
 const giveawayCommand = require('./commands/giveaway');
 const ms = require('ms');
 const client = new Discord.Client({ intents: 32767 });
@@ -10,12 +11,12 @@ const discordBanners = new DiscordBanners(client);
 const mongoose = require("mongoose");
 const { HYPIXEL, mongodburl} = require('./config.json');
 const Hypixel = require("hypixel-api-reborn");
-const hy = new Hypixel.Client(process.env.HYPIXEL);
+const hy = new Hypixel.Client("12");
 client.hypixel = hy;
 client.util = require("./util.js");
 const { get } = require("node-superfetch");
 const DBL = require("dblapi.js");
-const dbl = new DBL(process.env.TOPGGTOKEN, client);
+const dbl = new DBL("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg2NDAyNjA0MzM3ODU2NTE2MCIsImJvdCI6dHJ1ZSwiaWF0IjoxNjI3MzA4NTY3fQ.searxcymYsI0v0gfNt91oXLSHqWIOzNMx4shyxmiRgM", client);
 client.dbl = dbl;
 const { readdirSync } = require("fs");
 const express = require("express");
@@ -26,10 +27,17 @@ const { GoogleGenerativeAI } = require('@google/generative-ai')
 const NAME = "rizky"
 const langSchema = require("./models/language");
 const lang = require("./language");
-const KeyAI = new GoogleGenerativeAI(process.env.CHATBOT_APIKEY);
 const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const TICKET_CATEGORY_ID = '928313787998666792'; // Ganti dengan ID kategori untuk tiket
 const TICKET_LOG_CHANNEL_ID = '1257199978628120586'; // Ganti dengan ID channel log tiket
+
+const axios = require("axios")
+const urls = ["https://cheddar-deluxe-brook.glitch.me"]
+setInterval(function() {
+            urls.forEach(url => {
+            axios.get(url).then(console.log("Pong at " + Date.now())).catch(() => {});
+        })
+    }, 60 * 1000);
 const mongoOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -48,8 +56,9 @@ setInterval(() => {
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    remindMe.loadReminders(client);
     giveawayCommand.scheduleGiveaways(client);
-    setReminder.initializeReminders(client);
+    setReminder.loadReminders(client);
 });
 
 client.on("ready", async () => {
@@ -61,9 +70,11 @@ client.on("ready", async () => {
   
 });
 
+client.snipes = new Map();
+
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
-  
+
     // Jika pesan adalah perintah nuke
     if (message.content.startsWith('a.nuke')) {
         // Periksa jika pengguna adalah admin
@@ -259,7 +270,14 @@ client.on("guildCreate", async(guild) => {
 });
 
 // Message Delete Logging
-client.on('messageDelete', message => {
+client.on('messageDelete', function (message, channel){
+    client.snipes.set(message.channel.id, message, {
+    content: message.content,
+    author: message.author,
+    image: message.attachments.first()
+      ? message.attachments.first().proxyURL
+      : null
+  })
   const logChannel = client.channels.cache.get('1257199978628120586');
   if (!logChannel) return;
 
@@ -275,7 +293,7 @@ client.on('messageDelete', message => {
     .setTimestamp();
 
   logChannel.send({ embeds: [embed] });
-});
+})
 
 // Message Update Logging
 client.on('messageUpdate', (oldMessage, newMessage) => {
@@ -339,7 +357,7 @@ client.aliases = new Discord.Collection();
 client.cooldown = new Discord.Collection();
 client.events = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
-client.commands = new Map();
+client.commands = new Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.log(err);
