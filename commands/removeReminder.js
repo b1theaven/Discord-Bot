@@ -2,7 +2,7 @@ const { MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const { reminders } = require('./setReminder');
-const lang = require('../language'); // Pastikan path ini benar sesuai dengan struktur folder Anda
+const lang = require('../language');
 
 const remindersFile = path.resolve(__dirname, '../reminders.json');
 

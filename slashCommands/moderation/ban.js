@@ -30,7 +30,7 @@ module.exports = {
       .setColor("RANDOM")
       .setDescription(`_${lang(interaction.guild, "BANNED")}_ **${members.user.tag}**\n\n__${lang(interaction.guild, "REASON")}__: **${reasons}**`);
 
-    const notificationChannelID = '1251849567327096924'; // Ganti dengan ID channel yang diinginkan
+    const notificationChannelID = '916660170178850846'; // Ganti dengan ID channel yang diinginkan
 
     interaction.guild.members.cache.get(members.user.id).ban({ reason: reasons }).then(async () => {
       interaction.reply({ embeds: [userBan] });

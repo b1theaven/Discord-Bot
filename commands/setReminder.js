@@ -3,29 +3,31 @@ const fs = require('fs');
 const path = require('path');
 const lang = require('../language'); // Pastikan path ini benar sesuai dengan struktur folder Anda
 
-const remindersFile = path.resolve(__dirname, '../reminders.json');
+const databaseFile = path.resolve(__dirname, '../reminders.json');
 const reminders = new Map(); // Map to store interval IDs
 
 // Load existing reminders from the JSON file
-function initializeReminders(client) {
-    if (fs.existsSync(remindersFile)) {
-        const data = JSON.parse(fs.readFileSync(remindersFile, 'utf8'));
-        for (const [channelID, reminder] of Object.entries(data)) {
-            const remainingTime = reminder.timestamp + reminder.interval - Date.now();
-            const intervalID = setTimeout(() => {
-                const channel = client.channels.cache.get(channelID);
-                if (channel) {
-                    channel.send({ content: reminder.message });
-                }
-                // Set interval to repeat the message
-                const repeatID = setInterval(() => {
+function loadReminders(client) {
+    if (fs.existsSync(databaseFile)) {
+        const data = JSON.parse(fs.readFileSync(databaseFile, 'utf8'));
+        if (data.setReminders) {
+            for (const [channelID, reminder] of Object.entries(data.setReminders)) {
+                const remainingTime = reminder.timestamp + reminder.interval - Date.now();
+                const intervalID = setTimeout(() => {
+                    const channel = client.channels.cache.get(channelID);
                     if (channel) {
                         channel.send({ content: reminder.message });
                     }
-                }, reminder.interval);
-                reminders.set(channelID, repeatID);
-            }, remainingTime > 0 ? remainingTime : 0);
-            reminders.set(channelID, intervalID);
+                    // Set interval to repeat the message
+                    const repeatID = setInterval(() => {
+                        if (channel) {
+                            channel.send({ content: reminder.message });
+                        }
+                    }, reminder.interval);
+                    reminders.set(channelID, repeatID);
+                }, remainingTime > 0 ? remainingTime : 0);
+                reminders.set(channelID, intervalID);
+            }
         }
     }
 }
@@ -41,7 +43,7 @@ module.exports = {
         const [channelMention, intervalTime, ...messageContent] = args;
         const interval = parseInt(intervalTime) * 60 * 60 * 1000; // Convert hours to milliseconds
 
-        if (!channelMention || isNaN(interval) || !messageContent.length) {
+        if (!channelMention || !interval || !messageContent.length) {
             return msg.channel.send({ content: "Format: `a.setreminder <#channel> <interval_in_hours> <message>`" });
         }
 
@@ -59,13 +61,20 @@ module.exports = {
 
         reminders.set(targetChannel.id, intervalID);
 
-        // Save the reminder to the JSON file with a timestamp
-        let savedReminders = {};
-        if (fs.existsSync(remindersFile)) {
-            savedReminders = JSON.parse(fs.readFileSync(remindersFile, 'utf8'));
+        // Load existing database
+        let database = { setReminders: {}, remindMe: [] };
+        if (fs.existsSync(databaseFile)) {
+            database = JSON.parse(fs.readFileSync(databaseFile, 'utf8'));
         }
-        savedReminders[targetChannel.id] = { interval, message: reminderMessage, timestamp: Date.now() };
-        fs.writeFileSync(remindersFile, JSON.stringify(savedReminders, null, 4));
+
+        // Ensure setReminders object exists
+        if (typeof database.setReminders !== 'object' || database.setReminders === null) {
+            database.setReminders = {};
+        }
+
+        // Save the reminder to the JSON file with a timestamp
+        database.setReminders[targetChannel.id] = { interval, message: reminderMessage, timestamp: Date.now() };
+        fs.writeFileSync(databaseFile, JSON.stringify(database, null, 4));
 
         const embed = new MessageEmbed()
             .setColor('GREEN')
@@ -74,6 +83,7 @@ module.exports = {
 
         msg.channel.send({ embeds: [embed] });
     },
-    reminders,
-    initializeReminders
+    loadReminders
 };
+
+module.exports.reminders = reminders;
