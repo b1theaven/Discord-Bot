@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageEmbed } = require('discord.js');
 const ms = require("ms")
 const discord = require("discord.js")
 const schema = require("../models/commands")
@@ -54,13 +54,40 @@ const lang = require('../language')
       const check = await schema.findOne({ Cmds: commandfile.name })
     if(check) {
         if(check.Cmds.includes(commandfile.name)) return message.channel.send({ content: lang(msg.guild, 'COMMAND_DISABLE') }) 
-        commandfile.run(client, message, args) 
+        
+     try{
+         const cmd = await commandfile.run(client, message, args); 
+     } catch (err) {
+       
+       const ch = "1260909159432327299"
+       const errEmbed2 = new MessageEmbed()
+       .setTitle("Command butuh perbaikan segera")
+       .setDescription("Sistem mendeteksi adanya error pada command "+"\`"+commandfile.name+"\`")
+       .addField("Error Stack", `\`${err.stack}\``, true)
+       .addField("Error Message", `\`${err.message}\``, true)
+       .setFooter("Error Logging")
+  msg.channel.send({ content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
+ client.channels.cache.get(ch).send({ embeds: [errEmbed2]})
+     }
   }
       if(client.cooldown.has(`${message.author.id}-${commandfile.name}`)) {
           return message.channel.send({ content: stripIndents`
           **${lang(msg.guild, 'COMMAND_COOLDOWN')}**: \`${humanizeDuration(client.cooldown.get(`${msg.author.id}-${commandfile.name}`) - Date.now())}\`` })
       }
-    commandfile.run(client, message, args); 
+     try{
+         const cmd = await commandfile.run(client, message, args); 
+     } catch (err) {
+       
+       const ch = "1260909159432327299"
+       const errEmbed = new MessageEmbed()
+       .setTitle("Command butuh perbaikan segera")
+       .setDescription("Sistem mendeteksi adanya error pada command "+"\`"+commandfile.name+"\`")
+       .addField("Error Stack", `\`${err.stack}\``, true)
+       .addField("Error Message", `\`${err.message}\``, true)
+       .setFooter("Error Logging")
+ msg.channel.send({content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
+client.channels.cache.get(ch).send({ embeds: [errEmbed]})
+     }
     
       if(commandfile.cooldown) {
         const timeOut = (commandfile.cooldown) * 1000
