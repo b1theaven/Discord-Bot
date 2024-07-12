@@ -63,11 +63,11 @@ const lang = require('../language')
        const errEmbed2 = new MessageEmbed()
        .setTitle("Command butuh perbaikan segera")
        .setDescription("Sistem mendeteksi adanya error pada command "+"\`"+commandfile.name+"\`")
-       .addField("Error Stack", `\`${err.stack}\``, true)
-       .addField("Error Message", `\`${err.message}\``, true)
+       .addField("Error Stack", `\`${messageLimit(err.stack)}\``, true)
+       .addField("Error Message", `\`${messageLimit(err.message)}\``, true)
        .setFooter("Error Logging")
-  msg.channel.send({ content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
- client.channels.cache.get(ch).send({ embeds: [errEmbed2]})
+ msg.channel.send({ content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
+         client.channels.cache.get(ch).send({ embeds: [errEmbed2]})
      }
   }
       if(client.cooldown.has(`${message.author.id}-${commandfile.name}`)) {
@@ -82,11 +82,11 @@ const lang = require('../language')
        const errEmbed = new MessageEmbed()
        .setTitle("Command butuh perbaikan segera")
        .setDescription("Sistem mendeteksi adanya error pada command "+"\`"+commandfile.name+"\`")
-       .addField("Error Stack", `\`${err.stack}\``, true)
-       .addField("Error Message", `\`${err.message}\``, true)
+       .addField("Error Stack", `\`${messageLimit(err.stack)}\``, true)
+       .addField("Error Message", `\`${messageLimit(err.message)}\``, true)
        .setFooter("Error Logging")
  msg.channel.send({content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
-client.channels.cache.get(ch).send({ embeds: [errEmbed]})
+         client.channels.cache.get(ch).send({ embeds: [errEmbed]})
      }
     
       if(commandfile.cooldown) {
@@ -98,3 +98,12 @@ client.channels.cache.get(ch).send({ embeds: [errEmbed]})
       }
   }
  }
+ 
+ 
+ function messageLimit(str) {
+  if (str.length > 1000) {
+      return str.substring(0, 1001) + '...';
+  } else {
+      return str;
+  }
+}
