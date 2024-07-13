@@ -11,6 +11,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```addemoji.js```, berfungsi untuk menambahkan suatu emoji kedalam server.
 - ```avatar.js```, berfungsi untuk menampilkan avatar suatu user.
 - ```backup.js```, berfungsi untuk melakukan backup server.
+- ```cancelremind.js```, berfungsi untuk membatalkan dan menghapus reminder user dari database.
 - ```clear.js```, berfungsi untuk membersihkan pesan.
 - ```commands.js```, berfungsi untuk menyalakan/mematikan suatu perintah yang ada pada bot.
 - ```device.js```, berfungsi untuk mengetahui device apa yang digunakan oleh user.
@@ -19,6 +20,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```execute.js```, berfungsi untuk mengeksekusi perintah.
 - ```giveaway.js```, berfungsi sebagai media untuk melakukan giveaway.
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
+- ```listreminder.js```, berfungsi untuk menampilkan list reminder yang dimiliki user.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
 - ```permissions.js```, berfungsi untuk menampilkan permissions apa saja yang dimiliki oleh user.
 - ```ping.js```, berfungsi untuk menampilkan ping user.

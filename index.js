@@ -1,7 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const path = require('path')
-const remindMe = require('./commands/remindme');
+const moment = require('moment-timezone');
+const REMINDERS_FILE = './reminders.json';
 const setReminder = require('./commands/setReminder');
 const giveawayCommand = require('./commands/giveaway');
 const ms = require('ms');
@@ -56,7 +57,6 @@ setInterval(() => {
 
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    remindMe.loadReminders(client);
     giveawayCommand.scheduleGiveaways(client);
     setReminder.loadReminders(client);
 });
@@ -122,6 +122,38 @@ client.on('messageCreate', async message => {
         }, 5000);
     };
 });
+
+function getReminders() {
+    if (!fs.existsSync(REMINDERS_FILE)) {
+        return [];
+    }
+    const data = fs.readFileSync(REMINDERS_FILE);
+    return JSON.parse(data);
+}
+
+function checkReminders() {
+    setInterval(() => {
+        const now = moment();
+        const reminders = getReminders();
+        const toRemove = [];
+
+        reminders.forEach((reminder, index) => {
+            const reminderTime = moment(reminder.time);
+            if (now.isSameOrAfter(reminderTime)) {
+                const channel = client.channels.cache.get(reminder.channelId);
+                if (channel) {
+                    channel.send(`<@${reminder.userId}> Reminder: ${reminder.message}`);
+                }
+                toRemove.push(index);
+            }
+        });
+
+        if (toRemove.length > 0) {
+            const updatedReminders = reminders.filter((_, index) => !toRemove.includes(index));
+            fs.writeFileSync(REMINDERS_FILE, JSON.stringify(updatedReminders, null, 2));
+        }
+    }, 60000); // Check every minute
+}
 
 // Simpan daftar user yang memiliki tiket aktif
 const activeTickets = new Map();
@@ -357,7 +389,7 @@ client.aliases = new Discord.Collection();
 client.cooldown = new Discord.Collection();
 client.events = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
-client.commands = new Collection();
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.log(err);
