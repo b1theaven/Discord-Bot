@@ -4,7 +4,7 @@ const path = require('path');
 const { reminders } = require('./setReminder');
 const lang = require('../language');
 
-const remindersFile = path.resolve(__dirname, '../reminders.json');
+const remindersFile = path.resolve(__dirname, '../remindserver.json');
 
 module.exports = {
     name: 'removereminder',

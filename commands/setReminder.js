@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const lang = require('../language'); // Pastikan path ini benar sesuai dengan struktur folder Anda
 
-const databaseFile = path.resolve(__dirname, '../reminders.json');
+const databaseFile = path.resolve(__dirname, '../remindserver.json');
 const reminders = new Map(); // Map to store interval IDs
 
 // Load existing reminders from the JSON file

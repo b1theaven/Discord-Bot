@@ -1,6 +1,16 @@
 {
     "languages": ["en", "id", "jp"],
     "translations": {
+     "REMINDER_REMOVED": {
+        "en": "Reminder removed",
+        "id": "Pengingat telah dihapus",
+        "jp": "リマインダーが削除されました"
+      },
+      "REMINDER_SET": {
+        "en": "Reminder Set",
+        "id": "Pengingat telah diaktifkan",
+        "jp": "リマインダーを設定"
+      },
       "USERS_DISCRIMINATOR": {
         "en": "Users with discriminator",
         "id": "Pengguna dengan diskriminator",
