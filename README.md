@@ -19,6 +19,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```eval.js```, berfungsi untuk mengevaluasi beberapa kode.
 - ```execute.js```, berfungsi untuk mengeksekusi perintah.
 - ```giveaway.js```, berfungsi sebagai media untuk melakukan giveaway.
+- ```google.js```, berfungsi sebagai pencarian selayaknya Google.
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
 - ```listreminder.js```, berfungsi untuk menampilkan list reminder yang dimiliki user.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
@@ -41,6 +42,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```whois.js```, berfungsi untuk mendeskripsikan user.
 - ```worldclock.js```, berfungsi untuk menampilkan jam dunia.
 - ```youtubedownload.js```, berfungsi untuk meng-convert video YouTube menjadi MP3.
+- ```youtubestats.js```, berfungsi untuk menampilkan statistik dari suatu kanal YouTube.
 
 ## Slash Commands
 
