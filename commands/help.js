@@ -12,7 +12,7 @@ module.exports = {
             .setThumbnail(msg.guild.iconURL({ dynamic: true }))
             .addFields(
                 { name: '<:hammer:885195095840804885> Utility ' + lang(msg.guild, 'COMMANDS'), value: stripIndents`
-> \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`movie\`, \`say\`, \`remindme\`, \`cancelremind\`, \`listreminder\`, \`snipe\`` },
+> \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`movie\`, \`say\`, \`remindme\`, \`cancelremind\`, \`listreminder\`, \`snipe\`, \`google\`, \`ytstats\`, \`afk\`` },
                 { name: '<:shield:885185036419219496> Moderation', value: stripIndents`
 > \`setprefix\`, \`setlanguage\`, \`clear\`, \`addemoji\`, \`backup\`, \`kick\`, \`ban\`, \`giveaway\`, \`nuke\`, \`unban\`, \`reminder\`, \`removeremind\`` },
                 { name: "<:chart:885185036419219496> Slash "+ lang(msg.guild, "COMMANDS"), value: stripIndents`

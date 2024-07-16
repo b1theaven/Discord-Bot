@@ -75,6 +75,38 @@ client.snipes = new Map();
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
 
+    const afkFilePath = path.join(__dirname, 'afk.json');
+    const afkData = JSON.parse(fs.readFileSync(afkFilePath));
+
+    // Check if user is AFK and remove AFK status
+    if (afkData[message.author.id]) {
+      const { username } = afkData[message.author.id];
+      try {
+        await message.member.setNickname(username);
+        delete afkData[message.author.id];
+        fs.writeFileSync(afkFilePath, JSON.stringify(afkData, null, 2));
+
+        const replyMessage = await message.reply('You are no longer AFK.');
+        setTimeout(() => {
+          replyMessage.delete().catch(console.error);
+        }, 3000); // 3 seconds
+      } catch (error) {
+        if (error.code === 50013) {
+          message.reply('I do not have permission to change your nickname.');
+        } else {
+          console.error(error);
+        }
+      }
+    }
+
+    // Check for mentions and respond if mentioned user is AFK
+    message.mentions.users.forEach(user => {
+      if (afkData[user.id]) {
+        message.reply(`${user.username} is AFK: ${afkData[user.id].message}`);
+      }
+    });
+
+  
     // Jika pesan adalah perintah nuke
     if (message.content.startsWith('a.nuke')) {
         // Periksa jika pengguna adalah admin
@@ -310,7 +342,7 @@ client.on('messageDelete', function (message, channel){
       ? message.attachments.first().proxyURL
       : null
   })
-  const logChannel = client.channels.cache.get('1257199978628120586');
+  const logChannel = client.channels.cache.get('1258628318065070168');
   if (!logChannel) return;
 
   // Tambahkan pengecekan apakah pesan tersebut dihapus oleh bot sendiri
@@ -330,7 +362,7 @@ client.on('messageDelete', function (message, channel){
 // Message Update Logging
 client.on('messageUpdate', (oldMessage, newMessage) => {
   if (oldMessage.content === newMessage.content) return;
-  const logChannel = client.channels.cache.get('1257199978628120586');
+  const logChannel = client.channels.cache.get('1258628318065070168');
   if (!logChannel) return;
 
   const embed = new MessageEmbed()
@@ -347,7 +379,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 // Voice State Update Logging
 client.on('voiceStateUpdate', (oldState, newState) => {
-  const logChannel = client.channels.cache.get('1257199978628120586');
+  const logChannel = client.channels.cache.get('1258628318065070168');
   if (!logChannel) return;
 
   if (oldState.channelId !== newState.channelId) {
