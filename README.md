@@ -9,6 +9,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 ## Commands
 
 - ```addemoji.js```, berfungsi untuk menambahkan suatu emoji kedalam server.
+- ```afk.js```, berfungsi untuk menyalakan notifikasi AFK pada user.
 - ```avatar.js```, berfungsi untuk menampilkan avatar suatu user.
 - ```backup.js```, berfungsi untuk melakukan backup server.
 - ```cancelremind.js```, berfungsi untuk membatalkan dan menghapus reminder user dari database.
