@@ -86,13 +86,13 @@ client.on('messageCreate', async message => {
         delete afkData[message.author.id];
         fs.writeFileSync(afkFilePath, JSON.stringify(afkData, null, 2));
 
-        const replyMessage = await message.reply('You are no longer AFK.');
+        const replyMessage = await message.reply(lang(message.guild, 'NOT_AFK'));
         setTimeout(() => {
           replyMessage.delete().catch(console.error);
         }, 3000); // 3 seconds
       } catch (error) {
         if (error.code === 50013) {
-          message.reply('I do not have permission to change your nickname.');
+          message.reply(lang(message.guild, 'BOT_PERMISSIONS'));
         } else {
           console.error(error);
         }

@@ -1,782 +1,792 @@
 {
-    "languages": ["en", "id", "jp"],
-    "translations": {
-     "REMINDER_REMOVED": {
+  "languages": ["en", "id", "jp"],
+  "translations": {
+    "NOT_AFK": {
+      "en": "You are no longer AFK.",
+      "id": "Anda tidak lagi AFK sekarang.",
+      "jp": "あなたはもうAFKではありません。"
+    },
+    "AFK": {
+      "en": "You are now AFK: %s",
+      "id": "Anda telah memasuki status AFK: %s",
+      "jp": "あなたは現在 AFK です: %s"
+    },
+    "REMINDER_REMOVED": {
         "en": "Reminder removed",
         "id": "Pengingat telah dihapus",
         "jp": "リマインダーが削除されました"
-      },
-      "REMINDER_SET": {
+    },
+    "REMINDER_SET": {
         "en": "Reminder Set",
         "id": "Pengingat telah diaktifkan",
         "jp": "リマインダーを設定"
-      },
-      "USERS_DISCRIMINATOR": {
-        "en": "Users with discriminator",
-        "id": "Pengguna dengan diskriminator",
-        "jp": "弁別器を持つユーザー"
-      },
-      "NO_EMOJI": {
-        "en": "There are no emojis on this server",
-        "id": "Tidak ada emoji di server ini",
-        "jp": "このサーバーには絵文字はありません"
-      },
-      "TIME_UP": {
-        "en": "Time is up, please run the command again",
-        "id": "Waktu habis, silakan jalankan perintah lagi",
-        "jp": "時間切れです。コマンドをもう一度実行してください"
-      },
-      "BOT_PERMISSION": {
-        "en": "I don't have a permission",
-        "id": "Aku tidak mempunyai izin",
-        "jp": "許可がありません"
-      },
-      "NAME_SONG_CHAT": {
-        "en": "Enter song name in the chat",
-        "id": "Masukan nama lagu di chat",
-        "jp": "チャットに曲名を入力してください"
-      },
-      "LANGUAGE": {
-        "en": "Language",
-        "id": "Bahasa",
-        "jp": "言語"
-      },
-      "EMOJI_ADDED": {
-        "en": "Successfully added",
-        "id": "Berhasil ditambahkan",
-        "jp": "正常に追加されました"
-      },
-      "SPECIFY_EMOJI": {
-        "en": "Please specify an emoji",
-        "id": "Harap tentukan emoji",
-        "jp": "絵文字を指定してください"
-      },
-      "FONT_SET_TIMMANA": {
-        "en": "Font set to Timmana",
-        "id": "Font diatur ke Timmana",
-        "jp": "フォントをTimmanaに設定"
-      },
-      "GOODBYE_CHANNEL_SETED": {
-        "en": "Good bye message set to channel",
-        "id": "Pesan selamat tinggal disetel ke channel",
-        "jp": "さようならメッセージがチャンネルに設定されました"
-      },
-      "FONT_SELECT": {
-        "en": "To choose the font you want",
-        "id": "Untuk memilih font yang Anda inginkan",
-        "jp": "必要なフォントを選択するには"
-      },
-      "GOODBYE_NOT_SET": {
-        "en": "Good bye message has not been set on this server",
-        "id": "Pesan selamat tinggal belum disetel di server ini",
-        "jp": "このサーバーにさようならメッセージが設定されていません"
-      },
-      "FONT_SET_ARIAL": {
-      "en": "Font set to Arial",
-      "id": "Font disetel ke Arial",
-      "jp": "フォントをArialに設定"
-      },
-      "FONT_SET_BEBAS": {
-        "en": "Font set to BebasNeueRegular",
-        "id": "Font disetel ke BebasNeueRegular",
-        "jp": "フォントをBebasNeueRegularに設定"
-      },
-      "TYPE_FONT": {
-        "en": "Please select the font you want to use",
-        "id": "Silahkan pilih font yang ingin anda gunakan",
-        "jp": "使用したいフォントを選択してください\n利用可能なフォント:"
-      },
-      "WELCOME_ATTACH_SET": {
-        "en": "Attach image successfully set",
-        "id": "Lampiran gambar berhasil disetel",
-        "jp": "画像の添付が正常に設定されました"
-      },
-      "WELCOME_NOT_SET": {
-        "en": "Welcome message has not been set on this server",
-        "id": "Pesan selamat datang belum disetel di server ini",
-        "jp": "このサーバーにウェルカムメッセージが設定されていません"
-      },
-      "WELCOME_ATTACH_FIRST": {
-        "en": "Attach a picture first",
-        "id": "Lampirkan gambar terlebih dahulu",
-        "jp": "最初に写真を添付し​​てください"
-      },
-      "WELCOME_CHANNEL_SETED": {
-        "en": "Welcome message set to channel",
-        "id": "Pesan selamat datang disetel ke channel",
-        "jp": "チャネルに設定されたウェルカムメッセージ"
-      },
-      "WELCOME_PERMISSION_VIEW": {
-        "en": "I don't have permission \"VIEW_CHANNEL\" from channel",
-        "id": "Saya tidak memiliki izin \"VIEW_CHANNEL\" dari channel",
-        "jp": "チャンネルからの権限 \"VIEW_CHANNEL\" がありません"
-      },
-      "WELCOME_PERMISSION_SEND": {
-        "en": "I don't have permission \"SEND_MESSAGES\" from channel",
-        "id": "Saya tidak memiliki izin \"SEND_MESSAGES\" dari channel",
-        "jp": "チャネルからの権限「SEND_MESSAGES」がありません"
-      },
-      "WELCOME_CHANNEL_SET": {
-        "en": "Mention the channel you want to set",
-        "id": "Sebutkan channel yang ingin Anda atur",
-        "jp": "設定したいチャンネルに言及します"
-      },
-      "WELCOME_PARAMETER": {
+    },
+    "USERS_DISCRIMINATOR": {
+      "en": "Users with discriminator",
+      "id": "Pengguna dengan diskriminator",
+      "jp": "弁別器を持つユーザー"
+    },
+    "NO_EMOJI": {
+      "en": "There are no emojis on this server",
+      "id": "Tidak ada emoji di server ini",
+      "jp": "このサーバーには絵文字はありません"
+    },
+    "TIME_UP": {
+      "en": "Time is up, please run the command again",
+      "id": "Waktu habis, silakan jalankan perintah lagi",
+      "jp": "時間切れです。コマンドをもう一度実行してください"
+    },
+    "BOT_PERMISSION": {
+      "en": "I don't have a permission",
+      "id": "Aku tidak mempunyai izin",
+      "jp": "許可がありません"
+    },
+    "NAME_SONG_CHAT": {
+      "en": "Enter song name in the chat",
+      "id": "Masukan nama lagu di chat",
+      "jp": "チャットに曲名を入力してください"
+    },
+    "LANGUAGE": {
+      "en": "Language",
+      "id": "Bahasa",
+      "jp": "言語"
+    },
+    "EMOJI_ADDED": {
+      "en": "Successfully added",
+      "id": "Berhasil ditambahkan",
+      "jp": "正常に追加されました"
+    },
+    "SPECIFY_EMOJI": {
+      "en": "Please specify an emoji",
+      "id": "Harap tentukan emoji",
+      "jp": "絵文字を指定してください"
+    },
+    "FONT_SET_TIMMANA": {
+      "en": "Font set to Timmana",
+      "id": "Font diatur ke Timmana",
+      "jp": "フォントをTimmanaに設定"
+    },
+    "GOODBYE_CHANNEL_SETED": {
+      "en": "Good bye message set to channel",
+      "id": "Pesan selamat tinggal disetel ke channel",
+      "jp": "さようならメッセージがチャンネルに設定されました"
+    },
+    "FONT_SELECT": {
+      "en": "To choose the font you want",
+      "id": "Untuk memilih font yang Anda inginkan",
+      "jp": "必要なフォントを選択するには"
+    },
+    "GOODBYE_NOT_SET": {
+      "en": "Good bye message has not been set on this server",
+      "id": "Pesan selamat tinggal belum disetel di server ini",
+      "jp": "このサーバーにさようならメッセージが設定されていません"
+    },
+    "FONT_SET_ARIAL": {
+    "en": "Font set to Arial",
+    "id": "Font disetel ke Arial",
+    "jp": "フォントをArialに設定"
+    },
+    "FONT_SET_BEBAS": {
+      "en": "Font set to BebasNeueRegular",
+      "id": "Font disetel ke BebasNeueRegular",
+      "jp": "フォントをBebasNeueRegularに設定"
+    },
+    "TYPE_FONT": {
+      "en": "Please select the font you want to use",
+      "id": "Silahkan pilih font yang ingin anda gunakan",
+      "jp": "使用したいフォントを選択してください\n利用可能なフォント:"
+    },
+    "WELCOME_ATTACH_SET": {
+      "en": "Attach image successfully set",
+      "id": "Lampiran gambar berhasil disetel",
+      "jp": "画像の添付が正常に設定されました"
+    },
+    "WELCOME_NOT_SET": {
+      "en": "Welcome message has not been set on this server",
+      "id": "Pesan selamat datang belum disetel di server ini",
+      "jp": "このサーバーにウェルカムメッセージが設定されていません"
+    },
+    "WELCOME_ATTACH_FIRST": {
+      "en": "Attach a picture first",
+      "id": "Lampirkan gambar terlebih dahulu",
+      "jp": "最初に写真を添付し​​てください"
+    },
+    "WELCOME_CHANNEL_SETED": {
+      "en": "Welcome message set to channel",
+      "id": "Pesan selamat datang disetel ke channel",
+      "jp": "チャネルに設定されたウェルカムメッセージ"
+    },
+    "WELCOME_PERMISSION_VIEW": {
+      "en": "I don't have permission \"VIEW_CHANNEL\" from channel",
+      "id": "Saya tidak memiliki izin \"VIEW_CHANNEL\" dari channel",
+      "jp": "チャンネルからの権限 \"VIEW_CHANNEL\" がありません"
+    },
+    "WELCOME_PERMISSION_SEND": {
+      "en": "I don't have permission \"SEND_MESSAGES\" from channel",
+      "id": "Saya tidak memiliki izin \"SEND_MESSAGES\" dari channel",
+      "jp": "チャネルからの権限「SEND_MESSAGES」がありません"
+    },
+    "WELCOME_CHANNEL_SET": {
+      "en": "Mention the channel you want to set",
+      "id": "Sebutkan channel yang ingin Anda atur",
+      "jp": "設定したいチャンネルに言及します"
+    },
+    "WELCOME_PARAMETER": {
+      "en": "Please use a valid parameter",
+      "id": "Harap gunakan parameter yang valid",
+      "jp": "有効なパラメータを使用してください"
+    },
+    "WELCOME_BACKGROUND": {
+      "en": "To set image background",
+      "id": "Untuk mengatur latar belakang gambar",
+      "jp": "画像の背景を設定するには"
+    },
+    "WELCOME_CHANNEL": {
+      "en": "To set the channel",
+      "id": "Untuk mengatur channel",
+      "jp": "チャネルを設定するには"
+    },
+    "MESSAGE": {
+      "en": "Message",
+      "id": "Pesan",
+      "jp": "メッセージ"
+    },
+    "PLAYING": {
+      "en": "Playing",
+      "id": "Bermain",
+      "jp": "遊ぶ"
+    },
+    "USER_INFORMATION": {
+      "en": "User Information",
+      "id": "Informasi User",
+      "jp": "ユーザー情報"
+    },
+    "CREATED_ON": {
+      "en": "Created On",
+      "id": "Dibuat pada",
+      "jp": "作成日"
+    },
+    "MEMBER_INFORMATION": {
+      "en": "Member User Information",
+      "id": "Informasi Pengguna Anggota",
+      "jp": "メンバーユーザー情報"
+    },
+    "MEMBER_BOT": {
+      "en": "Bot Server Information",
+      "id": "Bot Server Informasi",
+      "jp": "ボットサーバー情報"
+    },
+    "MEMBER_USER_BOT": {
+      "en": "Bot Information",
+      "id": "Bot Informasi",
+      "jp": "ボット情報"
+    },
+    "JOINED_SERVER": {
+      "en": "Joined Server",
+      "id": "Bergabung Dengan Server",
+      "jp": "参加したサーバー"
+    },
+    "ROLES": {
+      "en": "Roles",
+      "id": "Peran",
+      "jp": "役割"
+    },
+    "PERMISSIONS": {
+      "en": "Permissions",
+      "id": "Izin",
+      "jp": "権限"
+    },
+    "REASON": {
+      "en": "Reason",
+      "id": "Alasan",
+      "jp": "理由"
+    },
+    "KICK": {
+      "en": "Kick user",
+      "id": "Pengguna yang di-tendang",
+      "jp": "キックされたユーザー"
+    },
+    "CANT_KICK": {
+      "en": "I can't kick this user or i don't have permission to banned",
+      "id": "Saya tidak dapat menendang pengguna ini atau saya tidak memiliki izin untuk melakukannya",
+      "jp": "このユーザーをキックできないか、キックする権限がありません"
+    },
+    "BANNED": {
+      "en": "Banned user",
+      "id": "Pengguna yang di banned",
+      "jp": "ブロックされたユーザー"
+    },
+    "CANT_BAN": {
+      "en": "I can't ban this user or i don't have permission to banned",
+      "id": "Saya tidak dapat memblokir pengguna ini atau saya tidak memiliki izin untuk membanned",
+      "jp": "このユーザーを禁止できないか、禁止する権限がありません"
+    },
+    "INTERACTION_PERMISSION": {
+      "en": "You don't have a permission",
+      "id": "Kamu tidak memiliki izin",
+      "jp": "あなたには許可がありません"
+    },
+    "IP_SETED": {
+      "en": "IP address successfully set",
+      "id": "Alamat ip berhasil di atur",
+      "jp": "IPアドレスが正常に設定されました"
+    },
+    "IP_PORT": {
+      "en": "<ip> <port> don't use <>",
+      "id": "<ip> <port> jangan gunakan <>",
+      "jp": "<ip> <port> は <> を使用しないでください"
+    },
+    "SETIP_SAMP_LIVE": {
+      "en": "Set ip address sa-mp",
+      "id": "Setel alamat ip sa-mp",
+      "jp": "IPアドレスsa-mpを設定します"
+    },
+    "DELETED_LIVE_SAMP": {
+      "en": "Successfully deleted",
+      "id": "Berhasil di hapus",
+      "jp": ""
+    },
+    "LIVE_NOT_SET": {
+      "en": "This server doesn't manage anything",
+      "id": "Server ini tidak mengatur alamat ip apapun",
+      "jp": ""
+    },
+    "CHANNEL_SET": {
+      "en": "Set to channel",
+      "id": "Setel ke saluran",
+      "jp": ""
+    },
+    "DONT_HAVE_PERMISSION_SENDMESSAGE": {
+      "en": "I don't have a \"SEND_MESSAGES\" permission from channel",
+      "id": "Aku tidak mempunyai izin \"SEND_MESSAGES\" dari channel",
+      "jp": ""
+    },
+    "DONT_HAVE_PERMISSION_VIEW": {
+      "en": "I don't have a \"VIEW_CHANNEL\" permission from channel",
+      "id": "Aku tidak mempunyai izin \"VIEW_CHANNEL\" dari channel",
+      "jp": ""
+    },
+    "MENTION_CHANNEL": {
+      "en": "Please mention any channel to set",
+      "id": "Sebutkan saluran apa saja yang akan disetel",
+      "jp": "設定するチャンネルを教えてください  "
+    },
+    "TO_DELETE_LIVE_SAMP": {
+      "en": "To delete live status sa-mp",
+      "id": "Untuk menghapus status langsung sa-mp",
+      "jp": ""
+    },
+    "TO_SET_LIVE_SAMP": {
+      "en": "To set live status sa-mp",
+      "id": "Untuk mengatur status langsung sa-mp",
+      "jp": "ライブステータスサンプルを設定するには"
+    },
+    "OWNER_ONLY": {
+      "en": "Only owner can use this command",
+      "id": "Hanya pemilik yang dapat menggunakan perintah ini",
+      "jp": "所有者のみがこのコマンドを使用できます"
+    },
+    "COMMANDS_LIST": {
+      "en": "Commands list",
+      "id": "Daftar Perintah",
+      "jp": "コマンドリスト"
+    },
+    "COMMANDS": {
+      "en": "Commands",
+      "id": "Perintah",
+      "jp": "コマンド"
+    },
+    "REMOVED": {
+      "en": "Messages were removed",
+      "id": "Pesan telah dihapus",
+      "jp": "メッセージが削除されました"
+    },
+    "UNKNOWN_MESSAGE": {
+      "en": "Unknown message",
+      "id": "Pesan tidak di kenal",
+      "jp": "不明なメッセージ"
+    },
+    "MANAGE_MESSAGES": {
+      "en": "You are missing \"MANAGE_MESSAGES\" permissions to run thid commands",
+      "id": "Anda kehilangan izin \"MANAGE_MESSAGES\" untuk menjalankan perintah ini",
+      "jp": "このコマンドを実行するための「MANAGE_MESSAGES」がありません"
+    },
+    "MANAGE_GUILD_PERMISSION": {
+      "en": "You are missing __\"MANAGE_GUILD\"__ permissions to run this commands",
+      "id": "Anda kehilangan izin __\"MANAGE_GUILD\"__ untuk menjalankan perintah ini",
+      "jp": "このコマンドを実行するための__\"MANAGE_GUILD\"__権限がありません"
+    },
+    "ADMINISTRATOR_PERMISSION": {
+      "en": "You are missing __\"ADMINISTRATOR\"__ permissions to run this commands",
+      "id": "Anda kehilangan izin __\"ADMINISTRATOR\"__ untuk menjalankan perintah ini",
+      "jp": "このコマンドを実行するための__\"ADMINISTRATOR\"__権限がありません"
+    },
+    "MISSING_PERMISSION": {
+      "en": "Missing permissions",
+      "id": "Izin tidak ada",
+      "jp": "権限がありません"
+    },
+    "IP_NOT_SET": {
+        "en": "The server has been not set, please run the command",
+        "id": "Server ini belum set apapun, mohon jalankan perintah",
+       "jp": "サーバーが設定されていません。コマンドを実行してください"
+    },
+    "SERVER_OFFLINE": {
+        "en": "Server is offline",
+        "id": "Server ini offline",
+       "jp": "サーバーがオフラインです"
+    },
+    "SERVER_NAME": {
+        "en": "Server Name",
+        "id": "Nama Server",
+       "jp": "サーバーの名前"
+    },
+    "VERSION_SERVER": {
+        "en": "Version",
+        "id": "Versi",
+       "jp": "バージョン"
+    },
+    "ONLINE_PLAYERS": {
+        "en": "Online Players",
+        "id": "Pemain Online",
+       "jp": "オンラインプレイヤー"
+    },
+    "PLAYER_LIST": {
+        "en": "Player List",
+        "id": "Daftar Pemain",
+        "jp": "プレイヤーリスト"
+    },
+    "PLAYERLIST_EXCEED": {
+        "en": "Exceed 100",
+        "id": "Melebihi 100",
+        "jp": "100を超える"
+    },
+    "PLAYERLIST_EMPTY": {
+        "en": "Empty",
+        "id": "Kosong",
+        "jp": "空の"
+    },
+    "VALID_PARAMETER": {
         "en": "Please use a valid parameter",
-        "id": "Harap gunakan parameter yang valid",
-        "jp": "有効なパラメータを使用してください"
-      },
-      "WELCOME_BACKGROUND": {
-        "en": "To set image background",
-        "id": "Untuk mengatur latar belakang gambar",
-        "jp": "画像の背景を設定するには"
-      },
-      "WELCOME_CHANNEL": {
-        "en": "To set the channel",
-        "id": "Untuk mengatur channel",
-        "jp": "チャネルを設定するには"
-      },
-      "MESSAGE": {
-        "en": "Message",
-        "id": "Pesan",
-        "jp": "メッセージ"
-      },
-      "PLAYING": {
-        "en": "Playing",
-        "id": "Bermain",
-        "jp": "遊ぶ"
-      },
-      "USER_INFORMATION": {
-        "en": "User Information",
-        "id": "Informasi User",
-        "jp": "ユーザー情報"
-      },
-      "CREATED_ON": {
-        "en": "Created On",
-        "id": "Dibuat pada",
-        "jp": "作成日"
-      },
-      "MEMBER_INFORMATION": {
-        "en": "Member User Information",
-        "id": "Informasi Pengguna Anggota",
-        "jp": "メンバーユーザー情報"
-      },
-      "MEMBER_BOT": {
-        "en": "Bot Server Information",
-        "id": "Bot Server Informasi",
-        "jp": "ボットサーバー情報"
-      },
-      "MEMBER_USER_BOT": {
-        "en": "Bot Information",
-        "id": "Bot Informasi",
-        "jp": "ボット情報"
-      },
-      "JOINED_SERVER": {
-        "en": "Joined Server",
-        "id": "Bergabung Dengan Server",
-        "jp": "参加したサーバー"
-      },
-      "ROLES": {
-        "en": "Roles",
-        "id": "Peran",
-        "jp": "役割"
-      },
-      "PERMISSIONS": {
-        "en": "Permissions",
-        "id": "Izin",
-        "jp": "権限"
-      },
-      "REASON": {
-        "en": "Reason",
-        "id": "Alasan",
-        "jp": "理由"
-      },
-      "KICK": {
-        "en": "Kick user",
-        "id": "Pengguna yang di-tendang",
-        "jp": "キックされたユーザー"
-      },
-      "CANT_KICK": {
-        "en": "I can't kick this user or i don't have permission to banned",
-        "id": "Saya tidak dapat menendang pengguna ini atau saya tidak memiliki izin untuk melakukannya",
-        "jp": "このユーザーをキックできないか、キックする権限がありません"
-      },
-      "BANNED": {
-        "en": "Banned user",
-        "id": "Pengguna yang di banned",
-        "jp": "ブロックされたユーザー"
-      },
-      "CANT_BAN": {
-        "en": "I can't ban this user or i don't have permission to banned",
-        "id": "Saya tidak dapat memblokir pengguna ini atau saya tidak memiliki izin untuk membanned",
-        "jp": "このユーザーを禁止できないか、禁止する権限がありません"
-      },
-      "INTERACTION_PERMISSION": {
-        "en": "You don't have a permission",
-        "id": "Kamu tidak memiliki izin",
-        "jp": "あなたには許可がありません"
-      },
-      "IP_SETED": {
-        "en": "IP address successfully set",
-        "id": "Alamat ip berhasil di atur",
-        "jp": "IPアドレスが正常に設定されました"
-      },
-      "IP_PORT": {
-        "en": "<ip> <port> don't use <>",
-        "id": "<ip> <port> jangan gunakan <>",
-        "jp": "<ip> <port> は <> を使用しないでください"
-      },
-      "SETIP_SAMP_LIVE": {
-        "en": "Set ip address sa-mp",
-        "id": "Setel alamat ip sa-mp",
-        "jp": "IPアドレスsa-mpを設定します"
-      },
-      "DELETED_LIVE_SAMP": {
-        "en": "Successfully deleted",
-        "id": "Berhasil di hapus",
-        "jp": ""
-      },
-      "LIVE_NOT_SET": {
-        "en": "This server doesn't manage anything",
-        "id": "Server ini tidak mengatur alamat ip apapun",
-        "jp": ""
-      },
-      "CHANNEL_SET": {
-        "en": "Set to channel",
-        "id": "Setel ke saluran",
-        "jp": ""
-      },
-      "DONT_HAVE_PERMISSION_SENDMESSAGE": {
-        "en": "I don't have a \"SEND_MESSAGES\" permission from channel",
-        "id": "Aku tidak mempunyai izin \"SEND_MESSAGES\" dari channel",
-        "jp": ""
-      },
-      "DONT_HAVE_PERMISSION_VIEW": {
-        "en": "I don't have a \"VIEW_CHANNEL\" permission from channel",
-        "id": "Aku tidak mempunyai izin \"VIEW_CHANNEL\" dari channel",
-        "jp": ""
-      },
-      "MENTION_CHANNEL": {
-        "en": "Please mention any channel to set",
-        "id": "Sebutkan saluran apa saja yang akan disetel",
-        "jp": ""
-      },
-      "TO_DELETE_LIVE_SAMP": {
-        "en": "To delete live status sa-mp",
-        "id": "Untuk menghapus status langsung sa-mp",
-        "jp": ""
-      },
-      "TO_SET_LIVE_SAMP": {
-        "en": "To set live status sa-mp",
-        "id": "Untuk mengatur status langsung sa-mp",
-        "jp": "ライブステータスサンプルを設定するには"
-      },
-      "OWNER_ONLY": {
-        "en": "Only owner can use this command",
-        "id": "Hanya pemilik yang dapat menggunakan perintah ini",
-        "jp": "所有者のみがこのコマンドを使用できます"
-      },
-      "COMMANDS_LIST": {
-        "en": "Commands list",
-        "id": "Daftar Perintah",
-        "jp": "コマンドリスト"
-      },
-      "COMMANDS": {
-        "en": "Commands",
-        "id": "Perintah",
-        "jp": "コマンド"
-      },
-      "REMOVED": {
-        "en": "Messages were removed",
-        "id": "Pesan telah dihapus",
-        "jp": "メッセージが削除されました"
-      },
-      "UNKNOWN_MESSAGE": {
-        "en": "Unknown message",
-        "id": "Pesan tidak di kenal",
-        "jp": "不明なメッセージ"
-      },
-      "MANAGE_MESSAGES": {
-        "en": "You are missing \"MANAGE_MESSAGES\" permissions to run thid commands",
-        "id": "Anda kehilangan izin \"MANAGE_MESSAGES\" untuk menjalankan perintah ini",
-        "jp": "このコマンドを実行するための「MANAGE_MESSAGES」がありません"
-      },
-      "MANAGE_GUILD_PERMISSION": {
-        "en": "You are missing __\"MANAGE_GUILD\"__ permissions to run this commands",
-        "id": "Anda kehilangan izin __\"MANAGE_GUILD\"__ untuk menjalankan perintah ini",
-        "jp": "このコマンドを実行するための__\"MANAGE_GUILD\"__権限がありません"
-      },
-      "ADMINISTRATOR_PERMISSION": {
-        "en": "You are missing __\"ADMINISTRATOR\"__ permissions to run this commands",
-        "id": "Anda kehilangan izin __\"ADMINISTRATOR\"__ untuk menjalankan perintah ini",
-        "jp": "このコマンドを実行するための__\"ADMINISTRATOR\"__権限がありません"
-      },
-      "MISSING_PERMISSION": {
-        "en": "Missing permissions",
-        "id": "Izin tidak ada",
-        "jp": "権限がありません"
-      },
-      "IP_NOT_SET": {
-          "en": "The server has been not set, please run the command",
-          "id": "Server ini belum set apapun, mohon jalankan perintah",
-         "jp": "サーバーが設定されていません。コマンドを実行してください"
-      },
-      "SERVER_OFFLINE": {
-          "en": "Server is offline",
-          "id": "Server ini offline",
-         "jp": "サーバーがオフラインです"
-      },
-      "SERVER_NAME": {
-          "en": "Server Name",
-          "id": "Nama Server",
-         "jp": "サーバーの名前"
-      },
-      "VERSION_SERVER": {
-          "en": "Version",
-          "id": "Versi",
-         "jp": "バージョン"
-      },
-      "ONLINE_PLAYERS": {
-          "en": "Online Players",
-          "id": "Pemain Online",
-         "jp": "オンラインプレイヤー"
-      },
-      "PLAYER_LIST": {
-          "en": "Player List",
-          "id": "Daftar Pemain",
-          "jp": "プレイヤーリスト"
-      },
-      "PLAYERLIST_EXCEED": {
-          "en": "Exceed 100",
-          "id": "Melebihi 100",
-          "jp": "100を超える"
-      },
-      "PLAYERLIST_EMPTY": {
-          "en": "Empty",
-          "id": "Kosong",
-          "jp": "空の"
-      },
-      "VALID_PARAMETER": {
-          "en": "Please use a valid parameter",
-          "id": "Mohon gunakan parameter yang valid",
-          "jp": "Please use a valid parameter"
-      },
-      "SERVER_SAVES": {
-          "en": "Saves from this server",
-          "id": "Menyimpan dari server ini",
-          "jp": "このサーバーから保存"
-      },
-      "LOAD_SERVER": {
-          "en": "Load from this server",
-          "id": "Memuat dari server ini",
-          "jp": "このサーバーからロード"
-      },
-      "SHOW_INFO": {
-          "en": "Show info of this  backup",
-          "id": "Melihat info cadangan ini",
-          "jp": "このバックアップの情報を表示する"
-      },
-      "BACKUP_CREATED_SUCCESS": {
-        "en": "Created successfully",
-        "id": "Berhasil di buat",
-        "jp": "正常に作成されました"
-      },
-      "TO_LOAD_BACKUP": {
-        "en": "To load the backup",
-        "id": "Memuat cadangan",
-        "jp": "バックアップをロードするには"
-      },
-      "BACKUP_WARNING": {
-          "en": "⚠️ When the backup is loaded, all the channels, roles, etc. Will be replaced\nSelect:\nAccept\n Canceled",
-          "id": "⚠️ Setelah memuat cadangan, semua channel, roles, dan lain lain. Akan di ganti\nPilih:\nSetuju\nMembatalkan" ,  
-          "jp": "バックアップが読み込まれると、すべてのチャネル、役割などが置き換えられます\n選択：\n承認\nキャンセル"
-      },
-      "WAITING_BACKUP": {
-        "en": "Waiting for accept or cancel",
-        "id": "Menunggu untuk menyetujui atau membatalkan",
-        "jp": "承認またはキャンセルを待っています"
-      },
-      "BACKUP_START": {
-          "en": "Accepted. Start loading the backup",
-          "id": "Menerima. Memulai memuat cadangan",
-          "jp": "受け入れられました。バックアップのロードを開始します"
-      },
-      "BACKUP_PERMISSION_MISSING": {
-          "en": "Sorry, an error occurred. Please check that i have \"ADMINISTRATOR\" permission",
-          "id": "Maaf, terjadi kesalahan. Mohon periksa saya mempunyai akses \"ADMINISTRATOR\"",
-          "jp": "申し訳ありませんが、エラーが発生しました。\"ADMINISTRATOR\"権限があることを確認してください"
-      },
-      "BACKUP_SUCESS_CREATED": {
-        "en": "Backup successfully created. Check your dms i send the backup ID",
-        "id": "Cadangan berhasil dibuat. Cek dms Anda, saya mengirim ID cadangan",
-        "jp": "バックアップが正常に作成されました。あなたのDMSをチェックしてください私はバックアップIDを送ります"
-      },
-      "BACKUP_CANCEL": {
-          "en": "You canceled the backup",
-          "id": "Kamu membatalkan pencadangan",
-          "jp": "バックアップをキャンセルしました"
-      },
-      "BACKUP_NOT_FOUND": {
-          "en": "Backup ID not found",
-          "id": "ID cadangan tidak di temukan",
-          "jp": "バックアップIDが見つかりません"
-      },
-      "VALID_BACKUP_ID": {
-          "en": "You must specify a valid backup id",
-          "id": "Kamu harus memasukan id cadangan yang valid",
-          "jp": "有効なバックアップIDを指定する必要があります"
-      },
-      "BACKUP_SIZE": {
-          "en": "Size",
-          "id": "Ukuran",
-          "jp": "サイズ"
-      },
-      "BACKUP_CREATED_AT": {
-          "en": "Created At",
-          "id": "Di buat pada",
-          "jp": "作成場所"
-      },
-      "DEVICE_MENTION_USERS": {
-          "en": "Mentions user first",
-          "id": "Sebutkan pengguna terlebih dahulu",
-          "jp": "ユーザーに最初に言及する"
-      },
-      "DEVICE_USED": {
-          "en": "Device used by",
-          "id": "Perangkat yang di gunakan oleh",
-          "jp": "によって使用されるデバイス"
-      },
-      "DEVICE_ERROR": {
-          "en": "Error:",
-          "id": "Kesalahan:",
-          "jp": "エラー:"
-      },
-      "SET_IP": {
-          "en": "This server has not set any ip, if you have access \"MANAGE_GUILD\" please run the command",
-          "id": "Server ini belum mengatur ip apapun, jika kamu mempunyai akses \"MANAGE_GUILD\" mohon jalankan perintah",
-          "jp": "このサーバーはIPを設定していません。アクセス権が \"「MANAGE_GUILD」\" の場合は、コマンドを実行してください" 
-      },
-      "IP_IS_UNHIDE": {
-          "en": "IP set to unhide\neveryone can see it",
-          "id": "IP diatur ke unhide\nsemua orang bisa melihatnya",
-          "jp": "再表示するように設定されたIP \nすべての人がそれを見ることができます" 
-      },
-      "IP_SET_HIDE": {
-          "en": "IP set to hide\neveryone can't see it",
-          "id": "IP diatur ke hide\nsemua orang tidak bisa melihatnya",
-          "jp": "非表示に設定されたIP \neveryoneはそれを見ることができません" 
-      },
-      "IP_IS_HIDE": {
-          "en": "It's like admins hiding the ip address",
-          "id": "Sepertinya admins menyembunyikan ip address",
-          "jp": "管理者がIPアドレスを隠しているようなものです" 
-        
-      },
-      "IP_SHOW": {
-          "en": "Here the IP",
-          "id": "Ini ip nya",
-          "jp": "ここでIP" 
-      },
-      "CANNOT_DMS": {
-          "en": "I can't dm you please turn it on",
-          "id": "Aku tidak bisa mengirim mu pesan mohon hidupkan",
-          "jp": "私はあなたがそれをオンにしてくださいDMすることはできません"
-      },
-      "CANNOT_FIND_USER": {
-        "en": "Error! Unable to find specified user. Please try again.",
-        "id": "Kesalahan! Tidak dapat menemukan pengguna tertentu. Silakan coba lagi.",
-        "jp": "エラー！指定されたユーザーが見つかりません。もう一度やり直してください。"
-      },
-      "GET_INFO_PING": {
-        "en": "Getting ping info...",
-        "id": "Mendapatkan info ping...",
-        "jp": "ping情報を取得しています..."
-      },
-      "ACCEPT": {
-        "en": "Accept",
-        "id": "Menyetujui",
-        "jp": "承認"
-      },
-      "CANCEL": {
-        "en": "Cancel",
-        "id": "Membatalkan",
-        "jp": "キャンセル"
-      },
-      "SUCCESS_DELETED_SAMP": {
-        "en": "Success delete server samp from my database",
-        "id": "Berhasil menghapus samp server dari database saya",
-        "jp": "データベースからサーバーサンプルを削除することに成功しました"
-      },
-       "CANCEL_DELETED_SAMP": {
-        "en": "You cancel to remove server samp from my database",
-        "id": "Anda membatalkan untuk menghapus samp server dari database saya",
-        "jp": "データベースからサーバーサンプルを削除するためにキャンセルします"
-      },
-      "COMMAND_COOLDOWN": {
-        "en": "Try running this commands in",
-        "id": "Coba jalankan perintah ini di",
-        "jp": "このコマンドをで実行してみてください"
-      },
-      "COMMAND_DISABLE": {
-        "en": "This commands has been disabled by dev",
-        "id": "Perintah ini telah dinonaktifkan oleh dev",
-        "jp": "このコマンドは開発者によって無効にされています"
-      },
-       "ENTER_NAME_SONG": {
-        "en": "Enter the name of the song",
-        "id": "Masukkan nama lagu",
-         "jp": "曲名を入力してください"
-      },
-       "SONG_DURATION": {
-        "en": "Duration",
-        "id": "Durasi",
-        "jp": "間隔"
-      },
-      "NAME": {
-        "en": "Name",
-        "id": "Nama",
-        "jp": "名前"
-      },
-      "TO_DOWNLOAD_MUSIC": {
-        "en": "To download the music",
-        "id": "Untuk mengunduh musik",
-        "jp": "音楽をダウンロードするには"
-      },
-      "SELECT_BUTTON": {
-        "en": "Please select the button below",
-        "id": "Silakan pilih tombol di bawah",
-        "jp": "ボタンを選択してください"
-      },
-      "CANCELED": {
-        "en": "Canceled",
-        "id": "Membatalkan",
-        "jp": "キャンセル"
-      },
-      "DOWNLOADING": {
-        "en": "Downloading",
-        "id": "Mengunduh",
-        "jp": "ダウンロード"
-      },
-      "FILE_SENT_FAILED": {
-        "en": "Failed to sent the file!\nError: Large size music cannot be sent",
-        "id": "Gagal mengirim file!\nError: Large size music cannot be sent",
-        "jp": "ファイルの送信に失敗しました！\nエラー：大きなサイズの音楽を送信できません"
-      },
-      "DOWNLOAD_SUCCESS": {
-        "en": "Downloading sucess",
-        "id": "Mengunduh berhasil",
-        "jp": "ダウンロードの成功"
-      },
-      "SEARCHING_MUSIC": {
-        "en": "Searching music",
-        "id": "Mencari musik",
-        "jp": "音楽を検索する"
-      },
-      "SELECT_LANGUAGE": {
-        "en": "Please select language\nAvailable languages:\n - English [en] 🇺🇸\n - Indonesia [id] 🇮🇩\n - Japan [jp] 🇯🇵",
-        "id": "Silahkan pilih bahasa\nBahasa yang tersedia:\n - English [en] 🇺🇸\n - Indonesia [id] 🇮🇩\n - Japan [jp] 🇯🇵",
-        "jp": "言語を選択してください\n利用可能な言語：\n- 英語 [en] 🇺🇸\n- インドネシア [id] 🇮🇩\n- 日本 [jp] 🇯🇵"
-      },
-       "LANGUAGE_NOT_FOUND": {
-        "en": "Language not found",
-        "id": "Bahasa tidak di temukan",
-        "jp": "言語が見つかりません"
-      },
-      "LANGUAGE_SET": {
-        "en": "Language is set to english 🇺🇸",
-        "id": "Bahasa di atur ke indonesia 🇮🇩",
-        "jp": "言語は日本に設定されています 🇯🇵"
-      },
-      "INPUT_NEW_PREFIX": {
-        "en": "Please input new prefix",
-        "id": "Silakan masukkan prefix baru",
-        "jp": "新しいプレフィックスを入力してください"
-      },
-      "EXAMPLE": {
-        "en": "Example",
-        "id": "Contoh",
-        "jp": "例"
-      },
-      "PREFIX_SET": {
-        "en": "Prefix set to",
-        "id": "Prefix di atur ke",
-        "jp": "プレフィックスをに設定"
-      },
-      "PREFIX_LONG": {
-        "en": "Prefix is too long, you have max 3 characters",
-        "id": "Prefix terlalu panjang, anda memiliki maksimal 3 karakter",
-        "jp": "プレフィックスが長すぎます。最大3文字です。"
-      },
-      "SEARCH_SOMETHING": {
-        "en": "Please provide something to search",
-        "id": "Tolong berikan sesuatu untuk dicari",
-        "jp": "検索するものを提供してください"
-      },
-       "SEARCH_NOT_FOUND": {
-        "en": "No result found for",
-        "id": "Tidak ada hasil yang ditemukan untuk",
-         "jp": "結果が見つかりません"
-      },
-      "PRICE": {
-        "en": "Price",
-        "id": "Harga",
-        "jp": "価格"
-      },
-      "FREE": {
-        "en": "Free",
-        "id": "Gratis",
-        "jp": "無料"
-      },
-      "RECOMMENDATIONS": {
-        "en": "Recommendations",
-        "id": "Rekomendasi",
-        "jp": "推奨事項"
-      },
-      "RELEASE_DATE": {
-        "en": "Release Date",
-        "id": "Tanggal rilis",
-        "jp": "発売日"
-      },
-      "SUPPORT_LANGUAGES": {
-        "en": "Supported Languages",
-        "id": "Bahasa yang didukung",
-        "jp": "サポートされている言語"
-      },
-      "DLC_COUNT": {
-        "en": "DLC Count",
-        "id": "Hitungan DLC",
-        "jp": "DLCカウント"
-      },
-      "DEVELOPERS": {
-        "en": "Developers",
-        "id": "Pengembang",
-        "jp": "開発者"
-      },
-      "PUBLISHERS": {
-        "en": "Publishers",
-        "id": "Penerbit",
-        "jp": "出版社"
-      },
-      "SYSTEM_REQUIREMENTS": {
-        "en": "System Requirements",
-        "id": "Persyaratan sistem",
-        "jp": "システム要求"
-      },
-      "MENTION_BOT": {
-        "en": "Please tag any bot",
-        "id": "Mohon tag bot apapun",
-        "jp": "ボットにタグを付けてください"
-      },
-      "OWNER": {
-        "en": "Owner",
-        "id": "Pemilik",
-        "jp": "オーナー"
-      },
-      "APPROVED_DATE": {
-        "en": "Approved on date",
-        "id": "Disetujui pada tanggal",
-        "jp": "日付で承認"
-      },
-      "ALL_VOTES": {
-        "en": "All votes",
-        "id": "Semua suara",
-        "jp": "すべての投票"
-      },
-      "MONTHLY_VOTES": {
-        "en": "Monthly votes",
-        "id": "Suara bulanan",
-        "jp": "毎月の投票"
-      },
-      "INVITE": {
-        "en": "Invite",
-        "id": "Undang",
-        "jp": "招待"
-      },
-      "WEBSITE": {
-        "en": "Website",
-        "id": "Situs web",
-        "jp": "Webサイト"
-      },
-      "INFORMATION": {
-        "en": "Information",
-        "id": "Informasi",
-        "jp": "情報"
-      },
-      "IP_SET_INSTRUCTIONS": {
-        "en": "<ip> <port> don't use <>",
-        "id": "<ip> <port> jangan gunakan <>",
-        "jp": "<ip> <port>は<>を使用しないでください"
-      },
-      "SETTING_SUCCESS": {
-        "en": "Setting success",
-        "id": "Menetapkan sukses",
-        "jp": "成功の設定"
-      },
-      "INSTRUCTIONS": {
-        "en": "Instructions for use",
-        "id": "Instruksi untuk penggunaan",
-        "jp": "使用説明書"
-      },
-      "SETTING_FAILED": {
-        "en": "Setting failed",
-        "id": "Pengaturan gagal",
-        "jp": "設定に失敗しました"
-        
-      },
-      "SETTING_PROCESS": {
-        "en": "Setting process",
-        "id": "Proses pengaturan",
-        "jp": "設定プロセス"
-      },
-      "CHECK": {
-        "en": "Check",
-        "id": "Cek",
-        "jp": "チェック"
-      },
-      "SERVER_ONLINE": {
-        "en": "Server is online",
-        "id": "Server sedang online",
-        "jp": "サーバーはオンラインです"
-      },
-      "TT_USERNAME": {
-        "en": "Enter the name of the user you want to search for",
-        "id": "Masukan nama user yang ingin di cari",
-        "jp": "検索するユーザーの名前を入力します。"
-      },
-      "TT_FOLLOWERS": {
-        "en": "Followers",
-        "id": "Jumlah Pengikut",
-        "jp": "フォロワー数"
-      },
-      "TT_LOCATION": {
-        "en": "Location",
-        "id": "Lokasi",
-        "jp": "場所"
-      },
-      "TT_NAME": {
-        "en": "Name",
-        "id": "Nama",
-        "jp": "名前"
-      },
-      "TT_FRIEND": {
-        "en": "Friend Counts",
-        "id": "Jumlah Teman",
-        "jp": "友達の数"
-      },
-      "TT_LISTED": {
-        "en": "Listed Count",
-        "id": "Jumlah Yang Tercantum",
-        "jp": "リストされたカウント"
-      },
-      "TT_CREATED": {
+        "id": "Mohon gunakan parameter yang valid",
+        "jp": "Please use a valid parameter"
+    },
+    "SERVER_SAVES": {
+        "en": "Saves from this server",
+        "id": "Menyimpan dari server ini",
+        "jp": "このサーバーから保存"
+    },
+    "LOAD_SERVER": {
+        "en": "Load from this server",
+        "id": "Memuat dari server ini",
+        "jp": "このサーバーからロード"
+    },
+    "SHOW_INFO": {
+        "en": "Show info of this  backup",
+        "id": "Melihat info cadangan ini",
+        "jp": "このバックアップの情報を表示する"
+    },
+    "BACKUP_CREATED_SUCCESS": {
+      "en": "Created successfully",
+      "id": "Berhasil di buat",
+      "jp": "正常に作成されました"
+    },
+    "TO_LOAD_BACKUP": {
+      "en": "To load the backup",
+      "id": "Memuat cadangan",
+      "jp": "バックアップをロードするには"
+    },
+    "BACKUP_WARNING": {
+        "en": "⚠️ When the backup is loaded, all the channels, roles, etc. Will be replaced\nSelect:\nAccept\n Canceled",
+        "id": "⚠️ Setelah memuat cadangan, semua channel, roles, dan lain lain. Akan di ganti\nPilih:\nSetuju\nMembatalkan" ,  
+        "jp": "バックアップが読み込まれると、すべてのチャネル、役割などが置き換えられます\n選択：\n承認\nキャンセル"
+    },
+    "WAITING_BACKUP": {
+      "en": "Waiting for accept or cancel",
+      "id": "Menunggu untuk menyetujui atau membatalkan",
+      "jp": "承認またはキャンセルを待っています"
+    },
+    "BACKUP_START": {
+        "en": "Accepted. Start loading the backup",
+        "id": "Menerima. Memulai memuat cadangan",
+        "jp": "受け入れられました。バックアップのロードを開始します"
+    },
+    "BACKUP_PERMISSION_MISSING": {
+        "en": "Sorry, an error occurred. Please check that i have \"ADMINISTRATOR\" permission",
+        "id": "Maaf, terjadi kesalahan. Mohon periksa saya mempunyai akses \"ADMINISTRATOR\"",
+        "jp": "申し訳ありませんが、エラーが発生しました。\"ADMINISTRATOR\"権限があることを確認してください"
+    },
+    "BACKUP_SUCESS_CREATED": {
+      "en": "Backup successfully created. Check your dms i send the backup ID",
+      "id": "Cadangan berhasil dibuat. Cek dms Anda, saya mengirim ID cadangan",
+      "jp": "バックアップが正常に作成されました。あなたのDMSをチェックしてください私はバックアップIDを送ります"
+    },
+    "BACKUP_CANCEL": {
+        "en": "You canceled the backup",
+        "id": "Kamu membatalkan pencadangan",
+        "jp": "バックアップをキャンセルしました"
+    },
+    "BACKUP_NOT_FOUND": {
+        "en": "Backup ID not found",
+        "id": "ID cadangan tidak di temukan",
+        "jp": "バックアップIDが見つかりません"
+    },
+    "VALID_BACKUP_ID": {
+        "en": "You must specify a valid backup id",
+        "id": "Kamu harus memasukan id cadangan yang valid",
+        "jp": "有効なバックアップIDを指定する必要があります"
+    },
+    "BACKUP_SIZE": {
+        "en": "Size",
+        "id": "Ukuran",
+        "jp": "サイズ"
+    },
+    "BACKUP_CREATED_AT": {
         "en": "Created At",
-        "id": "Di Buat Pada",
-        "jp": "作成日時"
-      },
-      "TT_VERIFIED": {
-        "en": "Verified",
-        "id": "Diverifikasi",
-        "jp": "検証"
-      }
+        "id": "Di buat pada",
+        "jp": "作成場所"
+    },
+    "DEVICE_MENTION_USERS": {
+        "en": "Mentions user first",
+        "id": "Sebutkan pengguna terlebih dahulu",
+        "jp": "ユーザーに最初に言及する"
+    },
+    "DEVICE_USED": {
+        "en": "Device used by",
+        "id": "Perangkat yang di gunakan oleh",
+        "jp": "によって使用されるデバイス"
+    },
+    "DEVICE_ERROR": {
+        "en": "Error:",
+        "id": "Kesalahan:",
+        "jp": "エラー:"
+    },
+    "SET_IP": {
+        "en": "This server has not set any ip, if you have access \"MANAGE_GUILD\" please run the command",
+        "id": "Server ini belum mengatur ip apapun, jika kamu mempunyai akses \"MANAGE_GUILD\" mohon jalankan perintah",
+        "jp": "このサーバーはIPを設定していません。アクセス権が \"「MANAGE_GUILD」\" の場合は、コマンドを実行してください" 
+    },
+    "IP_IS_UNHIDE": {
+        "en": "IP set to unhide\neveryone can see it",
+        "id": "IP diatur ke unhide\nsemua orang bisa melihatnya",
+        "jp": "再表示するように設定されたIP \nすべての人がそれを見ることができます" 
+    },
+    "IP_SET_HIDE": {
+        "en": "IP set to hide\neveryone can't see it",
+        "id": "IP diatur ke hide\nsemua orang tidak bisa melihatnya",
+        "jp": "非表示に設定されたIP \neveryoneはそれを見ることができません" 
+    },
+    "IP_IS_HIDE": {
+        "en": "It's like admins hiding the ip address",
+        "id": "Sepertinya admins menyembunyikan ip address",
+        "jp": "管理者がIPアドレスを隠しているようなものです" 
+      
+    },
+    "IP_SHOW": {
+        "en": "Here the IP",
+        "id": "Ini ip nya",
+        "jp": "ここでIP" 
+    },
+    "CANNOT_DMS": {
+        "en": "I can't dm you please turn it on",
+        "id": "Aku tidak bisa mengirim mu pesan mohon hidupkan",
+        "jp": "私はあなたがそれをオンにしてくださいDMすることはできません"
+    },
+    "CANNOT_FIND_USER": {
+      "en": "Error! Unable to find specified user. Please try again.",
+      "id": "Kesalahan! Tidak dapat menemukan pengguna tertentu. Silakan coba lagi.",
+      "jp": "エラー！指定されたユーザーが見つかりません。もう一度やり直してください。"
+    },
+    "GET_INFO_PING": {
+      "en": "Getting ping info...",
+      "id": "Mendapatkan info ping...",
+      "jp": "ping情報を取得しています..."
+    },
+    "ACCEPT": {
+      "en": "Accept",
+      "id": "Menyetujui",
+      "jp": "承認"
+    },
+    "CANCEL": {
+      "en": "Cancel",
+      "id": "Membatalkan",
+      "jp": "キャンセル"
+    },
+    "SUCCESS_DELETED_SAMP": {
+      "en": "Success delete server samp from my database",
+      "id": "Berhasil menghapus samp server dari database saya",
+      "jp": "データベースからサーバーサンプルを削除することに成功しました"
+    },
+     "CANCEL_DELETED_SAMP": {
+      "en": "You cancel to remove server samp from my database",
+      "id": "Anda membatalkan untuk menghapus samp server dari database saya",
+      "jp": "データベースからサーバーサンプルを削除するためにキャンセルします"
+    },
+    "COMMAND_COOLDOWN": {
+      "en": "Try running this commands in",
+      "id": "Coba jalankan perintah ini di",
+      "jp": "このコマンドをで実行してみてください"
+    },
+    "COMMAND_DISABLE": {
+      "en": "This commands has been disabled by dev",
+      "id": "Perintah ini telah dinonaktifkan oleh dev",
+      "jp": "このコマンドは開発者によって無効にされています"
+    },
+     "ENTER_NAME_SONG": {
+      "en": "Enter the name of the song",
+      "id": "Masukkan nama lagu",
+       "jp": "曲名を入力してください"
+    },
+     "SONG_DURATION": {
+      "en": "Duration",
+      "id": "Durasi",
+      "jp": "間隔"
+    },
+    "NAME": {
+      "en": "Name",
+      "id": "Nama",
+      "jp": "名前"
+    },
+    "TO_DOWNLOAD_MUSIC": {
+      "en": "To download the music",
+      "id": "Untuk mengunduh musik",
+      "jp": "音楽をダウンロードするには"
+    },
+    "SELECT_BUTTON": {
+      "en": "Please select the button below",
+      "id": "Silakan pilih tombol di bawah",
+      "jp": "ボタンを選択してください"
+    },
+    "CANCELED": {
+      "en": "Canceled",
+      "id": "Membatalkan",
+      "jp": "キャンセル"
+    },
+    "DOWNLOADING": {
+      "en": "Downloading",
+      "id": "Mengunduh",
+      "jp": "ダウンロード"
+    },
+    "FILE_SENT_FAILED": {
+      "en": "Failed to sent the file!\nError: Large size music cannot be sent",
+      "id": "Gagal mengirim file!\nError: Large size music cannot be sent",
+      "jp": "ファイルの送信に失敗しました！\nエラー：大きなサイズの音楽を送信できません"
+    },
+    "DOWNLOAD_SUCCESS": {
+      "en": "Downloading sucess",
+      "id": "Mengunduh berhasil",
+      "jp": "ダウンロードの成功"
+    },
+    "SEARCHING_MUSIC": {
+      "en": "Searching music",
+      "id": "Mencari musik",
+      "jp": "音楽を検索する"
+    },
+    "SELECT_LANGUAGE": {
+      "en": "Please select language\nAvailable languages:\n - English [en] 🇺🇸\n - Indonesia [id] 🇮🇩\n - Japan [jp] 🇯🇵",
+      "id": "Silahkan pilih bahasa\nBahasa yang tersedia:\n - English [en] 🇺🇸\n - Indonesia [id] 🇮🇩\n - Japan [jp] 🇯🇵",
+      "jp": "言語を選択してください\n利用可能な言語：\n- 英語 [en] 🇺🇸\n- インドネシア [id] 🇮🇩\n- 日本 [jp] 🇯🇵"
+    },
+     "LANGUAGE_NOT_FOUND": {
+      "en": "Language not found",
+      "id": "Bahasa tidak di temukan",
+      "jp": "言語が見つかりません"
+    },
+    "LANGUAGE_SET": {
+      "en": "Language is set to english 🇺🇸",
+      "id": "Bahasa di atur ke indonesia 🇮🇩",
+      "jp": "言語は日本に設定されています 🇯🇵"
+    },
+    "INPUT_NEW_PREFIX": {
+      "en": "Please input new prefix",
+      "id": "Silakan masukkan prefix baru",
+      "jp": "新しいプレフィックスを入力してください"
+    },
+    "EXAMPLE": {
+      "en": "Example",
+      "id": "Contoh",
+      "jp": "例"
+    },
+    "PREFIX_SET": {
+      "en": "Prefix set to",
+      "id": "Prefix di atur ke",
+      "jp": "プレフィックスをに設定"
+    },
+    "PREFIX_LONG": {
+      "en": "Prefix is too long, you have max 3 characters",
+      "id": "Prefix terlalu panjang, anda memiliki maksimal 3 karakter",
+      "jp": "プレフィックスが長すぎます。最大3文字です。"
+    },
+    "SEARCH_SOMETHING": {
+      "en": "Please provide something to search",
+      "id": "Tolong berikan sesuatu untuk dicari",
+      "jp": "検索するものを提供してください"
+    },
+     "SEARCH_NOT_FOUND": {
+      "en": "No result found for",
+      "id": "Tidak ada hasil yang ditemukan untuk",
+       "jp": "結果が見つかりません"
+    },
+    "PRICE": {
+      "en": "Price",
+      "id": "Harga",
+      "jp": "価格"
+    },
+    "FREE": {
+      "en": "Free",
+      "id": "Gratis",
+      "jp": "無料"
+    },
+    "RECOMMENDATIONS": {
+      "en": "Recommendations",
+      "id": "Rekomendasi",
+      "jp": "推奨事項"
+    },
+    "RELEASE_DATE": {
+      "en": "Release Date",
+      "id": "Tanggal rilis",
+      "jp": "発売日"
+    },
+    "SUPPORT_LANGUAGES": {
+      "en": "Supported Languages",
+      "id": "Bahasa yang didukung",
+      "jp": "サポートされている言語"
+    },
+    "DLC_COUNT": {
+      "en": "DLC Count",
+      "id": "Hitungan DLC",
+      "jp": "DLCカウント"
+    },
+    "DEVELOPERS": {
+      "en": "Developers",
+      "id": "Pengembang",
+      "jp": "開発者"
+    },
+    "PUBLISHERS": {
+      "en": "Publishers",
+      "id": "Penerbit",
+      "jp": "出版社"
+    },
+    "SYSTEM_REQUIREMENTS": {
+      "en": "System Requirements",
+      "id": "Persyaratan sistem",
+      "jp": "システム要求"
+    },
+    "MENTION_BOT": {
+      "en": "Please tag any bot",
+      "id": "Mohon tag bot apapun",
+      "jp": "ボットにタグを付けてください"
+    },
+    "OWNER": {
+      "en": "Owner",
+      "id": "Pemilik",
+      "jp": "オーナー"
+    },
+    "APPROVED_DATE": {
+      "en": "Approved on date",
+      "id": "Disetujui pada tanggal",
+      "jp": "日付で承認"
+    },
+    "ALL_VOTES": {
+      "en": "All votes",
+      "id": "Semua suara",
+      "jp": "すべての投票"
+    },
+    "MONTHLY_VOTES": {
+      "en": "Monthly votes",
+      "id": "Suara bulanan",
+      "jp": "毎月の投票"
+    },
+    "INVITE": {
+      "en": "Invite",
+      "id": "Undang",
+      "jp": "招待"
+    },
+    "WEBSITE": {
+      "en": "Website",
+      "id": "Situs web",
+      "jp": "Webサイト"
+    },
+    "INFORMATION": {
+      "en": "Information",
+      "id": "Informasi",
+      "jp": "情報"
+    },
+    "IP_SET_INSTRUCTIONS": {
+      "en": "<ip> <port> don't use <>",
+      "id": "<ip> <port> jangan gunakan <>",
+      "jp": "<ip> <port>は<>を使用しないでください"
+    },
+    "SETTING_SUCCESS": {
+      "en": "Setting success",
+      "id": "Menetapkan sukses",
+      "jp": "成功の設定"
+    },
+    "INSTRUCTIONS": {
+      "en": "Instructions for use",
+      "id": "Instruksi untuk penggunaan",
+      "jp": "使用説明書"
+    },
+    "SETTING_FAILED": {
+      "en": "Setting failed",
+      "id": "Pengaturan gagal",
+      "jp": "設定に失敗しました"
+      
+    },
+    "SETTING_PROCESS": {
+      "en": "Setting process",
+      "id": "Proses pengaturan",
+      "jp": "設定プロセス"
+    },
+    "CHECK": {
+      "en": "Check",
+      "id": "Cek",
+      "jp": "チェック"
+    },
+    "SERVER_ONLINE": {
+      "en": "Server is online",
+      "id": "Server sedang online",
+      "jp": "サーバーはオンラインです"
+    },
+    "TT_USERNAME": {
+      "en": "Enter the name of the user you want to search for",
+      "id": "Masukan nama user yang ingin di cari",
+      "jp": "検索するユーザーの名前を入力します。"
+    },
+    "TT_FOLLOWERS": {
+      "en": "Followers",
+      "id": "Jumlah Pengikut",
+      "jp": "フォロワー数"
+    },
+    "TT_LOCATION": {
+      "en": "Location",
+      "id": "Lokasi",
+      "jp": "場所"
+    },
+    "TT_NAME": {
+      "en": "Name",
+      "id": "Nama",
+      "jp": "名前"
+    },
+    "TT_FRIEND": {
+      "en": "Friend Counts",
+      "id": "Jumlah Teman",
+      "jp": "友達の数"
+    },
+    "TT_LISTED": {
+      "en": "Listed Count",
+      "id": "Jumlah Yang Tercantum",
+      "jp": "リストされたカウント"
+    },
+    "TT_CREATED": {
+      "en": "Created At",
+      "id": "Di Buat Pada",
+      "jp": "作成日時"
+    },
+    "TT_VERIFIED": {
+      "en": "Verified",
+      "id": "Diverifikasi",
+      "jp": "検証"
     }
   }
+}
