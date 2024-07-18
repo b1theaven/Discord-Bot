@@ -24,6 +24,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
 - ```listreminder.js```, berfungsi untuk menampilkan list reminder yang dimiliki user.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
+- ```nuke.js```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
 - ```permissions.js```, berfungsi untuk menampilkan permissions apa saja yang dimiliki oleh user.
 - ```ping.js```, berfungsi untuk menampilkan ping user.
 - ```playstore.js```, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari.
@@ -63,7 +64,6 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
-- ```Nuke```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
 
 ## Notes from Developer
 

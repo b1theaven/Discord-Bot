@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const fs = require("fs");
 const path = require('path')
 const moment = require('moment-timezone');
@@ -28,9 +29,9 @@ const { GoogleGenerativeAI } = require('@google/generative-ai')
 const NAME = "rizky"
 const langSchema = require("./models/language");
 const lang = require("./language");
-const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
-const TICKET_CATEGORY_ID = '928313787998666792'; // Ganti dengan ID kategori untuk tiket
-const TICKET_LOG_CHANNEL_ID = '1257199978628120586'; // Ganti dengan ID channel log tiket
+const TICKET_CATEGORY_ID = '1258628318065070168'; // Ganti dengan ID kategori untuk tiket
+const TICKET_LOG_CHANNEL_ID = '1258628318065070168'; // Ganti dengan ID channel log tiket
+let messageLb = require('./models/messagelb')
 
 const axios = require("axios")
 const urls = ["https://cheddar-deluxe-brook.glitch.me"]
@@ -55,15 +56,11 @@ setInterval(() => {
   console.log("Load all guild languages");
 }, 300 * 1000);
 
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-    giveawayCommand.scheduleGiveaways(client);
-    setReminder.loadReminders(client);
-});
-
 client.on("ready", async () => {
     console.log("Online " + client.user.tag);
     client.user.setActivity(`AERO Team Official Bot`);
+  giveawayCommand.scheduleGiveaways(client);
+    setReminder.loadReminders(client);
     loadLanguages(client);
     await mongoose.connect(mongodburl, mongoOptions);
     console.log("Connected to mongodb");
@@ -74,6 +71,31 @@ client.snipes = new Map();
 
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
+    let data = await messageLb.findOne({ guild : message.guild.id, id: message.author.id })
+  if(!data) {
+    
+    let newData = await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1})
+  } else {
+    var messageUp = await data.Messages + 1;
+    await messageLb.findOneAndUpdate({ guild: message.guild.id, id: message.author.id }, { Messages: messageUp}, { upsert: true })
+  }
+    // Mengirim pesan dengan tombol buat tiket saat perintah 'a.ticket' dikirim
+    if (message.content === 'a.ticket') {
+        const row = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('create_ticket')
+                    .setLabel('💎 Buat Tiket')
+                    .setStyle('PRIMARY'),
+            );
+
+        const embed = new MessageEmbed()
+            .setColor('#00FF00')
+            .setTitle('Buat Tiket')
+            .setDescription('Klik tombol di bawah ini untuk membuat tiket baru.');
+
+        await message.channel.send({ embeds: [embed], components: [row] });
+    }
 
     const afkFilePath = path.join(__dirname, 'afk.json');
     const afkData = JSON.parse(fs.readFileSync(afkFilePath));
@@ -85,11 +107,7 @@ client.on('messageCreate', async message => {
         await message.member.setNickname(username);
         delete afkData[message.author.id];
         fs.writeFileSync(afkFilePath, JSON.stringify(afkData, null, 2));
-
-        const replyMessage = await message.reply(lang(message.guild, 'NOT_AFK'));
-        setTimeout(() => {
-          replyMessage.delete().catch(console.error);
-        }, 3000); // 3 seconds
+        message.reply(lang(message.guild, 'NOT_AFK'));
       } catch (error) {
         if (error.code === 50013) {
           message.reply(lang(message.guild, 'BOT_PERMISSIONS'));
@@ -105,54 +123,6 @@ client.on('messageCreate', async message => {
         message.reply(`${user.username} is AFK: ${afkData[user.id].message}`);
       }
     });
-
-  
-    // Jika pesan adalah perintah nuke
-    if (message.content.startsWith('a.nuke')) {
-        // Periksa jika pengguna adalah admin
-        if (!message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) {
-            return message.reply('Anda tidak memiliki izin untuk menjalankan perintah ini.');
-        }
-
-        const channel = message.channel;
-
-        // Dapatkan semua izin channel
-        const channelPermissions = channel.permissionOverwrites.cache.map(perm => ({
-            id: perm.id,
-            allow: perm.allow.toArray(),
-            deny: perm.deny.toArray()
-        }));
-
-        // Buat embed konfirmasi
-        const embed = new MessageEmbed()
-            .setTitle('Nuke Channel')
-            .setDescription('Channel ini akan di-nuke dalam 5 detik.')
-            .setColor('RED');
-
-        await message.channel.send({ embeds: [embed] });
-
-        // Tunggu 5 detik sebelum melakukan nuke
-        setTimeout(async () => {
-            const newChannel = await channel.clone(); // Clone channel
-            await channel.delete(); // Hapus channel lama
-
-            // Pindahkan izin ke channel baru
-            for (const perm of channelPermissions) {
-                await newChannel.permissionOverwrites.create(perm.id, {
-                    allow: perm.allow,
-                    deny: perm.deny
-                });
-            }
-
-            // Kirim pesan konfirmasi di channel baru
-            const nukeEmbed = new MessageEmbed()
-                .setTitle('Channel Nuked')
-                .setDescription(`Channel ini telah di-nuke oleh ${message.author.tag}`)
-                .setColor('GREEN');
-
-            newChannel.send({ embeds: [nukeEmbed] });
-        }, 5000);
-    };
 });
 
 function getReminders() {
@@ -190,30 +160,19 @@ function checkReminders() {
 // Simpan daftar user yang memiliki tiket aktif
 const activeTickets = new Map();
 
-client.on('messageCreate', async message => {
-    if (message.author.bot) return;
-
-    // Mengirim pesan dengan tombol buat tiket saat perintah 'a.ticket' dikirim
-    if (message.content === 'a.ticket') {
-        const row = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('create_ticket')
-                    .setLabel('💎 Buat Tiket')
-                    .setStyle('PRIMARY'),
-            );
-
-        const embed = new MessageEmbed()
-            .setColor('#00FF00')
-            .setTitle('Buat Tiket')
-            .setDescription('Klik tombol di bawah ini untuk membuat tiket baru.');
-
-        await message.channel.send({ embeds: [embed], components: [row] });
-    }
-});
-
 client.on('interactionCreate', async interaction => {
     if (!interaction.isButton()) return;
+  
+    const command = client.commands.get(interaction.customId.split('_')[0]);
+
+    if (command && command.buttonExecute) {
+      try {
+        await command.buttonExecute(interaction);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({ content: 'There was an error while processing this action!', ephemeral: true });
+      }
+    }
 
     if (interaction.customId === 'create_ticket') {
         if (activeTickets.has(interaction.user.id)) {
@@ -333,31 +292,30 @@ client.on("guildCreate", async(guild) => {
   loadLanguages(client);
 });
 
-// Message Delete Logging
 client.on('messageDelete', function (message, channel){
+    if (message.deletedByBot) return; // Tambahkan pengecekan apakah pesan dihapus oleh bot
+
     client.snipes.set(message.channel.id, message, {
-    content: message.content,
-    author: message.author,
-    image: message.attachments.first()
-      ? message.attachments.first().proxyURL
-      : null
-  })
-  const logChannel = client.channels.cache.get('1258628318065070168');
-  if (!logChannel) return;
+        content: message.content,
+        author: message.author,
+        image: message.attachments.first()
+          ? message.attachments.first().proxyURL
+          : null
+    });
+    
+    const logChannel = client.channels.cache.get('1258628318065070168');
+    if (!logChannel) return;
 
-  // Tambahkan pengecekan apakah pesan tersebut dihapus oleh bot sendiri
-  if (message.author.bot) return;
+    const embed = new MessageEmbed()
+        .setTitle('<:no_entry_sign:885195095840804885> Message Deleted')
+        .setColor('RED')
+        .addField('`Author`', message.author.tag, true)
+        .addField('`Channel`', message.channel.name, true)
+        .addField('`Content`', message.content || 'Embed/Attachment', true)
+        .setTimestamp();
 
-  const embed = new MessageEmbed()
-    .setTitle('<:no_entry_sign:885195095840804885> Message Deleted')
-    .setColor('RED')
-    .addField('\`Author\`', message.author.tag, true)
-    .addField('\`Channel\`', message.channel.name, true)
-    .addField('\`Content\`', message.content || 'Embed/Attachment', true)
-    .setTimestamp();
-
-  logChannel.send({ embeds: [embed] });
-})
+    logChannel.send({ embeds: [embed] });
+});
 
 // Message Update Logging
 client.on('messageUpdate', (oldMessage, newMessage) => {
