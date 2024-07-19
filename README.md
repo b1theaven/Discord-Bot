@@ -15,6 +15,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```cancelremind.js```, berfungsi untuk membatalkan dan menghapus reminder user dari database.
 - ```clear.js```, berfungsi untuk membersihkan pesan.
 - ```commands.js```, berfungsi untuk menyalakan/mematikan suatu perintah yang ada pada bot.
+- ```customrole.js```, berfungsi sebagai benefit untuk Server Booster.
 - ```device.js```, berfungsi untuk mengetahui device apa yang digunakan oleh user.
 - ```emojilist.js```, berfungsi untuk menampilkan emoji apa saja yang ada pada server.
 - ```eval.js```, berfungsi untuk mengevaluasi beberapa kode.
@@ -33,9 +34,6 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```removeReminder.js```, berfungsi untuk menghapus reminder yang sudah dibuat.
 - ```reportbug.js```, berfungsi sebagai media untuk melakukan report bug.
 - ```revokeBan.js```, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
-- ```rolecreate.js```, berfungsi untuk membuat custom role sebagai benefit server booster.
-- ```roleedit.js```, berfungsi untuk mengedit custom role.
-- ```rolegive.js```, berfungsi untuk memberikan custom role-nya kepada user lain.
 - ```say.js```, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
 - ```setlanguage.js```, berfungsi untuk mengganti bahasa pada bot.
 - ```setprefix.js```, berfungsi untuk mengganti prefix pada bot.
