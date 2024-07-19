@@ -33,6 +33,9 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```removeReminder.js```, berfungsi untuk menghapus reminder yang sudah dibuat.
 - ```reportbug.js```, berfungsi sebagai media untuk melakukan report bug.
 - ```revokeBan.js```, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
+- ```rolecreate.js```, berfungsi untuk membuat custom role sebagai benefit server booster.
+- ```roleedit.js```, berfungsi untuk mengedit custom role.
+- ```rolegive.js```, berfungsi untuk memberikan custom role-nya kepada user lain.
 - ```say.js```, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
 - ```setlanguage.js```, berfungsi untuk mengganti bahasa pada bot.
 - ```setprefix.js```, berfungsi untuk mengganti prefix pada bot.
@@ -62,6 +65,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Others
 
+- ```Boost Notification```, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
 

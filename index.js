@@ -31,6 +31,8 @@ const langSchema = require("./models/language");
 const lang = require("./language");
 const TICKET_CATEGORY_ID = '1258628318065070168'; // Ganti dengan ID kategori untuk tiket
 const TICKET_LOG_CHANNEL_ID = '1258628318065070168'; // Ganti dengan ID channel log tiket
+const dataPath = path.join(__dirname, 'boosters.json');
+let data = { boosters: {} };
 let messageLb = require('./models/messagelb')
 
 const axios = require("axios")
@@ -68,6 +70,63 @@ client.on("ready", async () => {
 });
 
 client.snipes = new Map();
+
+if (fs.existsSync(dataPath)) {
+  try {
+      const rawData = fs.readFileSync(dataPath, 'utf8');
+      data = JSON.parse(rawData);
+  } catch (error) {
+      console.error('Error reading data file:', error);
+  }
+} else {
+  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+}
+
+client.on('guildMemberUpdate', async (oldMember, newMember) => {
+  try {
+      const oldBoostTimestamp = oldMember.premiumSinceTimestamp;
+      const newBoostTimestamp = newMember.premiumSinceTimestamp;
+
+      if (oldBoostTimestamp !== newBoostTimestamp) {
+          // User started boosting the server
+          const thankYouChannelId = '1263640449386549268'; // Ganti dengan ID channel yang diinginkan
+          const thankYouChannel = newMember.guild.channels.cache.get(thankYouChannelId);
+
+          if (thankYouChannel) {
+              const embed = new MessageEmbed()
+                  .setColor('#FFD700')
+                  .setTitle('Terima Kasih telah boosting server ini!')
+                  .setDescription(`Terima kasih ${newMember} telah boosting server! Anda mendapatkan kesempatan untuk membuat custom role. Gunakan perintah \`a.rolecreate <nama> <warna>\` untuk membuat role.`)
+                  .setThumbnail(newMember.guild.iconURL({ dynamic: true }));
+
+              await thankYouChannel.send({ embeds: [embed] });
+          }
+
+          // Initialize booster data if not exists
+          if (!data.boosters[newMember.id]) {
+              data.boosters[newMember.id] = {
+                  hasCustomRole: false,
+                  roleInfo: null,
+                  givenTo: null
+              };
+              fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+          }
+      } else if (oldMember.premiumSince && !newMember.premiumSince) {
+          // User stopped boosting the server
+          const boosterData = data.boosters[oldMember.id];
+          if (boosterData && boosterData.hasCustomRole) {
+              const role = oldMember.guild.roles.cache.get(boosterData.roleInfo.roleId);
+              if (role) {
+                  await role.delete('User stopped boosting');
+              }
+              delete data.boosters[oldMember.id];
+              fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+          }
+      }
+  } catch (error) {
+      console.error('Error handling guildMemberUpdate event:', error);
+  }
+});
 
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
