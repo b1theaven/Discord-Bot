@@ -136,99 +136,124 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
 });
 
 client.on('messageCreate', async message => {
-    if (message.author.bot) return;
+  if (message.author.bot) return;
+
+  let levelData = await levelSchema.findOne({ guild: message.guild.id, id: message.author.id });
+
+  if (!levelData) {
+      levelData = await levelSchema.create({ guild: message.guild.id, id: message.author.id, xp: 0, level: 0 });
+  }
+
+  const xpGive = 1;
+  const xpRequire = levelData.level * levelData.level * 20 + 20;
+
+  if (levelData.xp + xpGive >= xpRequire) {
+      levelData.xp += xpGive;
+      levelData.level += 1;
+      await levelData.save();
+
+      if (!message.channel) return;
+      if(levelData.level == 10) {
+          //ActiveRole
+          if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
+          else await message.member.roles.add('PUT_YOUR_ROLE_ID')
+      }
+      if(levelData.level == 20) {
+          //VeryActiveRole
+          if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
+          else await message.member.roles.add('PUT_YOUR_ROLE_ID')
+      }
+      if(levelData.level == 30) {
+          //HyperactiveRole
+          if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
+          else await message.member.roles.add('PUT_YOUR_ROLE_ID')
+      }if(levelData.level == 50) {
+          //SuperActiveRole
+          if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
+          else await message.member.roles.add('PUT_YOUR_ROLE_ID')
+      }
+      if(levelData.level == 75) {
+          //SuperDuperActiveRole
+          if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
+          else await message.member.roles.add('PUT_YOUR_ROLE_ID')
+      }
+      const channelLevel = "PUT_YOUR_CHANNEL_ID"
+      let levelEmbed = new Discord.MessageEmbed()
+          .setColor("GREEN")
+          .setDescription(`<@${message.author.id}>, selamat, kamu naik level ${levelData.level}!`);
+      client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}.**`})
+      //message.channel.send({ embeds: [levelEmbed] });
+  } else {
+      levelData.xp += xpGive;
+      await levelData.save();
+  }
+//
+//
+//
+const messageData = await messageLb.findOne({ guild : message.guild.id, id: message.author.id });
+if(!messageData) {
+  await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1});
+} else {
+  const messageUp = messageData.Messages + 1;
+  await messageLb.findOneAndUpdate({ guild: message.guild.id, id: message.author.id }, { Messages: messageUp}, { upsert: true });
+}
+  
+ let data = await messageLb.findOne({ guild : message.guild.id, id: message.author.id })
+if(!data) {
+  
+  let newData = await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1})
+} else {
+  var messageUp = await data.Messages + 1;
+  await messageLb.findOneAndUpdate({ guild: message.guild.id, id: message.author.id }, { Messages: messageUp}, { upsert: true })
+}
+
+  const afkFilePath = path.join(__dirname, 'afk.json');
+  const afkData = JSON.parse(fs.readFileSync(afkFilePath));
+
+  // Check if user is AFK and remove AFK status
+  if (afkData[message.author.id]) {
+    const { username } = afkData[message.author.id];
+    try {
+      await message.member.setNickname(username);
+      delete afkData[message.author.id];
+      fs.writeFileSync(afkFilePath, JSON.stringify(afkData, null, 2));
+
+      const replyMessage = await message.reply('You are no longer AFK.');
+      setTimeout(() => {
+        replyMessage.delete().catch(console.error);
+      }, 3000); // 3 seconds
+    } catch (error) {
+      if (error.code === 50013) {
+        message.reply('I do not have permission to change your nickname.');
+      } else {
+        console.error(error);
+      }
+    }
+  }
+
+  // Check for mentions and respond if mentioned user is AFK
+  message.mentions.users.forEach(user => {
+    if (afkData[user.id]) {
+      message.reply(`${user.username} is AFK: ${afkData[user.id].message}`);
+    }
+  });
  
-    let levelData = await levelSchema.findOne({ guild: message.guild.id, id: message.author.id });
+  if (message.content === 'a.ticket') {
+  const row = new MessageActionRow()
+  .addComponents(
+  new MessageButton()
+  .setCustomId('create_ticket')
+  .setLabel('💎 Buat Tiket')
+  .setStyle('PRIMARY'),
+  );
 
-    if (!levelData) {
-        levelData = await levelSchema.create({ guild: message.guild.id, id: message.author.id, xp: 0, level: 0 });
-    }
+  const embed = new MessageEmbed()
+  .setColor('#00FF00')
+  .setTitle('Buat Tiket')
+  .setDescription('Klik tombol di bawah ini untuk membuat tiket baru.');
 
-    const xpGive = 1;
-    const xpRequire = levelData.level * levelData.level * 20 + 20;
-
-    if (levelData.xp + xpGive >= xpRequire) {
-        levelData.xp += xpGive;
-        levelData.level += 1;
-        await levelData.save();
-
-        if (!message.channel) return;
-
-        let levelEmbed = new Discord.MessageEmbed()
-            .setColor("GREEN")
-            .setDescription(`<@${message.author.id}>, selamat kamu naik level ${levelData.level}!`);
-        message.channel.send({ embeds: [levelEmbed] });
-    } else {
-        levelData.xp += xpGive;
-        await levelData.save();
-    }
-  //
-  //
-  //
-  const messageData = await messageLb.findOne({ guild : message.guild.id, id: message.author.id });
-  if(!messageData) {
-  	await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1});
-  } else {
-    const messageUp = messageData.Messages + 1;
-    await messageLb.findOneAndUpdate({ guild: message.guild.id, id: message.author.id }, { Messages: messageUp}, { upsert: true });
+  await message.channel.send({ embeds: [embed], components: [row] });
   }
-    
-   let data = await messageLb.findOne({ guild : message.guild.id, id: message.author.id })
-  if(!data) {
-    
-    let newData = await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1})
-  } else {
-    var messageUp = await data.Messages + 1;
-    await messageLb.findOneAndUpdate({ guild: message.guild.id, id: message.author.id }, { Messages: messageUp}, { upsert: true })
-  }
-
-    const afkFilePath = path.join(__dirname, 'afk.json');
-    const afkData = JSON.parse(fs.readFileSync(afkFilePath));
-
-    // Check if user is AFK and remove AFK status
-    if (afkData[message.author.id]) {
-      const { username } = afkData[message.author.id];
-      try {
-        await message.member.setNickname(username);
-        delete afkData[message.author.id];
-        fs.writeFileSync(afkFilePath, JSON.stringify(afkData, null, 2));
-
-        const replyMessage = await message.reply('You are no longer AFK.');
-        setTimeout(() => {
-          replyMessage.delete().catch(console.error);
-        }, 3000); // 3 seconds
-      } catch (error) {
-        if (error.code === 50013) {
-          message.reply('I do not have permission to change your nickname.');
-        } else {
-          console.error(error);
-        }
-      }
-    }
-
-    // Check for mentions and respond if mentioned user is AFK
-    message.mentions.users.forEach(user => {
-      if (afkData[user.id]) {
-        message.reply(`${user.username} is AFK: ${afkData[user.id].message}`);
-      }
-    });
-   
-    if (message.content === 'a.ticket') {
-    const row = new MessageActionRow()
-    .addComponents(
-    new MessageButton()
-    .setCustomId('create_ticket')
-    .setLabel('💎 Buat Tiket')
-    .setStyle('PRIMARY'),
-    );
-
-    const embed = new MessageEmbed()
-    .setColor('#00FF00')
-    .setTitle('Buat Tiket')
-    .setDescription('Klik tombol di bawah ini untuk membuat tiket baru.');
-
-    await message.channel.send({ embeds: [embed], components: [row] });
-    }
 });
 
 function getReminders() {
