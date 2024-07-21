@@ -144,52 +144,44 @@ client.on('messageCreate', async message => {
       levelData = await levelSchema.create({ guild: message.guild.id, id: message.author.id, xp: 0, level: 0 });
   }
 
-  const xpGive = 1;
-  const xpRequire = levelData.level * levelData.level * 20 + 20;
+  const xpGive = Math.floor(Math.random() * 23) + 1;
+  const xpRequire = levelData.level * levelData.level * 100 + 100;
 
   if (levelData.xp + xpGive >= xpRequire) {
-      levelData.xp += xpGive;
+      levelData.xp += 5;
       levelData.level += 1;
       await levelData.save();
 
       if (!message.channel) return;
       if(levelData.level == 10) {
-          //ActiveRole
           if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
           else await message.member.roles.add('PUT_YOUR_ROLE_ID')
       }
       if(levelData.level == 20) {
-          //VeryActiveRole
           if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
           else await message.member.roles.add('PUT_YOUR_ROLE_ID')
       }
       if(levelData.level == 30) {
-          //HyperactiveRole
           if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
           else await message.member.roles.add('PUT_YOUR_ROLE_ID')
       }if(levelData.level == 50) {
-          //SuperActiveRole
           if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
           else await message.member.roles.add('PUT_YOUR_ROLE_ID')
       }
       if(levelData.level == 75) {
-          //SuperDuperActiveRole
           if(message.member.roles.cache.has('PUT_YOUR_ROLE_ID')) return;
           else await message.member.roles.add('PUT_YOUR_ROLE_ID')
       }
       const channelLevel = "PUT_YOUR_CHANNEL_ID"
       let levelEmbed = new Discord.MessageEmbed()
           .setColor("GREEN")
-          .setDescription(`<@${message.author.id}>, selamat, kamu naik level ${levelData.level}!`);
-      client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}.**`})
-      //message.channel.send({ embeds: [levelEmbed] });
+          .setDescription(`<@${message.author.id}>, selamat kamu naik level ${levelData.level}!`);
+      client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}**!`})
   } else {
       levelData.xp += xpGive;
       await levelData.save();
   }
-//
-//
-//
+
 const messageData = await messageLb.findOne({ guild : message.guild.id, id: message.author.id });
 if(!messageData) {
   await messageLb.create({ guild: message.guild.id, id: message.author.id, Messages: 1});
@@ -221,7 +213,7 @@ if(!data) {
       const replyMessage = await message.reply('You are no longer AFK.');
       setTimeout(() => {
         replyMessage.delete().catch(console.error);
-      }, 3000); // 3 seconds
+      }, 3000);
     } catch (error) {
       if (error.code === 50013) {
         message.reply('I do not have permission to change your nickname.');
@@ -285,7 +277,7 @@ function checkReminders() {
             const updatedReminders = reminders.filter((_, index) => !toRemove.includes(index));
             fs.writeFileSync(REMINDERS_FILE, JSON.stringify(updatedReminders, null, 2));
         }
-    }, 60000); // Check every minute
+    }, 60000);
 }
 
 client.on('interactionCreate', async interaction => {
