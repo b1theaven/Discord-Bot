@@ -23,6 +23,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```giveaway.js```, berfungsi sebagai media untuk melakukan giveaway.
 - ```google.js```, berfungsi sebagai pencarian selayaknya Google.
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
+- ```leaderboard.js```, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
 - ```listreminder.js```, berfungsi untuk menampilkan list reminder yang dimiliki user.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
 - ```nuke.js```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
@@ -63,6 +64,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Others
 
+- ```Levelling System```, berfungsi sebagai sistem untuk melakukan levelling dengan role sebagai reward.
 - ```Boost Notification```, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
