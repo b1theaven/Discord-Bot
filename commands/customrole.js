@@ -14,11 +14,11 @@ module.exports = {
             .addField("a.role edit <nama role> [warna]", "Untuk mengedit custom roles", true)
             .addField("a.role give <@user>", "Untuk memberikan custom roles kepada orang yang kamu tag", true)
             .setDescription("```<> Required | [] Optional```")
-            .setTitle("Benefit Boosters")
+            .setTitle("Custom roles benefit member yang telah membosting server ini")
             .setThumbnail(message.guild.iconURL({ dynamic: true }));
       
         if (!message.member.premiumSince) {
-            return message.reply('Anda tidak memiliki boost untuk membuat role custom.');
+             return message.reply('Anda tidak memiliki boost untuk membuat role custom.');
         }
 
         if (!message.guild.me.permissions.has('MANAGE_ROLES')) {
@@ -70,38 +70,39 @@ module.exports = {
                 message.reply('Terjadi kesalahan saat membuat role custom.');
             }
         } else if (args[0].toLowerCase() === "edit") {
-            const newRoleName = args.slice(1, args.length).join(' ');
-            const roleColor = args[args.length - 1].startsWith('#') ? args[args.length - 1] : null;
-            const boosterData = data.boosters[message.member.id];
+    const roleColor = args[args.length - 1].startsWith('#') ? args[args.length - 1] : null;
+    const newRoleName = roleColor ? args.slice(1, -1).join(' ') : args.slice(1).join(' ');
 
-            if (!boosterData || !boosterData.hasCustomRole) {
-                return message.reply('Anda tidak memiliki role custom untuk diedit.');
-            }
+    const boosterData = data.boosters[message.member.id];
 
-            const role = message.guild.roles.cache.get(boosterData.roleInfo.roleId);
-            if (!role) {
-                return message.reply('Role tidak ditemukan.');
-            }
+    if (!boosterData || !boosterData.hasCustomRole) {
+        return message.reply('Anda tidak memiliki role custom untuk diedit.');
+    }
 
-            try {
-                await role.setName(newRoleName);
-                if (roleColor) {
-                    await role.setColor(roleColor);
-                    boosterData.roleInfo.roleColor = roleColor;
-                }
-                boosterData.roleInfo.roleName = newRoleName;
-                fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-                message.reply(`Role berhasil diubah menjadi ${newRoleName} dengan warna ${roleColor ? roleColor : boosterData.roleInfo.roleColor}.`);
-            } catch (error) {
-                console.error(error);
-                let embedError = new MessageEmbed()
-                    .setColor("RED")
-                    .addField("Terjadi kesalahan", "```Kesalahan ini bisa terjadi karena Anda tidak memasukkan kode warna hex yang valid.```")
-                    .addField("Error stack", `\`\`\`${error.stack}\`\`\``)
-                    .addField("Error message", `\`\`\`${error.message}\`\`\``);
-                return message.reply({ embeds: [embedError] });
-            }
-        } else if (args[0].toLowerCase() === "give") {
+    const role = message.guild.roles.cache.get(boosterData.roleInfo.roleId);
+    if (!role) {
+        return message.reply('Role tidak ditemukan.');
+    }
+
+    try {
+        await role.setName(newRoleName);
+        if (roleColor) {
+            await role.setColor(roleColor);
+            boosterData.roleInfo.roleColor = roleColor;
+        }
+        boosterData.roleInfo.roleName = newRoleName;
+        fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
+        message.reply(`Role berhasil diubah menjadi ${newRoleName} dengan warna ${roleColor ? roleColor : boosterData.roleInfo.roleColor}.`);
+    } catch (error) {
+        console.error(error);
+        let embedError = new MessageEmbed()
+            .setColor("RED")
+            .addField("Terjadi kesalahan", "```Kesalahan ini bisa terjadi karena Anda tidak memasukkan kode warna hex yang valid.```")
+            .addField("Error stack", `\`\`\`${error.stack}\`\`\``)
+            .addField("Error message", `\`\`\`${error.message}\`\`\``);
+        return message.reply({ embeds: [embedError] });
+    }
+} else if (args[0].toLowerCase() === "give") {
             const targetUser = message.mentions.members.first();
             if (!targetUser) {
                 return message.reply('Pengguna tidak ditemukan. Pastikan Anda mention pengguna yang ingin diberikan role.');
