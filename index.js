@@ -34,6 +34,10 @@ const dataPath = path.join(__dirname, 'boosters.json');
 const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const TICKET_CATEGORY_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID kategori untuk tiket
 const TICKET_LOG_CHANNEL_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID channel log tiket
+const GUILD_ID = 'PUT_YOUR_GUILD_ID';
+const ALL_MEMBERS_CHANNEL_ID = 'ALL_MEMBERS_CHANNEL_ID';
+const MEMBERS_CHANNEL_ID = 'MEMBERS_CHANNEL_ID';
+const BOT_CHANNEL_ID = 'BOT_CHANNEL_ID';
 let boosterData = { boosters: {} };
 
 const axios = require("axios")
@@ -71,7 +75,10 @@ client.on("ready", async () => {
     loadLanguages(client);
     await mongoose.connect(mongodburl, mongoOptions);
     console.log("Connected to mongodb");
-  
+    const guild = client.guilds.cache.get(GUILD_ID);
+    if (guild) {
+        await updateChannelNames(guild);
+    }
 });
 
 client.snipes = new Map();
@@ -87,6 +94,34 @@ if (fs.existsSync(dataPath)) {
     }
 } else {
     fs.writeFileSync(dataPath, JSON.stringify(boosterData, null, 2));
+}
+
+client.on('guildMemberAdd', async member => {
+  await updateChannelNames(member.guild);
+});
+
+client.on('guildMemberRemove', async member => {
+  await updateChannelNames(member.guild);
+});
+
+async function updateChannelNames(guild) {
+  try {
+    const allMembersChannel = guild.channels.cache.get(ALL_MEMBERS_CHANNEL_ID);
+    const membersChannel = guild.channels.cache.get(MEMBERS_CHANNEL_ID);
+    const botChannel = guild.channels.cache.get(BOT_CHANNEL_ID);
+    
+    if (!allMembersChannel || !membersChannel || !botChannel) return;
+
+    const allMembersCount = guild.memberCount;
+    const membersCount = guild.members.cache.filter(member => !member.user.bot).size;
+    const botCount = guild.members.cache.filter(member => member.user.bot).size;
+
+    await allMembersChannel.setName(`🌐 ║All Members: ${allMembersCount}`);
+    await membersChannel.setName(`👥 ║Members: ${membersCount}`);
+    await botChannel.setName(`👾 ║Bots: ${botCount}`);
+  } catch (error) {
+        console.error('Error updating channel names:', error);
+  }
 }
 
 client.on('guildMemberUpdate', async (oldMember, newMember) => {
@@ -176,7 +211,7 @@ client.on('messageCreate', async message => {
       let levelEmbed = new Discord.MessageEmbed()
           .setColor("GREEN")
           .setDescription(`<@${message.author.id}>, selamat kamu naik level ${levelData.level}!`);
-      client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}**!`})
+      client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat! Kamu telah naik ke level **${levelData.level}**!`})
   } else {
       levelData.xp += xpGive;
       await levelData.save();

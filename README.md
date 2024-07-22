@@ -64,6 +64,8 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Others
 
+- ```Announcement Message```, berfungsi untuk memberi notifikasi apabila ada user yang baru saja bergabung atau keluar.
+- ```Server Stats```, berfungsi untuk menampilkan statistik anggota seluruhnya saat ini.
 - ```Levelling System```, berfungsi sebagai sistem untuk melakukan levelling dengan role sebagai reward.
 - ```Boost Notification```, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
@@ -71,4 +73,4 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Notes from Developer
 
-Repository ini akan terus di-update oleh kami hingga kami kehabisan ide, kalian bisa bantu menambahkan ide apa saja yang bisa kami masukkan kedalam repository ini dengan berkomentar ya. Oh ya, jangan lupa follow akun [Github](https://github.com/b1theaven/) saya dan juga kalian bisa join [Server Discord](https://discord.gg/J4rBuvHskq) kami untuk bergabung dengan komunitas kami serta kalian bisa dukung kami melalui [SociaBuzz](https://sociabuzz.com/bitheaven) saya, terimakasih sudah membaca dan menggunakan repository ini dengan baik!
+Kami sadar kode yang kami buat masih terkesan tidak rapih dan banyak kekurangannya, maka dari itu repository ini akan terus di-update oleh kami hingga kami kehabisan ide, kalian bisa bantu menambahkan ide apa saja yang bisa kami masukkan kedalam repository ini dengan berkomentar ya. Oh ya, jangan lupa follow akun [Github](https://github.com/b1theaven/) saya dan juga kalian bisa join [Server Discord](https://discord.gg/J4rBuvHskq) kami untuk bergabung dengan komunitas kami serta kalian bisa dukung kami melalui [SociaBuzz](https://sociabuzz.com/bitheaven) saya, terimakasih sudah membaca dan menggunakan repository ini dengan baik!
