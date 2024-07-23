@@ -64,7 +64,6 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 ## Others
 
-- ```Announcement Message```, berfungsi untuk memberi notifikasi apabila ada user yang baru saja bergabung atau keluar.
 - ```Server Stats```, berfungsi untuk menampilkan statistik anggota seluruhnya saat ini.
 - ```Levelling System```, berfungsi sebagai sistem untuk melakukan levelling dengan role sebagai reward.
 - ```Boost Notification```, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.

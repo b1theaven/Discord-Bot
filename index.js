@@ -34,6 +34,8 @@ const dataPath = path.join(__dirname, 'boosters.json');
 const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const TICKET_CATEGORY_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID kategori untuk tiket
 const TICKET_LOG_CHANNEL_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID channel log tiket
+const WELCOME_CHANNEL_ID = 'PUT_YOUR_CHANNEL_ID';
+const LEAVE_CHANNEL_ID = 'PUT_YOUR_CHANNEL_ID';
 const GUILD_ID = 'PUT_YOUR_GUILD_ID';
 const ALL_MEMBERS_CHANNEL_ID = 'ALL_MEMBERS_CHANNEL_ID';
 const MEMBERS_CHANNEL_ID = 'MEMBERS_CHANNEL_ID';
@@ -98,10 +100,76 @@ if (fs.existsSync(dataPath)) {
 
 client.on('guildMemberAdd', async member => {
   await updateChannelNames(member.guild);
+  try {
+      const welcomeImage = await new canvafy.WelcomeLeave()
+          .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
+          .setBackground("image", "https://media.discordapp.net/attachments/881207789547061258/1264583321770397768/IMG_1050.jpg?ex=669e667e&is=669d14fe&hm=a9d514573195ac25970776158067fef1b05e6a15be818d9b6e1bdb975f9b7a4a&=&format=webp&width=556&height=671")
+          .setTitle(`${member.user.username}`)
+          .setDescription("Welcome to this server, go read the rules please!")
+          .setBorder("#2a2e35")
+          .setAvatarBorder("#2a2e35")
+          .setOverlayOpacity(0.3)
+          .build();
+
+      // Verifikasi apakah welcomeImage adalah buffer yang valid
+      if (!welcomeImage) {
+          console.error("Failed to create welcome image.");
+          return;
+      }
+
+      const attachment = new MessageAttachment(welcomeImage, `welcome-${member.id}.png`);
+
+      const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
+      if (!channel) {
+          console.error("Welcome channel not found.");
+          return;
+      }
+
+      await channel.send({
+          content: `Welcome to you ${member}!`,
+          files: [attachment]
+      });
+
+  } catch (error) {
+      console.error("Error in guildMemberAdd event:", error);
+  }
 });
 
 client.on('guildMemberRemove', async member => {
   await updateChannelNames(member.guild);
+  try {
+      const leaveImage = await new canvafy.WelcomeLeave()
+          .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
+          .setBackground("image", "https://media.discordapp.net/attachments/1263443860525289603/1264851373363564594/stardewvalley.png?ex=669f6023&is=669e0ea3&hm=e7ff5d98b934281c2fe103c49b9aebe4d4d81426bf2d4f61d3d71964dcf26244&=&format=webp&quality=lossless&width=550&height=309")
+          .setTitle(`${member.user.username}`)
+          .setDescription("Time to say goodbye, my friend!")
+          .setBorder("#2a2e35")
+          .setAvatarBorder("#2a2e35")
+          .setOverlayOpacity(0.3)
+          .build();
+
+      // Verifikasi apakah welcomeImage adalah buffer yang valid
+      if (!leaveImage) {
+          console.error("Failed to create leave image.");
+          return;
+      }
+
+      const attachment = new MessageAttachment(leaveImage, `leave-${member.id}.png`);
+
+      const channel = member.guild.channels.cache.get(LEAVE_CHANNEL_ID);
+      if (!channel) {
+          console.error("Leave channel not found.");
+          return;
+      }
+
+      await channel.send({
+          content: `Bye-bye, ${member}!`,
+          files: [attachment]
+      });
+
+  } catch (error) {
+      console.error("Error in guildMemberAdd event:", error);
+  }
 });
 
 async function updateChannelNames(guild) {
