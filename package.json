@@ -15,6 +15,7 @@
     "@google/generative-ai": "^0.13.0",
     "@napi-rs/canvas": "^0.1.53",
     "axios": "^0.21.1",
+    "canvafy": "^7.1.0",
     "child_process": "^1.0.2",
     "common-tags": "^1.8.0",
     "dblapi.js": "^2.4.1",
