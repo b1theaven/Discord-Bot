@@ -1,12 +1,10 @@
-const Tribes1 = require('./tribes1');
+import tribes1 from './tribes1.js'
 
-class Starsiege extends Tribes1 {
-    constructor() {
-        super();
-        this.encoding = 'latin1';
-        this.requestByte = 0x72;
-        this.responseByte = 0x73;
-    }
+export default class starsiege extends tribes1 {
+  constructor () {
+    super()
+    this.encoding = 'latin1'
+    this.requestByte = 0x72
+    this.responseByte = 0x73
+  }
 }
-
-module.exports = Starsiege;

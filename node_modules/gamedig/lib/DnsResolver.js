@@ -1,79 +1,76 @@
-const dns = require('dns'),
-    Logger = require('./Logger'),
-    util = require('util'),
-    dnsLookupAsync = util.promisify(dns.lookup),
-    dnsResolveAsync = util.promisify(dns.resolve),
-    punycode = require('punycode');
+import dns from 'node:dns'
+import { isIP } from 'node:net'
+import punycode from 'punycode/punycode.js'
 
-class DnsResolver {
-    /**
+export default class DnsResolver {
+  /**
      * @param {Logger} logger
      */
-    constructor(logger) {
-        this.logger = logger;
-    }
+  constructor (logger) {
+    this.logger = logger
+  }
 
-    isIp(host) {
-        return !!host.match(/\d+\.\d+\.\d+\.\d+/);
-    }
-
-    /**
-     * Response port will only be present if srv record was involved.
+  /**
+     * Resolve a host name to its IP, if the given host name is already
+     * an IP address no request is made.
+     *
+     * If a srvRecordPrefix is provided a SRV request will be made and the
+     * port returned will be included in the output.
      * @param {string} host
+     * @param {number} ipFamily
      * @param {string=} srvRecordPrefix
      * @returns {Promise<{address:string, port:number=}>}
      */
-    async resolve(host, srvRecordPrefix) {
-        this.logger.debug("DNS Lookup: " + host);
+  async resolve (host, ipFamily, srvRecordPrefix) {
+    this.logger.debug('DNS Lookup: ' + host)
 
-        if(this.isIp(host)) {
-            this.logger.debug("Raw IP Address: " + host);
-            return {address: host};
-        }
-
-        const asciiForm = punycode.toASCII(host);
-        if (asciiForm !== host) {
-            this.logger.debug("Encoded punycode: " + host + " -> " + asciiForm);
-            host = asciiForm;
-        }
-
-        if (srvRecordPrefix) {
-            this.logger.debug("SRV Resolve: " + srvRecordPrefix + '.' + host);
-            let records;
-            try {
-                records = await dnsResolveAsync(srvRecordPrefix + '.' + host, 'SRV');
-                if (records.length >= 1) {
-                    this.logger.debug("Found SRV Records: ", records);
-                    const record = records[0];
-                    const srvPort = record.port;
-                    const srvHost = record.name;
-                    if (srvHost === host) {
-                        throw new Error('Loop in DNS SRV records');
-                    }
-                    return {
-                        port: srvPort,
-                        ...await this.resolve(srvHost, srvRecordPrefix)
-                    };
-                }
-                this.logger.debug("No SRV Record");
-            } catch (e) {
-                this.logger.debug(e);
-            }
-        }
-
-        this.logger.debug("Standard Resolve: " + host);
-        const dnsResult = await dnsLookupAsync(host);
-        // For some reason, this sometimes returns a string address rather than an object.
-        // I haven't been able to reproduce, but it's been reported on the issue tracker.
-        let address;
-        if (typeof dnsResult === 'string') {
-            address = dnsResult;
-        } else {
-            address = dnsResult.address;
-        }
-        this.logger.debug("Found address: " + address);
-        return {address: address};
+    // Check if host is IPv4 or IPv6
+    if (isIP(host) === 4 || isIP(host) === 6) {
+      this.logger.debug('Raw IP Address: ' + host)
+      return { address: host }
     }
-}
 
-module.exports = DnsResolver;
+    const asciiForm = punycode.toASCII(host)
+    if (asciiForm !== host) {
+      this.logger.debug('Encoded punycode: ' + host + ' -> ' + asciiForm)
+      host = asciiForm
+    }
+
+    if (srvRecordPrefix) {
+      this.logger.debug('SRV Resolve: ' + srvRecordPrefix + '.' + host)
+      let records
+      try {
+        records = await dns.promises.resolve(srvRecordPrefix + '.' + host, 'SRV')
+        if (records.length >= 1) {
+          this.logger.debug('Found SRV Records: ', records)
+          const record = records[0]
+          const srvPort = record.port
+          const srvHost = record.name
+          if (srvHost === host) {
+            throw new Error('Loop in DNS SRV records')
+          }
+          return {
+            port: srvPort,
+            ...await this.resolve(srvHost, ipFamily, srvRecordPrefix)
+          }
+        }
+        this.logger.debug('No SRV Record')
+      } catch (e) {
+        this.logger.debug(e)
+      }
+    }
+
+    this.logger.debug('Standard Resolve: ' + host)
+    const dnsResult = await dns.promises.lookup(host, ipFamily)
+    // For some reason, this sometimes returns a string address rather than an object.
+    // I haven't been able to reproduce, but it's been reported on the issue tracker.
+    let address
+    if (typeof dnsResult === 'string') {
+      address = dnsResult
+    } else {
+      address = dnsResult.address
+    }
+    this.logger.debug('Found address: ' + address)
+    return { address }
+  }
+}

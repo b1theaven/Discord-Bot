@@ -1,22 +1,7 @@
-const Path = require('path'),
-    fs = require('fs'),
-    Core = require('../protocols/core');
+import * as protocols from '../protocols/index.js'
 
-class ProtocolResolver {
-    constructor() {
-        this.protocolDir = Path.normalize(__dirname+'/../protocols');
-    }
+export const getProtocol = (protocolId) => {
+  if (!(protocolId in protocols)) { throw Error('Protocol definition file missing: ' + protocolId) }
 
-    /**
-     * @returns Core
-     */
-    create(protocolId) {
-        protocolId = Path.basename(protocolId);
-        const path = this.protocolDir+'/'+protocolId;
-        if(!fs.existsSync(path+'.js')) throw Error('Protocol definition file missing: '+type);
-        const protocol = require(path);
-        return new protocol();
-    }
+  return new protocols[protocolId]()
 }
-
-module.exports = ProtocolResolver;
