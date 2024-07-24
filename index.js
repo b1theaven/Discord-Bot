@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const fs = require("fs");
 const path = require('path')
+const canvafy = require('canvafy')
+const { WelcomeLeave } = require("canvafy")
 const REMINDERS_FILE = './reminders.json';
 const moment = require('moment-timezone');
 const remindMe = require('./commands/remindme');
@@ -103,9 +105,9 @@ client.on('guildMemberAdd', async member => {
   try {
       const welcomeImage = await new canvafy.WelcomeLeave()
           .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
-          .setBackground("image", "https://media.discordapp.net/attachments/881207789547061258/1264583321770397768/IMG_1050.jpg?ex=669e667e&is=669d14fe&hm=a9d514573195ac25970776158067fef1b05e6a15be818d9b6e1bdb975f9b7a4a&=&format=webp&width=556&height=671")
+          .setBackground("image", "https://i.imgur.com/7LBfqAE.jpeg")
           .setTitle(`${member.user.username}`)
-          .setDescription("Welcome to this server, go read the rules please!")
+          .setDescription("Welcome to this server, go read the rules please!", '#FF0000')
           .setBorder("#2a2e35")
           .setAvatarBorder("#2a2e35")
           .setOverlayOpacity(0.3)
@@ -140,15 +142,15 @@ client.on('guildMemberRemove', async member => {
   try {
       const leaveImage = await new canvafy.WelcomeLeave()
           .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
-          .setBackground("image", "https://media.discordapp.net/attachments/1263443860525289603/1264851373363564594/stardewvalley.png?ex=669f6023&is=669e0ea3&hm=e7ff5d98b934281c2fe103c49b9aebe4d4d81426bf2d4f61d3d71964dcf26244&=&format=webp&quality=lossless&width=550&height=309")
+          .setBackground("image", "https://i.imgur.com/7LBfqAE.jpeg")
           .setTitle(`${member.user.username}`)
-          .setDescription("Time to say goodbye, my friend!")
+          .setDescription("Time to say goodbye, my friend!", '#FF0000')
           .setBorder("#2a2e35")
           .setAvatarBorder("#2a2e35")
           .setOverlayOpacity(0.3)
           .build();
 
-      // Verifikasi apakah welcomeImage adalah buffer yang valid
+      // Verifikasi apakah leaveImage adalah buffer yang valid
       if (!leaveImage) {
           console.error("Failed to create leave image.");
           return;
@@ -168,7 +170,7 @@ client.on('guildMemberRemove', async member => {
       });
 
   } catch (error) {
-      console.error("Error in guildMemberAdd event:", error);
+      console.error("Error in guildMemberRemove event:", error);
   }
 });
 
