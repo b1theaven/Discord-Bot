@@ -20,7 +20,7 @@ module.exports = {
                 { name: "<:chart:885185036419219496> Slash "+ lang(msg.guild, "COMMANDS"), value: stripIndents`
 > \`avatar\`, \`serveravatar\`, \`automod-flaggedword\`, \`automod-keyword\`, \`automod-mentionspam\`, \`ban\`, \`kick\`, \`setlanguage\`, \`setprefix\`, \`reloadcommands\`, \`youtubedownload\`` },
                 { name: '<:information_source:885192830283313232> Information ' + lang(msg.guild, 'COMMANDS'), value: stripIndents`
-> \`steam\`, \`playstore\`, \`topgginfo\`, \`device\`, \`worldclock\`, \`permissions\`, \`whois\`, \`stats\`` },
+> \`steam\`, \`playstore\`, \`topgginfo\`, \`device\`, \`worldclock\`, \`permissions\`, \`whois\`, \`stats\`, \`leaderboard\`` },
             )
             .setFooter('Apabila terdapat bug pada bot ini silahkan gunakan a.reportbug [bug] , terimakasih!');
             
