@@ -22,7 +22,7 @@
     "discord-backup": "^3.0.1",
     "discord-badges": "^0.0.0",
     "discord-banners": "^1.0.1",
-    "discord.js": "^14.15.3",
+    "discord.js": "^13.17.1",
     "discord.js-pagination": "^1.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.17.1",

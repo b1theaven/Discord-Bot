@@ -1,4 +1,23 @@
 const list = new Intl.ListFormat('en');
+const fs = require('fs');
+
+function loadReactionRoles() {
+    try {
+        const data = fs.readFileSync('./reactionroles.json', 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading or parsing reactionroles.json:', error);
+        return {};
+    }
+};
+
+function saveReactionRoles(data) {
+    try {
+        fs.writeFileSync('./reactionroles.json', JSON.stringify(data, null, 2));
+    } catch (error) {
+        console.error('Error saving reactionroles.json:', error);
+    }
+};
 // All functions returned from this module will now be in string format
 
 /**
@@ -99,5 +118,7 @@ module.exports = {
   compactNum,
   joinArray,
   joinArrayAndLimit,
-  clean
+  clean,
+  loadReactionRoles,
+  saveReactionRoles
 };
