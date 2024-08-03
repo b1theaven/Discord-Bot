@@ -50,6 +50,7 @@
     "parse-ms": "^4.0.0",
     "pidusage": "^3.0.0",
     "pretty-ms": "^9.1.0",
+    "prodia.js": "^3.0.0",
     "snekfetch": "^4.0.4",
     "superagent": "^9.0.2",
     "youtube-sr": "^4.3.10",
