@@ -15,6 +15,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```cancelremind.js```, berfungsi untuk membatalkan dan menghapus reminder user dari database.
 - ```clear.js```, berfungsi untuk membersihkan pesan.
 - ```commands.js```, berfungsi untuk menyalakan/mematikan suatu perintah yang ada pada bot.
+- ```cuddle.js```, berfungsi untuk menampilkan GIF anime ke user lain.
 - ```customrole.js```, berfungsi sebagai benefit untuk Server Booster.
 - ```device.js```, berfungsi untuk mengetahui device apa yang digunakan oleh user.
 - ```emojilist.js```, berfungsi untuk menampilkan emoji apa saja yang ada pada server.
@@ -23,10 +24,14 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```giveaway.js```, berfungsi sebagai media untuk melakukan giveaway.
 - ```google.js```, berfungsi sebagai pencarian selayaknya Google.
 - ```help.js```, berfungsi untuk menampilkan commands yang ada.
+- ```hug.js```, berfungsi untuk menampilkan GIF anime ke user lain.
+- ```kiss.js```, berfungsi untuk menampilkan GIF anime ke user lain.
 - ```leaderboard.js```, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
 - ```listreminder.js```, berfungsi untuk menampilkan list reminder yang dimiliki user.
 - ```movie.js```, berfungsi untuk mendeskripsikan film yang ingin dicari.
+- ```nasa.js```, berfungsi untuk menampilkan NASA Picture of the Day.
 - ```nuke.js```, berfungsi untuk menghapus seluruh pesan pada suatu channel.
+- ```pat.js```, berfungsi untuk menampilkan GIF anime ke user lain.
 - ```permissions.js```, berfungsi untuk menampilkan permissions apa saja yang dimiliki oleh user.
 - ```ping.js```, berfungsi untuk menampilkan ping user.
 - ```playstore.js```, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari.
@@ -36,9 +41,11 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```reportbug.js```, berfungsi sebagai media untuk melakukan report bug.
 - ```revokeBan.js```, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
 - ```say.js```, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
+- ```search-youtube.js```, berfungsi sebagai media untuk mencari video YouTube.
 - ```setlanguage.js```, berfungsi untuk mengganti bahasa pada bot.
 - ```setprefix.js```, berfungsi untuk mengganti prefix pada bot.
 - ```setReminder.js```, berfungsi untuk mengirimkan pesan yg akan berulang otomatis oleh bot disuatu channel tertentu.
+- ```slap.js```, berfungsi untuk menampilkan GIF anime ke user lain.
 - ```snipe.js```, berfungsi untuk mengecek pesan terakhir yang dihapus di suatu channel.
 - ```stats.js```, berfungsi untuk mengetahui statistik bot saat ini.
 - ```steam.js```, berfungsi untuk mendeskripsikan aplikasi/game yang ingin dicari.
@@ -56,9 +63,14 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```automod-keyword.js```, berfungsi untuk memblokir kata-kata kunci yang diinginkan.
 - ```automod-mentionspam.js```, berfungsi untuk memblokir spam mention.
 - ```ban.js```, berfungsi untuk mem-banned user.
+- ```imagine.js```, berfungsi untuk menghasilkan gambar menggunakan A.I.
 - ```kick.js```, berfungsi untuk menendang user.
+- ```leaderboard.js```, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
+- ```lyrics.js```, berfungsi untuk menampilkan lirik pada sebuah lagu yang diinginkan.
 - ```setlanguage.js```, berfungsi untuk mengatur bahasa pada bot.
 - ```setprefix.js```, berfungsi untuk mengganti prefix pada bot.
+- ```reactionrole-add.js```, berfungsi untuk membuat reaction role pada sebuah message.
+- ```reactionrole-remove.js```, berfungsi untuk menghapus reaction role pada sebuah message.
 - ```reloadcommands.js```, berfungsi untuk memuat ulang commands yang ada pada bot.
 - ```youtubedownload.js```, berfungsi untuk meng-convert video YouTube menjadi MP3.
 
