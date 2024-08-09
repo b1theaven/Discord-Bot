@@ -81,6 +81,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - ```Boost Notification```, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.
 - ```Audit Log```, berfungsi sebagai media untuk audit log.
 - ```Ticketing```, berfungsi untuk membuat tiket.
+- ```Anti Crash```, berfungsi untuk mencegah adanya crash apabila ada error pada code.
 
 ## Notes from Developer
 
