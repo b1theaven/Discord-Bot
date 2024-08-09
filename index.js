@@ -5,11 +5,11 @@ const canvafy = require('canvafy')
 const { WelcomeLeave } = require("canvafy")
 const REMINDERS_FILE = './reminders.json';
 const moment = require('moment-timezone');
-const remindMe = require('./commands/remindme');
+const global = require("./global.js")
 const setReminder = require('./commands/setReminder');
 const giveawayCommand = require('./commands/giveaway');
 const ms = require('ms');
-const client = new Discord.Client({ intents: 32767 });
+const client = new Discord.Client({ intents: 32767, partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 const { DiscordBanners } = require('discord-banners');
 const discordBanners = new DiscordBanners(client);
 const mongoose = require("mongoose");
@@ -32,7 +32,11 @@ const { GoogleGenerativeAI } = require('@google/generative-ai')
 const langSchema = require("./models/language");
 const lang = require("./language");
 const levelSchema = require("./models/level");
+const reactionRole = require("./models/reactionrole")
+const backgroundBuffer = new MessageAttachment('./images.jpg', 'images.png')
 const dataPath = path.join(__dirname, 'boosters.json');
+const neko = require("nekos.life")
+const nekoClient = new neko()
 const { Client, Intents, MessageActionRow, Collection, MessageButton, MessageEmbed, Events, Permissions } = require("discord.js");
 const TICKET_CATEGORY_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID kategori untuk tiket
 const TICKET_LOG_CHANNEL_ID = 'PUT_YOUR_CHANNEL_ID'; // Ganti dengan ID channel log tiket
@@ -43,18 +47,19 @@ const ALL_MEMBERS_CHANNEL_ID = 'ALL_MEMBERS_CHANNEL_ID';
 const MEMBERS_CHANNEL_ID = 'MEMBERS_CHANNEL_ID';
 const BOT_CHANNEL_ID = 'BOT_CHANNEL_ID';
 let boosterData = { boosters: {} };
+client.neko = nekoClient
 
 const axios = require("axios")
 const urls = [""]
 setInterval(function() {
-            urls.forEach(url => {
-            axios.get(url).then(console.log("Pong at " + Date.now())).catch(() => {});
-        })
-    }, 60 * 1000);
+  urls.forEach(url => {
+  axios.get(url).then(global.debug("Pong at " + Date.now())).catch(() => {});
+})
+}, 90 * 1000);
 const mongoOptions = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 };
 
 app.get("/", (req, res) => {
@@ -64,25 +69,25 @@ app.listen(process.env.PORT || 3000);
 
 setInterval(() => {
   loadLanguages(client);
-  console.log("Load all guild languages");
+  global.success("Load all guild languages");
 }, 300 * 1000);
 
 client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    global.info(`Logged in as ${client.user.tag}!`);
     giveawayCommand.scheduleGiveaways(client);
     setReminder.loadReminders(client);
 });
 
 client.on("ready", async () => {
-    console.log("Online " + client.user.tag);
-    client.user.setActivity(`AERO Team Official Bot`);
-    loadLanguages(client);
-    await mongoose.connect(mongodburl, mongoOptions);
-    console.log("Connected to mongodb");
-    const guild = client.guilds.cache.get(GUILD_ID);
-    if (guild) {
-        await updateChannelNames(guild);
-    }
+  global.success("Online " + client.user.tag);
+  client.user.setActivity(`AERO Team Official Bot`);
+  loadLanguages(client);
+  await mongoose.connect(mongodburl, mongoOptions);
+  global.success("Connected to mongodb");
+  const guild = client.guilds.cache.get(GUILD_ID);
+  if (guild) {
+      await updateChannelNames(guild);
+  }
 });
 
 client.snipes = new Map();
@@ -100,24 +105,89 @@ if (fs.existsSync(dataPath)) {
     fs.writeFileSync(dataPath, JSON.stringify(boosterData, null, 2));
 }
 
+client.on("messageReactionAdd", async(react, user) => {
+
+  if(react.message.partial) await react.message.fetch()
+  if(react.partial)await react.fetch()
+  
+  if(!react.message.guildId) return
+  if(user.bot) return
+  
+  let emojiID = `<:${react.emoji.name}:${react.emoji.id}>`
+  if(!react.emoji.id) {
+    emojiID = react.emoji.name
+  }
+  
+  
+  const reactData = await reactionRole.findOne({ guild: react.message.guildId, message: react.message.id, emoji: emojiID})
+  
+  if(!reactData) return
+  
+  const guild = await client.guilds.cache.get(react.message.guildId)
+  const member = await guild.members.cache.get(user.id)
+  
+  try { 
+  
+    const embed = new MessageEmbed()
+    .setColor("GREEN")
+    .setDescription(`✅ I have added a role <@&${reactData.role}> to ${member}`)
+    await member.roles.add(reactData.role)
+    await react.message.reply({ embeds: [embed]}).then(m => setTimeout(() => m.delete(), 5000))
+  } catch(e) {
+    console.log(e)
+    console.log(reactData.role)
+  }
+
+})
+
+client.on("messageReactionRemove", async(react, user) => {
+  
+  if(react.message.partial) await react.message.fetch
+  if(react.partial) await react.fetch()
+  
+  
+  if(!react.message.guildId) return
+  if(user.bot) return
+  
+  let emojiID = `<:${react.emoji.name}:${react.emoji.id}>`
+  if(!react.emoji.id) {
+    emojiID = react.emoji.name
+  }
+  
+  
+  const reactData = await reactionRole.findOne({ guild: react.message.guildId, message: react.message.id, emoji: emojiID})
+  
+  if(!reactData) return
+  
+  const guild = await client.guilds.cache.get(react.message.guildId)
+  const member = await guild.members.cache.get(user.id)
+  
+  try { 
+  
+    const embed = new MessageEmbed()
+    .setColor("ORANGE")
+    .setDescription(`✅ I have removed a role <@&${reactData.role}> from ${member}`)
+    await member.roles.remove(reactData.role)
+    await react.message.reply({ embeds : [embed]}).then(m => setTimeout(() => m.delete(), 5000))
+  } catch(e) {
+    console.log(e)
+    console.log(reactData.role)
+  }
+
+})
+
 client.on('guildMemberAdd', async member => {
   await updateChannelNames(member.guild);
-  try {
       const welcomeImage = await new canvafy.WelcomeLeave()
           .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
-          .setBackground("image", "https://i.imgur.com/7LBfqAE.jpeg")
+          setBackground("image", backgroundBuffer)
           .setTitle(`${member.user.username}`)
-          .setDescription("Welcome to this server, go read the rules please!", '#FF0000')
-          .setBorder("#2a2e35")
-          .setAvatarBorder("#2a2e35")
+          .setDescription("Welcome to the server", "#FFFFFF")
+          .setBorder(getRandomColor())
+          .setAvatarBorder(getRandomColor())
           .setOverlayOpacity(0.3)
           .build();
-
-      // Verifikasi apakah welcomeImage adalah buffer yang valid
-      if (!welcomeImage) {
-          console.error("Failed to create welcome image.");
-          return;
-      }
+      
 
       const attachment = new MessageAttachment(welcomeImage, `welcome-${member.id}.png`);
 
@@ -128,49 +198,46 @@ client.on('guildMemberAdd', async member => {
       }
 
       await channel.send({
-          content: `Welcome to you ${member}!`,
+          content: `Welcome to this server, ${member}! go read the rules please <#881207788922101823>!`,
           files: [attachment]
       });
 
-  } catch (error) {
-      console.error("Error in guildMemberAdd event:", error);
-  }
-});
+   })
 
 client.on('guildMemberRemove', async member => {
   await updateChannelNames(member.guild);
   try {
       const leaveImage = await new canvafy.WelcomeLeave()
           .setAvatar(member.user.displayAvatarURL({ forceStatic: true, extension: "png" }))
-          .setBackground("image", "https://i.imgur.com/7LBfqAE.jpeg")
+          .setBackground("image", backgroundBuffer)
           .setTitle(`${member.user.username}`)
-          .setDescription("Time to say goodbye, my friend!", '#FF0000')
-          .setBorder("#2a2e35")
-          .setAvatarBorder("#2a2e35")
+          .setDescription("Time to say goodbye, my friend!", "#FFFFFF")
+          .setBorder(getRandomColor())
+          .setAvatarBorder(getRandomColor())
           .setOverlayOpacity(0.3)
           .build();
-
+     const leaveBuffer2 = new Discord.MessageAttachment(leaveImage, "leave-image.png")
       // Verifikasi apakah leaveImage adalah buffer yang valid
-      if (!leaveImage) {
+     if (!leaveImage2) {
           console.error("Failed to create leave image.");
           return;
       }
+      
 
       const attachment = new MessageAttachment(leaveImage, `leave-${member.id}.png`);
-
       const channel = member.guild.channels.cache.get(LEAVE_CHANNEL_ID);
       if (!channel) {
           console.error("Leave channel not found.");
           return;
       }
 
-      await channel.send({
+      channel.send({
           content: `Bye-bye, ${member}!`,
-          files: [attachment]
+          files: [leaveBuffer2]
       });
 
   } catch (error) {
-      console.error("Error in guildMemberRemove event:", error);
+      console.error("Error in guildMemberAdd event:", error);
   }
 });
 
@@ -386,131 +453,135 @@ function checkReminders() {
 }
 
 client.on('interactionCreate', async interaction => {
-    if (!interaction.isButton()) return;
+  if (!interaction.isButton()) return;
 
-    if (interaction.customId === 'create_ticket') {
-        if (activeTickets.has(interaction.user.id)) {
-            return interaction.reply({ content: 'Anda sudah memiliki tiket yang belum ditutup. Harap tutup tiket tersebut sebelum membuat tiket baru.', ephemeral: true });
-        }
+  const command = client.commands.get(interaction.customId.split('_')[0]);
 
-        const ticketChannel = await interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
-            type: 'GUILD_TEXT',
-            parent: TICKET_CATEGORY_ID,
-            permissionOverwrites: [
-                {
-                    id: interaction.guild.id,
-                    deny: ['VIEW_CHANNEL'],
-                },
-                {
-                    id: interaction.user.id,
-                    allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-                },
-            ],
-        });
-
-        activeTickets.set(interaction.user.id, ticketChannel.id);
-
-        const memberCount = interaction.guild.memberCount;
-
-        const ticketEmbed = new MessageEmbed()
-            .setColor('#00FF00')
-            .setTitle('Tiket Dibuat')
-            .setDescription(`Tiket Anda telah dibuat: ${ticketChannel}`)
-            .setTimestamp();
-
-        await interaction.reply({ embeds: [ticketEmbed], ephemeral: true });
-
-        const closeRow = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('close_ticket')
-                    .setLabel('⛔ Tutup Tiket')
-                    .setStyle('DANGER'),
-            );
-
-        const welcomeMessage = await ticketChannel.send({
-            content: `Selamat datang <@${interaction.user.id}>! Selamat berbelanja! Klik tombol dibawah jika ingin menutup tiketnya ya~`,
-            components: [closeRow],
-        });
-
-        // Menambahkan reaksi otomatis
-    } else if (interaction.customId === 'close_ticket') {
-        const channel = interaction.channel;
-        if (!channel.name.startsWith('ticket-')) {
-            return interaction.reply({ content: 'Ini bukan channel tiket!', ephemeral: true });
-        }
-
-        const logChannel = client.channels.cache.get(TICKET_LOG_CHANNEL_ID);
-        if (logChannel) {
-            const closeEmbed = new MessageEmbed()
-                .setColor('#FF0000')
-                .setTitle('Tiket Ditutup')
-                .setDescription(`Tiket ditutup oleh <@${interaction.user.id}>`)
-                .setTimestamp();
-
-            await logChannel.send({ embeds: [closeEmbed] });
-        }
-
-        const ticketOwnerId = Array.from(activeTickets.keys()).find(key => activeTickets.get(key) === channel.id);
-        if (ticketOwnerId) {
-            activeTickets.delete(ticketOwnerId);
-        }
-
-        await interaction.reply({ content: 'Tiket ini akan ditutup dalam 5 detik.', ephemeral: true });
-        setTimeout(() => {
-            channel.delete().catch(err => console.error('Failed to delete channel:', err));
-        }, 5000);
+  if (command && command.buttonExecute) {
+    try {
+      await command.buttonExecute(interaction);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({ content: 'There was an error while processing this action!', ephemeral: true });
     }
-      try {
-        if (interaction.isCommand()) {
-          if (interaction.commandName === 'ping') {
-            return interaction.reply({ content: `Pong! ${client.ws.ping}ms` });
-          }
-          const cmd = client.slashCommands.get(interaction.commandName);
-          if (!cmd) return interaction.reply({ content: "Something Went Wrong", ephemeral: true });
+  }
 
-          if (cmd.permission) {
-            const authorPerms = interaction.channel.permissionsFor(interaction.member);
-            if (!authorPerms || !authorPerms.has(cmd.permission)) {
-              const permEmbed = new Discord.MessageEmbed()
-                .setColor("BLUE")
-                .setDescription(lang(interaction.guild, "INTERACTION_PERMISSION") + " " + cmd.permission);
-              return interaction.reply({ embeds: [permEmbed], ephemeral: true });
-            }
-          }
-          if (cmd.ownerOnly) {
-            if (!['PUT_YOUR_DISCORD_ID'].includes(interaction.member.id)) {
-              return interaction.reply({ content: 'Owner only', ephemeral: true });
-            }
-          }
-          const args = [];
-          for (let option of interaction.options.data) {
-            if (option.type === "SUB_COMMAND") {
-              if (option.name) args.push(option.name);
-              option.options?.forEach((x) => {
-                if (x.value) args.push(x.value);
-              });
-            } else if (option.value) args.push(option.value);
-          }
-         const commands = await cmd.execute(client, interaction, args);
-        }
-      } catch (err) {
-         const cmd = client.slashCommands.get(interaction.commandName);
-         const ch = "PUT_YOUR_CHANNEL_ID"
-           const errEmbed2 = new MessageEmbed()
-           .setTitle("Command butuh perbaikan segera")
-           .setDescription("Sistem mendeteksi adanya error pada command "+"\`"+cmd.name+"\`")
-           .addField("Error Stack", `\`${messageLimit(err.stack)}\``, true)
-           .addField("Error Message", `\`${messageLimit(err.message)}\``, true)
-           .setFooter("Error Logging")
-     interaction.reply({ content: "Maaf, terjadi kesalahan saat menjalankan perintah"})
-             client.channels.cache.get(ch).send({ embeds: [errEmbed2]})
-        console.log("Something Went Wrong => ", err);
+  if (interaction.customId === 'create_ticket') {
+      if (activeTickets.has(interaction.user.id)) {
+          return interaction.reply({ content: 'Anda sudah memiliki tiket yang belum ditutup. Harap tutup tiket tersebut sebelum membuat tiket baru.', ephemeral: true });
       }
+
+      const ticketChannel = await interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
+          type: 'GUILD_TEXT',
+          parent: TICKET_CATEGORY_ID,
+          permissionOverwrites: [
+              {
+                  id: interaction.guild.id,
+                  deny: ['VIEW_CHANNEL'],
+              },
+              {
+                  id: interaction.user.id,
+                  allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+              },
+          ],
+      });
+
+      activeTickets.set(interaction.user.id, ticketChannel.id);
+
+      const memberCount = interaction.guild.memberCount;
+
+      const ticketEmbed = new MessageEmbed()
+          .setColor('#00FF00')
+          .setTitle('Tiket Dibuat')
+          .setDescription(`Tiket Anda telah dibuat: ${ticketChannel}`)
+          .setTimestamp();
+
+      await interaction.reply({ embeds: [ticketEmbed], ephemeral: true });
+
+      const closeRow = new MessageActionRow()
+          .addComponents(
+              new MessageButton()
+                  .setCustomId('close_ticket')
+                  .setLabel('⛔ Tutup Tiket')
+                  .setStyle('DANGER'),
+          );
+
+      const welcomeMessage = await ticketChannel.send({
+          content: `Selamat datang <@${interaction.user.id}>! Selamat berbelanja! Klik tombol dibawah jika ingin menutup tiketnya ya~`,
+          components: [closeRow],
+      });
+
+      // Menambahkan reaksi otomatis
+  } else if (interaction.customId === 'close_ticket') {
+      const channel = interaction.channel;
+      if (!channel.name.startsWith('ticket-')) {
+          return interaction.reply({ content: 'Ini bukan channel tiket!', ephemeral: true });
+      }
+
+      const logChannel = client.channels.cache.get(TICKET_LOG_CHANNEL_ID);
+      if (logChannel) {
+          const closeEmbed = new MessageEmbed()
+              .setColor('#FF0000')
+              .setTitle('Tiket Ditutup')
+              .setDescription(`Tiket ditutup oleh <@${interaction.user.id}>`)
+              .setTimestamp();
+
+          await logChannel.send({ embeds: [closeEmbed] });
+      }
+
+      const ticketOwnerId = Array.from(activeTickets.keys()).find(key => activeTickets.get(key) === channel.id);
+      if (ticketOwnerId) {
+          activeTickets.delete(ticketOwnerId);
+      }
+
+      await interaction.reply({ content: 'Tiket ini akan ditutup dalam 5 detik.', ephemeral: true });
+      setTimeout(() => {
+          channel.delete().catch(err => console.error('Failed to delete channel:', err));
+      }, 5000);
+  }
+});
+
+client.on('interactionCreate', async interaction => {
+try {
+  if (interaction.isCommand()) {
+    if (interaction.commandName === 'ping') {
+      return interaction.reply({ content: `Pong! ${client.ws.ping}ms` });
+    }
+    const cmd = client.slashCommands.get(interaction.commandName);
+    if (!cmd) return interaction.reply({ content: "Something Went Wrong", ephemeral: true });
+
+    if (cmd.permission) {
+      const authorPerms = interaction.channel.permissionsFor(interaction.member);
+      if (!authorPerms || !authorPerms.has(cmd.permission)) {
+        const permEmbed = new Discord.MessageEmbed()
+          .setColor("BLUE")
+          .setDescription(lang(interaction.guild, "INTERACTION_PERMISSION") + " " + cmd.permission);
+        return interaction.reply({ embeds: [permEmbed], ephemeral: true });
+      }
+    }
+    if (cmd.ownerOnly) {
+      if (!['671351376642834440', '1005082777206661190', '627027667685867530', '465491570305662978'].includes(interaction.member.id)) {
+        return interaction.reply({ content: 'Owner only', ephemeral: true });
+      }
+    }
+    const args = [];
+    for (let option of interaction.options.data) {
+      if (option.type === "SUB_COMMAND") {
+        if (option.name) args.push(option.name);
+        option.options?.forEach((x) => {
+          if (x.value) args.push(x.value);
+        });
+      } else if (option.value) args.push(option.value);
+    }
+    cmd.execute(client, interaction, args);
+  }
+} catch (err) {
+  console.log("Something Went Wrong => ", err);
+}
 });
 
 client.on("guildCreate", async(guild) => {
-  loadLanguages(client);
+loadLanguages(client);
 });
 
 // Message Delete Logging
@@ -604,11 +675,11 @@ client.slashCommands = new Discord.Collection();
 client.commands = new Collection();
 
 fs.readdir("./commands/", (err, files) => {
-  if (err) return console.log(err);
+  if (err) return global.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);
-    console.log("Successfully loaded " + file);
+    global.success("Successfully loaded " + file);
     let commandName = file.split(".")[0];
     client.commands.set(commandName, props);
     if (props.aliases) {
@@ -623,7 +694,7 @@ fs.readdir('./events/', (err, files) => {
   if (err) console.log(err);
   files.forEach(file => {
     let eventFunc = require(`./events/${file}`);
-    console.log("Successfully loaded " + file);
+    global.success("Successfully loaded " + file);
     let eventName = file.split(".")[0];
     client.on(eventName, (...args) => eventFunc.run(client, ...args));
   });
@@ -635,9 +706,77 @@ handlers.forEach((handler) => {
   require(`./handler/${handler}`)(client);
 });
 
+// Error handling
+const channelCrash = "PUT_YOUR_CHANNEL_ID"
+  process.on("unhandledRejection", (reason, p) => {
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true}))
+    .setColor("YELLOW")
+    .setFooter("Anti Crash")
+    .setTimestamp()
+    .addField("Serval Anti Crash", "\`\`\`Unhandled Rejection/Catch\`\`\`")
+    .addField("Reason", `\`\`\`${messageLimit(reason)}\`\`\``)
+    console.log(" [antiCrash] :: Unhandled Rejection/Catch");
+    client.channels.cache.get("1269726419127242842").send({ embeds: [embed]})
+    console.log(reason, p);
+  });
+  process.on("uncaughtException", (err, origin) => {
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
+    .setColor("YELLOW")
+    .setTimestamp()
+    .setFooter("Anti Crash")
+    .addField("Serval Anti Crash", "\`\`\`Uncaught Exception/Catch\`\`\`")
+    .addField("Error", `\`\`\`${messageLimit(err)}\`\`\``)
+    .addField("Error Message", `\`\`\`${messageLimit(err.message)}\`\`\``)
+    client.channels.cache.get("1269726419127242842").send({ embeds: [embed]})
+    console.log(" [antiCrash] :: Uncaught Exception/Catch");
+    console.log(err, origin);
+  });
+  process.on("uncaughtExceptionMonitor", (err, origin) => {
+      
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
+    .setColor("YELLOW")
+    .addField("Serval Anti Crash (Monitor)", "\`\`\`Uncautht Exception/Catch (Monitor)\`\`\`")
+    .setFooter("Anti Crash")
+    .addField("Error", `\`\`\`${messageLimit(err)}\`\`\``)
+    .addField("Error Message", `\`\`\`${messageLimit(err.message)}\`\`\``)
+    .setTimestamp()
+    client.channels.cache.get("1269726419127242842").send({ embeds: [embed]})
+    console.log(" [antiCrash] :: Uncaught Exception/Catch (MONITOR)");
+    console.log(err, origin);
+  });
+  process.on("multipleResolves", (type, promise, reason) => {
+    console.log(" [antiCrash] :: Multiple Resolves");
+  });
+
+process.on("uncaughtReferenceError", (err) => {
+      
+    const embed = new Discord.MessageEmbed()
+    .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true}))
+    .setColor("YELLOW")
+    .setTimestamp()
+    .setFooter("Anti Crash")
+    .addField("Serval Anti Crash", `\`\`\`Uncaught Reference Error\`\`\``)
+    .addField("Error Stack", `\`\`\`${messageLimit(err.stack)}\`\`\``)
+    .addField("Error Message", `\`\`\`${messageLimit(err.message)}\`\`\``)
+    client.channels.cache.get("1269726419127242842").send({ embeds: [embed]})
+    console.log(" [antiCrash] :: Uncaught Reference Error");
+  });
+
 client.login(process.env.TOKEN);
 
 module.exports.client = client;
+
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 function messageLimit(str) {
   if (str.length > 1000) {
