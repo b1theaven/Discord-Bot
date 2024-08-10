@@ -307,13 +307,92 @@ client.on('guildMemberUpdate', async (oldMember, newMember) => {
     }
 });
 
+const userXpIntervals = new Map();
+
+client.on('voiceStateUpdate', async (oldState, newState) => {
+  const userId = newState.id;
+  const guildId = newState.guild.id;
+  const xpGive = Math.floor(Math.random() * 124) * 3;
+
+  if (newState.channel && !oldState.channel) {
+    if (userXpIntervals.has(userId)) {
+      clearInterval(userXpIntervals.get(userId));
+    }
+
+    // Buat interval baru untuk menambah XP
+    const xpInterval = setInterval(async () => {
+      let levelData = await levelSchema.findOne({ guild: "PUT_YOUR_GUILD_ID", id: userId });
+
+      if (!levelData) {
+        levelData = new levelSchema({
+          guild: "PUT_YOUR_GUILD_ID",
+          id: userId,
+          xp: xpGive,
+          level: 1
+        });
+      } else {
+        levelData.xp += xpGive;
+
+        const xpNeeded = levelData.level * levelData.level * 100 + 100
+
+        if (levelData.xp + xpGive >= xpNeeded) {
+          levelData.xp -= xpNeeded;
+          levelData.level += 1;
+          await levelData.save();
+
+          if (!newState.channel) return;
+
+          const roleIdMap = {
+            10: 'PUT_YOUR_ROLE_ID',
+            20: 'PUT_YOUR_ROLE_ID',
+            30: 'PUT_YOUR_ROLE_ID',
+            50: 'PUT_YOUR_ROLE_ID',
+            75: 'PUT_YOUR_ROLE_ID',
+          };
+
+          if (roleIdMap[levelData.level]) {
+            const roleId = roleIdMap[levelData.level];
+            const role = newState.guild.roles.cache.get(roleId);
+            if (role && !newState.member.roles.cache.has(roleId)) {
+              await newState.member.roles.add(role);
+            }
+          }
+
+          const channelLevel = "PUT_YOUR_CHANNEL_ID";
+          const levelEmbed = new MessageEmbed()
+            .setColor("GREEN")
+            .setDescription(`<@${message.author.id}>, selamat, kamu telah naik level ke ${levelData.level}!`);
+          client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}**!`})
+
+        } else {
+          await levelData.save();
+        }
+      }
+
+      if (!newState.channel) {
+        clearInterval(xpInterval);
+        userXpIntervals.delete(userId);
+      }
+    }, 50000);
+
+    userXpIntervals.set(userId, xpInterval);
+  }
+
+  if (!newState.channel && oldState.channel) {
+    if (userXpIntervals.has(userId)) {
+      clearInterval(userXpIntervals.get(userId));
+      userXpIntervals.delete(userId);
+    }
+  }
+});
+
 client.on('messageCreate', async message => {
   if (message.author.bot) return;
 
-  let levelData = await levelSchema.findOne({ guild: message.guild.id, id: message.author.id });
+  let levelData = await levelSchema.findOne({ guild: "PUT_YOUR_GUILD_ID", id: message.author.id });
 
   if (!levelData) {
-      levelData = await levelSchema.create({ guild: message.guild.id, id: message.author.id, xp: 0, level: 0 });
+      levelData = await levelSchema.create({ guild: "PUT_YOUR_GUILD_ID", id: message.author.id, xp: 0, level: 0 });
   }
 
   const xpGive = Math.floor(Math.random() * 23) + 1;
