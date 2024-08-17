@@ -13,6 +13,7 @@
     "@discordjs/builders": "^1.6.3",
     "@google-ai/generativelanguage": "^2.5.0",
     "@google/generative-ai": "^0.16.0",
+    "@iamtraction/google-translate": "^2.0.1",
     "@napi-rs/canvas": "^0.1.53",
     "app-store-scraper": "^0.18.0",
     "axios": "^1.7.2",
