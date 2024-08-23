@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js')
 const confessSchema = require('../../models/confession')
 module.exports = {
     name: "confession-remove",
-    description: "Menghapus confession server",
+    description: "Menghapus confession server (bukan menghapus pesan confession)",
+    permission: "ADMINISTRATOR",
   execute: async(client, interaction, args) => {
     
     const data = await confessSchema.findOne({ guild: interaction.guild.id })
