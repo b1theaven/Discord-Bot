@@ -314,18 +314,49 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
   const guildId = newState.guild.id;
   const xpGive = Math.floor(Math.random() * 124) * 3;
 
+  // Logging voice state changes
+  const logChannel = client.channels.cache.get('PUT_YOUR_CHANNEL_ID');
+  if (logChannel && oldState.channelId !== newState.channelId) {
+    if (!oldState.channelId) {
+      const embed = new MessageEmbed()
+        .setTitle('<:sound:885195095840804885> Member Joined Voice Channel')
+        .setColor('GREEN')
+        .addField('\`Member\`', newState.member.user.tag, true)
+        .addField('\`Channel\`', newState.channel.name, true)
+        .setTimestamp();
+      logChannel.send({ embeds: [embed] });
+    } else if (!newState.channelId) {
+      const embed = new MessageEmbed()
+        .setTitle('<:mute:885195095840804885> Member Left Voice Channel')
+        .setColor('RED')
+        .addField('\`Member\`', oldState.member.user.tag, true)
+        .addField('\`Channel\`', oldState.channel.name, true)
+        .setTimestamp();
+      logChannel.send({ embeds: [embed] });
+    } else {
+      const embed = new MessageEmbed()
+        .setTitle('<:sound:885195095840804885> Member Moved Voice Channel')
+        .setColor('YELLOW')
+        .addField('\`Member\`', oldState.member.user.tag, true)
+        .addField('\`From\`', oldState.channel.name, true)
+        .addField('\`To\`', newState.channel.name, true)
+        .setTimestamp();
+      logChannel.send({ embeds: [embed] });
+    }
+  }
+
+  // Leveling and XP gain logic
   if (newState.channel && !oldState.channel) {
     if (userXpIntervals.has(userId)) {
       clearInterval(userXpIntervals.get(userId));
     }
 
-    // Buat interval baru untuk menambah XP
     const xpInterval = setInterval(async () => {
-      let levelData = await levelSchema.findOne({ guild: "PUT_YOUR_GUILD_ID", id: userId });
+      let levelData = await levelSchema.findOne({ guild: guildId, id: userId });
 
       if (!levelData) {
         levelData = new levelSchema({
-          guild: "PUT_YOUR_GUILD_ID",
+          guild: guildId,
           id: userId,
           xp: xpGive,
           level: 1
@@ -333,7 +364,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
       } else {
         levelData.xp += xpGive;
 
-        const xpNeeded = levelData.level * levelData.level * 100 + 100
+        const xpNeeded = levelData.level * levelData.level * 100 + 100;
 
         if (levelData.xp + xpGive >= xpNeeded) {
           levelData.xp -= xpNeeded;
@@ -361,9 +392,8 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
           const channelLevel = "PUT_YOUR_CHANNEL_ID";
           const levelEmbed = new MessageEmbed()
             .setColor("GREEN")
-            .setDescription(`<@${message.author.id}>, selamat, kamu telah naik level ke ${levelData.level}!`);
-          client.channels.cache.get(channelLevel).send({ content: `<@${message.author.id}> selamat kamu telah naik ke level **${levelData.level}**!`})
-
+            .setDescription(`<@${newState.member.id}>, selamat, kamu telah naik level ke ${levelData.level}!`);
+          client.channels.cache.get(channelLevel).send({ content: `<@${newState.member.id}> selamat kamu telah naik ke level **${levelData.level}**!` });
         } else {
           await levelData.save();
         }
@@ -532,131 +562,137 @@ function checkReminders() {
 }
 
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isButton()) return;
-
-  const command = client.commands.get(interaction.customId.split('_')[0]);
-
-  if (command && command.buttonExecute) {
-    try {
-      await command.buttonExecute(interaction);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({ content: 'There was an error while processing this action!', ephemeral: true });
-    }
-  }
-
-  if (interaction.customId === 'create_ticket') {
-      if (activeTickets.has(interaction.user.id)) {
-          return interaction.reply({ content: 'Anda sudah memiliki tiket yang belum ditutup. Harap tutup tiket tersebut sebelum membuat tiket baru.', ephemeral: true });
+  try {
+    // Handle Slash Commands
+    if (interaction.isCommand()) {
+      if (interaction.commandName === 'ping') {
+        return interaction.reply({ content: `Pong! ${client.ws.ping}ms` });
       }
 
-      const ticketChannel = await interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
+      const cmd = client.slashCommands.get(interaction.commandName);
+      if (!cmd) return interaction.reply({ content: "Something Went Wrong", ephemeral: true });
+
+      // Permission Check
+      if (cmd.permission) {
+        const authorPerms = interaction.channel.permissionsFor(interaction.member);
+        if (!authorPerms || !authorPerms.has(cmd.permission)) {
+          const permEmbed = new Discord.MessageEmbed()
+            .setColor("BLUE")
+            .setDescription(lang(interaction.guild, "INTERACTION_PERMISSION") + " " + cmd.permission);
+          return interaction.reply({ embeds: [permEmbed], ephemeral: true });
+        }
+      }
+
+      // Owner Only Check
+      if (cmd.ownerOnly) {
+        if (!['671351376642834440', '1005082777206661190', '627027667685867530', '465491570305662978'].includes(interaction.member.id)) {
+          return interaction.reply({ content: 'Owner only', ephemeral: true });
+        }
+      }
+
+      // Parse Arguments
+      const args = [];
+      for (let option of interaction.options.data) {
+        if (option.type === "SUB_COMMAND") {
+          if (option.name) args.push(option.name);
+          option.options?.forEach((x) => {
+            if (x.value) args.push(x.value);
+          });
+        } else if (option.value) args.push(option.value);
+      }
+
+      // Execute Command
+      cmd.execute(client, interaction, args);
+
+    // Handle Button Interactions
+    } else if (interaction.isButton()) {
+      const command = client.commands.get(interaction.customId.split('_')[0]);
+
+      if (command && command.buttonExecute) {
+        try {
+          await command.buttonExecute(interaction);
+        } catch (error) {
+          console.error(error);
+          await interaction.reply({ content: 'There was an error while processing this action!', ephemeral: true });
+        }
+      }
+
+      // Create Ticket Interaction
+      if (interaction.customId === 'create_ticket') {
+        if (activeTickets.has(interaction.user.id)) {
+          return interaction.reply({ content: 'Anda sudah memiliki tiket yang belum ditutup. Harap tutup tiket tersebut sebelum membuat tiket baru.', ephemeral: true });
+        }
+
+        const ticketChannel = await interaction.guild.channels.create(`ticket-${interaction.user.username}`, {
           type: 'GUILD_TEXT',
           parent: TICKET_CATEGORY_ID,
           permissionOverwrites: [
-              {
-                  id: interaction.guild.id,
-                  deny: ['VIEW_CHANNEL'],
-              },
-              {
-                  id: interaction.user.id,
-                  allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
-              },
+            {
+              id: interaction.guild.id,
+              deny: ['VIEW_CHANNEL'],
+            },
+            {
+              id: interaction.user.id,
+              allow: ['VIEW_CHANNEL', 'SEND_MESSAGES'],
+            },
           ],
-      });
+        });
 
-      activeTickets.set(interaction.user.id, ticketChannel.id);
+        activeTickets.set(interaction.user.id, ticketChannel.id);
 
-      const memberCount = interaction.guild.memberCount;
-
-      const ticketEmbed = new MessageEmbed()
+        const ticketEmbed = new MessageEmbed()
           .setColor('#00FF00')
           .setTitle('Tiket Dibuat')
           .setDescription(`Tiket Anda telah dibuat: ${ticketChannel}`)
           .setTimestamp();
 
-      await interaction.reply({ embeds: [ticketEmbed], ephemeral: true });
+        await interaction.reply({ embeds: [ticketEmbed], ephemeral: true });
 
-      const closeRow = new MessageActionRow()
+        const closeRow = new MessageActionRow()
           .addComponents(
-              new MessageButton()
-                  .setCustomId('close_ticket')
-                  .setLabel('⛔ Tutup Tiket')
-                  .setStyle('DANGER'),
+            new MessageButton()
+              .setCustomId('close_ticket')
+              .setLabel('⛔ Tutup Tiket')
+              .setStyle('DANGER'),
           );
 
-      const welcomeMessage = await ticketChannel.send({
-          content: `Selamat datang <@${interaction.user.id}>! Selamat berbelanja! Klik tombol dibawah jika ingin menutup tiketnya ya~`,
+        await ticketChannel.send({
+          content: `Selamat datang <@${interaction.user.id}>! Klik tombol di bawah untuk menutup tiket.`,
           components: [closeRow],
-      });
+        });
 
-      // Menambahkan reaksi otomatis
-  } else if (interaction.customId === 'close_ticket') {
-      const channel = interaction.channel;
-      if (!channel.name.startsWith('ticket-')) {
+      // Close Ticket Interaction
+      } else if (interaction.customId === 'close_ticket') {
+        const channel = interaction.channel;
+        if (!channel.name.startsWith('ticket-')) {
           return interaction.reply({ content: 'Ini bukan channel tiket!', ephemeral: true });
-      }
+        }
 
-      const logChannel = client.channels.cache.get(TICKET_LOG_CHANNEL_ID);
-      if (logChannel) {
+        const logChannel = client.channels.cache.get(TICKET_LOG_CHANNEL_ID);
+        if (logChannel) {
           const closeEmbed = new MessageEmbed()
-              .setColor('#FF0000')
-              .setTitle('Tiket Ditutup')
-              .setDescription(`Tiket ditutup oleh <@${interaction.user.id}>`)
-              .setTimestamp();
+            .setColor('#FF0000')
+            .setTitle('Tiket Ditutup')
+            .setDescription(`Tiket ditutup oleh <@${interaction.user.id}>`)
+            .setTimestamp();
 
           await logChannel.send({ embeds: [closeEmbed] });
-      }
+        }
 
-      const ticketOwnerId = Array.from(activeTickets.keys()).find(key => activeTickets.get(key) === channel.id);
-      if (ticketOwnerId) {
+        const ticketOwnerId = Array.from(activeTickets.keys()).find(key => activeTickets.get(key) === channel.id);
+        if (ticketOwnerId) {
           activeTickets.delete(ticketOwnerId);
-      }
+        }
 
-      await interaction.reply({ content: 'Tiket ini akan ditutup dalam 5 detik.', ephemeral: true });
-      setTimeout(() => {
+        await interaction.reply({ content: 'Tiket ini akan ditutup dalam 5 detik.', ephemeral: true });
+        setTimeout(() => {
           channel.delete().catch(err => console.error('Failed to delete channel:', err));
-      }, 5000);
-  }
-});
-
-client.on('interactionCreate', async interaction => {
-try {
-  if (interaction.isCommand()) {
-    if (interaction.commandName === 'ping') {
-      return interaction.reply({ content: `Pong! ${client.ws.ping}ms` });
-    }
-    const cmd = client.slashCommands.get(interaction.commandName);
-    if (!cmd) return interaction.reply({ content: "Something Went Wrong", ephemeral: true });
-
-    if (cmd.permission) {
-      const authorPerms = interaction.channel.permissionsFor(interaction.member);
-      if (!authorPerms || !authorPerms.has(cmd.permission)) {
-        const permEmbed = new Discord.MessageEmbed()
-          .setColor("BLUE")
-          .setDescription(lang(interaction.guild, "INTERACTION_PERMISSION") + " " + cmd.permission);
-        return interaction.reply({ embeds: [permEmbed], ephemeral: true });
+        }, 5000);
       }
     }
-    if (cmd.ownerOnly) {
-      if (!['671351376642834440', '1005082777206661190', '627027667685867530', '465491570305662978'].includes(interaction.member.id)) {
-        return interaction.reply({ content: 'Owner only', ephemeral: true });
-      }
-    }
-    const args = [];
-    for (let option of interaction.options.data) {
-      if (option.type === "SUB_COMMAND") {
-        if (option.name) args.push(option.name);
-        option.options?.forEach((x) => {
-          if (x.value) args.push(x.value);
-        });
-      } else if (option.value) args.push(option.value);
-    }
-    cmd.execute(client, interaction, args);
+  } catch (err) {
+    console.log("Something Went Wrong => ", err);
   }
-} catch (err) {
-  console.log("Something Went Wrong => ", err);
-}
 });
 
 client.on("guildCreate", async(guild) => {
@@ -677,14 +713,16 @@ client.on('messageDelete', function (message, channel){
 
   // Tambahkan pengecekan apakah pesan tersebut dihapus oleh bot sendiri
   if (message.author.bot) return;
-
-  const embed = new MessageEmbed()
+  console.log(message.attachments.size)
+  let image = message.attachments.first();;
+  let embed = new MessageEmbed()
     .setTitle('<:no_entry_sign:885195095840804885> Message Deleted')
     .setColor('RED')
     .addField('\`Author\`', message.author.tag, true)
     .addField('\`Channel\`', message.channel.name, true)
     .addField('\`Content\`', message.content || 'Embed/Attachment', true)
     .setTimestamp();
+    if(message.attachments.size > 0) embed.setImage(image.url ? image.proxyURL : null)
 
   logChannel.send({ embeds: [embed] });
 })
@@ -705,44 +743,6 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     .setTimestamp();
 
   logChannel.send({ embeds: [embed] });
-});
-
-// Voice State Update Logging
-client.on('voiceStateUpdate', (oldState, newState) => {
-  const logChannel = client.channels.cache.get('PUT_YOUR_CHANNEL_ID');
-  if (!logChannel) return;
-
-  if (oldState.channelId !== newState.channelId) {
-    if (!oldState.channelId) {
-      const embed = new MessageEmbed()
-        .setTitle('<:sound:885195095840804885> Member Joined Voice Channel')
-        .setColor('GREEN')
-        .addField('\`Member\`', newState.member.user.tag, true)
-        .addField('\`Channel\`', newState.channel.name, true)
-        .setTimestamp();
-
-      logChannel.send({ embeds: [embed] });
-    } else if (!newState.channelId) {
-      const embed = new MessageEmbed()
-        .setTitle('<:mute:885195095840804885> Member Left Voice Channel')
-        .setColor('RED')
-        .addField('\`Member\`', oldState.member.user.tag, true)
-        .addField('\`Channel\`', oldState.channel.name, true)
-        .setTimestamp();
-
-      logChannel.send({ embeds: [embed] });
-    } else {
-      const embed = new MessageEmbed()
-        .setTitle('<:sound:885195095840804885> Member Moved Voice Channel')
-        .setColor('YELLOW')
-        .addField('\`Member\`', oldState.member.user.tag, true)
-        .addField('\`From\`', oldState.channel.name, true)
-        .addField('\`To\`', newState.channel.name, true)
-        .setTimestamp();
-
-      logChannel.send({ embeds: [embed] });
-    }
-  }
 });
 
 client.banners = discordBanners;
