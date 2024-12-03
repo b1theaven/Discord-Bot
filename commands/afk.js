@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const afkFilePath = path.join(__dirname, '../afk.json');
-const lang = require('../language');
-
+const afkFilePath = path.join(__dirname, 'afk.json');
+const afkSchema = require("../models/afk")
 function loadAfkData() {
   if (!fs.existsSync(afkFilePath)) {
     fs.writeFileSync(afkFilePath, JSON.stringify({}));
@@ -21,6 +20,8 @@ module.exports = {
   run: async (client, message, args) => {
     const afkData = loadAfkData();
     const afkMessage = args.join(' ') || 'I am AFK';
+      
+      if(afkMessage.includes("@everyone") || afkMessage.includes("@here")) return message.reply("You can't use that")
 
     afkData[message.author.id] = {
       message: afkMessage,
@@ -30,11 +31,18 @@ module.exports = {
     saveAfkData(afkData);
 
     try {
-      await message.member.setNickname(`[AFK] ${message.member.displayName}`);
-      message.reply(lang(message.guild, 'AFK').replace('%s', afkMessage));
+        await afkSchema.findOneAndUpdate(
+            {
+            id: message.author.id },
+            { message: afkMessage,
+            timestamp: Date.now() },
+            { upsert: true }
+        )
+      message.reply(`You are now AFK: ${afkMessage}`);
+       // await message.member.setNickname(`[AFK] ${message.member.displayName}`)
     } catch (error) {
       if (error.code === 50013) {
-        message.reply(lang(message.guild, 'BOT_PERMISSIONS'));
+        message.reply('I do not have permission to change your nickname.');
       } else {
         console.error(error);
       }
