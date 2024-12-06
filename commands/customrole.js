@@ -14,7 +14,7 @@ module.exports = {
             .addField("a.role edit <nama role> [warna]", "Untuk mengedit custom roles", true)
             .addField("a.role give <@user>", "Untuk memberikan custom roles kepada orang yang kamu tag", true)
             .setDescription("```<> Required | [] Optional```")
-            .setTitle("Custom roles benefit member yang telah membosting server ini")
+            .setTitle("Benefit Boosters")
             .setThumbnail(message.guild.iconURL({ dynamic: true }));
       
         if (!message.member.premiumSince) {
@@ -45,7 +45,7 @@ module.exports = {
                     reason: 'Custom role for server booster',
                 });
 
-                const boosterRoleId = '1263690055436861512';
+                const boosterRoleId = '912980818371178518';
                 const boosterRole = message.guild.roles.cache.get(boosterRoleId);
                 if (boosterRole) {
                     await role.setPosition(boosterRole.position + 1);
