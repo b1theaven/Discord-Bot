@@ -64,25 +64,44 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 
 - `appstore.js`, berfungsi untuk mendeskripsikan aplikasi yang dicari dari App Store.
 - `avatar.js`, berfungsi untuk menampilkan avatar suatu user.
+- `admin-level.js`, berfungsi untuk mengatur dan me-reset level yang dimiliki user (khusus Admin).
+- `admin-panel.js`, berfungsi untuk menampilkan panel admin pada user yang dituju.
+- `blacklist.js`, berfungsi untuk memblacklist user agar tidak dapat menggunakan bot (khusus Admin).
+- `chat-gpt.js`, berfungsi untuk memberikan hasil dari prompt yang diberikan ke GPT.
+- `color.js`, berfungsi untuk memberitahu warna/kode hex apa dari yang diinput.
+- `jointocreate-setup.js`, berfungsi untuk mengatur create voice channel (khusus Admin).
+- `mod-panel.js`, sama seperti admin-panel namun ini berada di kelas Moderator.
 - `bmkg.js`, berfungsi untuk menampilkan berita gempa hari ini di Indonesia.
 - `serveravatar.js`, berfungsi untuk menampilkan avatar pada server.
 - `automod-flaggedword.js`, berfungsi untuk memblokir kata-kata kotor dan konten seksual di suatu channel.
 - `automod-keyword.js`, berfungsi untuk memblokir kata-kata kunci yang diinginkan.
 - `automod-mentionspam.js`, berfungsi untuk memblokir spam mention.
 - `ban.js`, berfungsi untuk mem-banned user.
+- `customrole-create.js`, berfungsi untuk membuat custom role (khusus Booster).
+- `customrole-gift.js`, berfungsi untuk memberikan custom role yang dibuat ke orang lain (khusus Booster).
+- `customrole-seticon.js`, berfungsi untuk menambahkan gambar sebagai icon custom role (khusus Booster).
+- `customroles.js`, memberikan tampilan tentang informasi custom role milikmu (khusus Booster).
 - `confess.js`, berfungsi untuk membuat pesan anonim.
 - `confession-blacklist.js`, berfungsi untuk mem-blacklist confess yang mengandung unsur tidak senonoh.
 - `confession-delete.js`, berfungsi untuk menghapus ID confession tertentu.
 - `confession-remove.js`, berfungsi untuk menghapus list confess.
 - `confession-setup.js`, berfungsi untuk melakukan setup pada confession.
 - `confession-unblacklist.js`, berfungsi untuk menghapus blacklist pada confess.
+- `lastfm-set.js`, berfungsi untuk mengatur LastFM username.
+- `lastfm-top.js`, berfungsi untuk menampilkan top 10 artis dan album yang kamu sukai.
+- `lastfm-whoknows.js`, berfungsi untuk menampilkan artis yang sedang kamu dengarkan.
+- `lastfm.js`, berfungsi untuk menampilkan lagu dan trek sebelumnya.
 - `eval.js`, berfungsi untuk mengevaluasi beberapa kode.
 - `imagine.js`, berfungsi untuk menghasilkan gambar menggunakan A.I.
 - `kick.js`, berfungsi untuk menendang user.
 - `leaderboard.js`, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
+- `lookingforgroup.js`, berfungsi untuk menampilkan siapa saja yang bermain game yang sedang dicari.
+- `serveravatar.js`, berfungsi untuk menampilkan server avatar.
 - `movie.js`, berfungsi untuk menampilkan deskripsi film yang sedang dicari.
+- `photosize.js`, berfungsi untuk mengatur besar suatu gambar.
 - `pinterest.js`, berfungsi untuk menampilkan bermacam-macam gambar dari Pinterest.
 - `playstore.js`, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari dari Google Play Store.
+- `radio.js`, berfungsi untuk menambahkan radio kedalam voice channel.
 - `lyrics.js`, berfungsi untuk menampilkan lirik pada sebuah lagu yang diinginkan.
 - `setlanguage.js`, berfungsi untuk mengatur bahasa pada bot.
 - `setprefix.js`, berfungsi untuk mengganti prefix pada bot.
@@ -90,6 +109,9 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - `reactionrole-add.js`, berfungsi untuk membuat reaction role pada sebuah message.
 - `reactionrole-remove.js`, berfungsi untuk menghapus reaction role pada sebuah message.
 - `reloadcommands.js`, berfungsi untuk memuat ulang commands yang ada pada bot.
+- `starboard-remove.js`, berfungsi untuk menghapus sistem starboard.
+- `starboard-setup.js`, berfungsi untuk mengatur sistem starboard.
+- `voice-panel.js`, berfungsi untuk menampilkan panel voice.
 - `youtubedownload.js`, berfungsi untuk meng-convert video YouTube menjadi MP3.
 
 ## Others
