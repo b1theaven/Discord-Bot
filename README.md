@@ -122,6 +122,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - `Audit Log`, berfungsi sebagai media untuk audit log.
 - `Ticketing`, berfungsi untuk membuat tiket.
 - `Anti Crash`, berfungsi untuk mencegah adanya crash apabila ada error pada code.
+- `Automatic Voice`, berfungsi untuk membuat voice channel secara otomatis dan mengaturnya sendiri sesuka hati.
 
 ## Notes from Developer
 
