@@ -123,6 +123,7 @@ Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya 
 - `Ticketing`, berfungsi untuk membuat tiket.
 - `Anti Crash`, berfungsi untuk mencegah adanya crash apabila ada error pada code.
 - `Automatic Voice`, berfungsi untuk membuat voice channel secara otomatis dan mengaturnya sendiri sesuka hati.
+- `Radio`, berfungsi untuk menyetel radio yang disediakan dari bot.
 
 ## Notes from Developer
 
