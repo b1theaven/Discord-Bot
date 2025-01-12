@@ -1,130 +1,170 @@
-# Private Bot Discord
+# Discord Bot Project
 
-Bot ini bersifat privat dan dibuat serta dimodifikasi sedemikian rupa oleh saya dan @reid.miless (Discord)
+## 🎉 Overview
 
-## Library
+**Discord Bot Project** adalah bot Discord yang dirancang untuk memberikan berbagai fitur menarik, seperti manajemen server, permainan interaktif, leveling sistem, dan banyak lagi! Bot ini dikembangkan menggunakan **Node.js** dengan library **Discord.js v13** untuk memberikan pengalaman terbaik bagi pengguna.
 
-- [discord.js](https://discord.js.org/#/)
+---
 
-## Commands
+## 🎯 Features
 
-- `appstore.js`, berfungsi untuk mendeskripsikan aplikasi yang dicari dari App Store.
-- `addemoji.js`, berfungsi untuk menambahkan suatu emoji kedalam server.
-- `afk.js`, berfungsi untuk menyalakan notifikasi AFK pada user.
-- `avatar.js`, berfungsi untuk menampilkan avatar suatu user.
-- `backup.js`, berfungsi untuk melakukan backup server.
-- `ban.js`, berfungsi untuk mem-banned user.
-- `cancelremind.js`, berfungsi untuk membatalkan dan menghapus reminder user dari database.
-- `clear.js`, berfungsi untuk membersihkan pesan.
-- `commands.js`, berfungsi untuk menyalakan/mematikan suatu perintah yang ada pada bot.
-- `cuddle.js`, berfungsi untuk menampilkan GIF anime ke user lain.
-- `customrole.js`, berfungsi sebagai benefit untuk Server Booster.
-- `device.js`, berfungsi untuk mengetahui device apa yang digunakan oleh user.
-- `downloader.js`, berfungsi untuk mendownload video dari platform manapun.
-- `emojilist.js`, berfungsi untuk menampilkan emoji apa saja yang ada pada server.
-- `eval.js`, berfungsi untuk mengevaluasi beberapa kode.
-- `execute.js`, berfungsi untuk mengeksekusi perintah.
-- `firstmessage.js`, berfungsi untuk menampilkan pesan pertama yang muncul pada suatu channel.
-- `giveaway.js`, berfungsi sebagai media untuk melakukan giveaway.
-- `google.js`, berfungsi sebagai pencarian selayaknya Google.
-- `help.js`, berfungsi untuk menampilkan commands yang ada.
-- `hug.js`, berfungsi untuk menampilkan GIF anime ke user lain.
-- `kiss.js`, berfungsi untuk menampilkan GIF anime ke user lain.
-- `leaderboard.js`, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
-- `listreminder.js`, berfungsi untuk menampilkan list reminder yang dimiliki user.
-- `movie.js`, berfungsi untuk mendeskripsikan film yang ingin dicari.
-- `nasa.js`, berfungsi untuk menampilkan NASA Picture of the Day.
-- `nuke.js`, berfungsi untuk menghapus seluruh pesan pada suatu channel.
-- `pat.js`, berfungsi untuk menampilkan GIF anime ke user lain.
-- `permissions.js`, berfungsi untuk menampilkan permissions apa saja yang dimiliki oleh user.
-- `ping.js`, berfungsi untuk menampilkan ping user.
-- `pinterest.js`, berfungsi untuk menampilkan bermacam-macam gambar dari Pinterest.
-- `playstore.js`, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari.
-- `reload.js`, berfungsi untuk memuat ulang commands yang ada pada bot.
-- `remindme.js`, berfungsi untuk memberi reminder kepada bot untuk mengirimkannya pada user melalui DM.
-- `removeReminder.js`, berfungsi untuk menghapus reminder yang sudah dibuat.
-- `reportbug.js`, berfungsi sebagai media untuk melakukan report bug.
-- `revokeBan.js`, berfungsi untuk menghilangkan ban pada user yang pernah ter-banned.
-- `say.js`, berfungsi sebagai media untuk menggantikan user saat mengetikkan teks.
-- `search-youtube.js`, berfungsi sebagai media untuk mencari video YouTube.
-- `setlanguage.js`, berfungsi untuk mengganti bahasa pada bot.
-- `setprefix.js`, berfungsi untuk mengganti prefix pada bot.
-- `setReminder.js`, berfungsi untuk mengirimkan pesan yg akan berulang otomatis oleh bot disuatu channel tertentu.
-- `slap.js`, berfungsi untuk menampilkan GIF anime ke user lain.
-- `snipe.js`, berfungsi untuk mengecek pesan terakhir yang dihapus di suatu channel.
-- `stats.js`, berfungsi untuk mengetahui statistik bot saat ini.
-- `steam.js`, berfungsi untuk mendeskripsikan aplikasi/game yang ingin dicari.
-- `topgginfo.js`, berfungsi untuk mencari tahu informasi bot lain di website TOP.GG
-- `whois.js`, berfungsi untuk mendeskripsikan user.
-- `worldclock.js`, berfungsi untuk menampilkan jam dunia.
-- `youtubedownload.js`, berfungsi untuk meng-convert video YouTube menjadi MP3.
-- `youtubestats.js`, berfungsi untuk menampilkan statistik dari suatu kanal YouTube.
+1. **Utility and Management**
 
-## Slash Commands
+   - **AFK Notification**: Mengaktifkan status _Away From Keyboard_ (AFK) dengan pemberitahuan otomatis saat user disebutkan.
+   - **Backup Server**: Menyimpan cadangan konfigurasi server Anda.
+   - **Clear Messages**: Membersihkan pesan dalam jumlah besar di channel.
+   - **Role Management**: Mendukung custom role untuk _Server Booster_ dengan opsi membuat, mengedit, dan membagikannya ke pengguna lain.
+   - **Reminder System**: Menyediakan pengingat berbasis waktu untuk user melalui DM atau channel tertentu.
+   - **Audit Log**: Melacak aktivitas penting di server untuk keperluan administrasi.
 
-- `appstore.js`, berfungsi untuk mendeskripsikan aplikasi yang dicari dari App Store.
-- `avatar.js`, berfungsi untuk menampilkan avatar suatu user.
-- `admin-level.js`, berfungsi untuk mengatur dan me-reset level yang dimiliki user (khusus Admin).
-- `admin-panel.js`, berfungsi untuk menampilkan panel admin pada user yang dituju.
-- `blacklist.js`, berfungsi untuk memblacklist user agar tidak dapat menggunakan bot (khusus Admin).
-- `chat-gpt.js`, berfungsi untuk memberikan hasil dari prompt yang diberikan ke GPT.
-- `color.js`, berfungsi untuk memberitahu warna/kode hex apa dari yang diinput.
-- `jointocreate-setup.js`, berfungsi untuk mengatur create voice channel (khusus Admin).
-- `mod-panel.js`, sama seperti admin-panel namun ini berada di kelas Moderator.
-- `bmkg.js`, berfungsi untuk menampilkan berita gempa hari ini di Indonesia.
-- `serveravatar.js`, berfungsi untuk menampilkan avatar pada server.
-- `automod-flaggedword.js`, berfungsi untuk memblokir kata-kata kotor dan konten seksual di suatu channel.
-- `automod-keyword.js`, berfungsi untuk memblokir kata-kata kunci yang diinginkan.
-- `automod-mentionspam.js`, berfungsi untuk memblokir spam mention.
-- `ban.js`, berfungsi untuk mem-banned user.
-- `customrole-create.js`, berfungsi untuk membuat custom role (khusus Booster).
-- `customrole-gift.js`, berfungsi untuk memberikan custom role yang dibuat ke orang lain (khusus Booster).
-- `customrole-seticon.js`, berfungsi untuk menambahkan gambar sebagai icon custom role (khusus Booster).
-- `customroles.js`, memberikan tampilan tentang informasi custom role milikmu (khusus Booster).
-- `confess.js`, berfungsi untuk membuat pesan anonim.
-- `confession-blacklist.js`, berfungsi untuk mem-blacklist confess yang mengandung unsur tidak senonoh.
-- `confession-delete.js`, berfungsi untuk menghapus ID confession tertentu.
-- `confession-remove.js`, berfungsi untuk menghapus list confess.
-- `confession-setup.js`, berfungsi untuk melakukan setup pada confession.
-- `confession-unblacklist.js`, berfungsi untuk menghapus blacklist pada confess.
-- `lastfm-set.js`, berfungsi untuk mengatur LastFM username.
-- `lastfm-top.js`, berfungsi untuk menampilkan top 10 artis dan album yang kamu sukai.
-- `lastfm-whoknows.js`, berfungsi untuk menampilkan artis yang sedang kamu dengarkan.
-- `lastfm.js`, berfungsi untuk menampilkan lagu dan trek sebelumnya.
-- `eval.js`, berfungsi untuk mengevaluasi beberapa kode.
-- `imagine.js`, berfungsi untuk menghasilkan gambar menggunakan A.I.
-- `kick.js`, berfungsi untuk menendang user.
-- `leaderboard.js`, berfungsi untuk menampilkan leaderboard pesan, invite, dan level.
-- `lookingforgroup.js`, berfungsi untuk menampilkan siapa saja yang bermain game yang sedang dicari.
-- `serveravatar.js`, berfungsi untuk menampilkan server avatar.
-- `movie.js`, berfungsi untuk menampilkan deskripsi film yang sedang dicari.
-- `photosize.js`, berfungsi untuk mengatur besar suatu gambar.
-- `pinterest.js`, berfungsi untuk menampilkan bermacam-macam gambar dari Pinterest.
-- `playstore.js`, berfungsi untuk mendeskripsikan aplikasi yang ingin dicari dari Google Play Store.
-- `radio.js`, berfungsi untuk menambahkan radio kedalam voice channel.
-- `lyrics.js`, berfungsi untuk menampilkan lirik pada sebuah lagu yang diinginkan.
-- `setlanguage.js`, berfungsi untuk mengatur bahasa pada bot.
-- `setprefix.js`, berfungsi untuk mengganti prefix pada bot.
-- `translate.js`, berfungsi untuk mentranslate bahasa yang diinginkan.
-- `reactionrole-add.js`, berfungsi untuk membuat reaction role pada sebuah message.
-- `reactionrole-remove.js`, berfungsi untuk menghapus reaction role pada sebuah message.
-- `reloadcommands.js`, berfungsi untuk memuat ulang commands yang ada pada bot.
-- `starboard-remove.js`, berfungsi untuk menghapus sistem starboard.
-- `starboard-setup.js`, berfungsi untuk mengatur sistem starboard.
-- `voice-panel.js`, berfungsi untuk menampilkan panel voice.
-- `youtubedownload.js`, berfungsi untuk meng-convert video YouTube menjadi MP3.
+2. **Moderation Tools**
 
-## Others
+   - **Ban and Kick**: Memungkinkan admin untuk melarang atau mengeluarkan user dari server.
+   - **Blacklist**: Memblokir user atau kata tertentu untuk menjaga lingkungan server tetap aman.
+   - **Automoderation**: Memblokir kata kotor, spam mention, dan konten yang tidak diinginkan secara otomatis.
 
-- `Server Stats`, berfungsi untuk menampilkan statistik anggota seluruhnya saat ini.
-- `Levelling System`, berfungsi sebagai sistem untuk melakukan levelling dengan role sebagai reward.
-- `Boost Notification`, berfungsi sebagai notifikasi apabila ada user yang melakukan boost ke server.
-- `Audit Log`, berfungsi sebagai media untuk audit log.
-- `Ticketing`, berfungsi untuk membuat tiket.
-- `Anti Crash`, berfungsi untuk mencegah adanya crash apabila ada error pada code.
-- `Automatic Voice`, berfungsi untuk membuat voice channel secara otomatis dan mengaturnya sendiri sesuka hati.
-- `Radio`, berfungsi untuk menyetel radio yang disediakan dari bot.
+3. **Fun and Interactive**
 
-## Notes from Developer
+   - **GIF Commands**: Berbagai perintah seperti `slap`, `hug`, `cuddle`, dan `kiss` untuk berbagi GIF anime dengan user lain.
+   - **Confession System**: Mengirimkan pesan anonim ke channel tertentu.
+   - **Search and Discovery**: Mendukung pencarian aplikasi, game, video YouTube, gambar Pinterest, dan lainnya.
+   - **Giveaway**: Fitur undian interaktif untuk melibatkan komunitas.
 
-Kami sadar kode yang kami buat masih terkesan tidak rapih dan banyak kekurangannya, maka dari itu repository ini akan terus di-update oleh kami hingga kami kehabisan ide, kalian bisa bantu menambahkan ide apa saja yang bisa kami masukkan kedalam repository ini dengan berkomentar ya. Oh ya, jangan lupa follow akun [Github](https://github.com/b1theaven/) saya dan juga kalian bisa join [Server Discord](https://discord.gg/J4rBuvHskq) kami untuk bergabung dengan komunitas kami serta kalian bisa dukung kami melalui [SociaBuzz](https://sociabuzz.com/bitheaven) saya, terimakasih sudah membaca dan menggunakan repository ini dengan baik!
+4. **Information and Tools**
+
+   - **User and Server Insights**: Menampilkan avatar, statistik server, dan informasi user secara mendetail.
+   - **World Clock**: Melihat waktu di berbagai belahan dunia.
+   - **NASA Picture of the Day**: Menampilkan foto luar angkasa dari NASA.
+   - **Lyrics Search**: Mencari lirik lagu dengan cepat.
+   - **Radio Streaming**: Mendukung pemutaran radio langsung di voice channel.
+
+5. **Leveling and Leaderboard**
+
+   - **Levelling System**: Memberikan XP dan level untuk aktivitas user dengan role sebagai hadiah.
+   - **Leaderboard**: Menampilkan daftar pengguna dengan pesan, undangan, atau level terbanyak.
+
+6. **Customization**
+
+   - **Prefix Customization**: Mengubah prefix perintah sesuai preferensi server.
+   - **Language Support**: Mengatur bahasa bot untuk pengalaman yang lebih personal.
+
+7. **Advanced Integrations**
+
+   - **LastFM Integration**: Melihat musik yang sedang Anda dengarkan, artis favorit, dan banyak lagi.
+   - **AI Tools**: Menghasilkan gambar menggunakan teknologi AI.
+   - **YouTube Integration**: Mengonversi video YouTube ke MP3 atau menampilkan statistik kanal.
+
+8. **Others**
+   - **Automatic Voice Channels**: Membuat dan mengatur voice channel secara otomatis.
+   - **Ticketing System**: Membantu admin mengelola permintaan bantuan dari user.
+   - **Anti-Crash System**: Menjamin stabilitas bot dengan mencegah crash akibat error.
+
+---
+
+## 🛠️ Technologies Used
+
+- **Node.js**: Lingkungan runtime JavaScript.
+- **Discord.js v13**: Library utama untuk interaksi dengan Discord API.
+- **MongoDB**: Database untuk menyimpan data pengguna, leveling, dan konfigurasi server.
+- **npm**: Untuk mengelola dependensi proyek.
+
+---
+
+## 📋 Prerequisites
+
+Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
+
+- **Node.js**: [Download Node.js](https://nodejs.org/)
+- **npm**: Sudah termasuk dalam instalasi Node.js.
+- **MongoDB**: Untuk menyimpan data secara persisten.
+
+---
+
+## ⚙️ Installation
+
+1. Clone repositori ini ke komputer Anda:
+
+   ```bash
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+
+   ```
+
+2. Instal dependensi yang diperlukan:
+
+   ```bash
+   npm install
+
+   ```
+
+3. Buat file `.env` untuk menyimpan token bot dan URI database:
+
+   ```bash
+   DISCORD_TOKEN=your-discord-bot-token
+   MONGO_URI=your-mongodb-uri
+
+   ```
+
+4. Jalankan bot:
+   ```bash
+   node index.js
+   ```
+
+---
+
+## 📜 Usage
+
+1. Tambahkan bot ke server Anda:
+
+- Gunakan link OAuth2 yang dihasilkan di [Discord Developer Portal](https://discord.com/developers/applications).
+
+2. Gunakan perintah berikut:
+
+- `!help`: Melihat daftar perintah yang tersedia.
+- `!ping`: Mengecek latensi bot.
+- `!level`: Melihat level Anda di server.
+
+3. Akses panel admin untuk konfigurasi tambahan (jika tersedia).
+
+---
+
+## 🤝 Contributing
+
+Kami menyambut kontribusi dari siapa saja! Jika Anda memiliki ide atau menemukan bug:
+
+1. Fork repositori ini.
+2. Buat branch baru untuk perubahan Anda:
+   ```bash
+   git checkout -b feature-branch-name
+   ```
+3. Commit perubahan Anda:
+   ```bash
+   git commit -m "Add new feature/fix bug"
+   ```
+4. Push branch Anda:
+   ```bash
+   git push origin feature-branch-name
+   ```
+5. Buat Pull Request di GitHub.
+
+---
+
+## 🐛 Known Issues
+
+- **Command timeout**: Beberapa perintah mungkin membutuhkan waktu lebih lama dari yang diharapkan. Kami sedang mengoptimalkan performa.
+- **Compatibility**: Bot ini hanya mendukung Discord.js v13 ke atas.
+
+## 📞 Support
+
+Jika Anda memiliki pertanyaan atau memerlukan bantuan, hubungi kami melalui:
+
+- Email: mohammadrizky881@gmail.com
+- Discord: [Join Support Server](https://discord.gg/J4rBuvHskq)
+
+---
+
+## 🎉 Acknowledgements
+
+- **Discord.js**: Untuk library yang luar biasa.
+- **MongoDB**: Untuk database yang andal.
+- **Komunitas Discord**: Untuk inspirasi dan ide fitur.
