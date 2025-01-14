@@ -120,9 +120,9 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
 
 2. Gunakan perintah berikut:
 
-- `!help`: Melihat daftar perintah yang tersedia.
-- `!ping`: Mengecek latensi bot.
-- `!level`: Melihat level Anda di server.
+- `a.help`: Melihat daftar perintah yang tersedia.
+- `a.ping`: Mengecek latensi bot.
+- `a.level`: Melihat level Anda di server.
 
 3. Akses panel admin untuk konfigurasi tambahan (jika tersedia).
 
@@ -160,6 +160,12 @@ Jika Anda memiliki pertanyaan atau memerlukan bantuan, hubungi kami melalui:
 
 - Email: mohammadrizky881@gmail.com
 - Discord: [Join Support Server](https://discord.gg/J4rBuvHskq)
+
+---
+
+## 📜 License
+
+Proyek ini dilisensikan di bawah [MIT License](https://github.com/b1theaven/Discord-Bot/blob/main/LICENSE).
 
 ---
 
