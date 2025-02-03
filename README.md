@@ -94,7 +94,7 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
 1. Clone repositori ini ke komputer Anda:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/b1theaven/Discord-Bot.git
    cd your-repo-name
 
    ```
