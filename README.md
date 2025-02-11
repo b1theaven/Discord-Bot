@@ -61,15 +61,6 @@
 
 ---
 
-## 💠 Diagrams
-
-- **Class Diagram**: [Klik disini untuk melihat.](https://media.discordapp.net/attachments/909990115466682420/1330755600354644058/image.png?ex=678f223b&is=678dd0bb&hm=0b0c6ca598c4c047dbde38ddad4cae9460dc7b410b28ef1570ae23d4ac5a3124&=&format=webp&quality=lossless&width=477&height=463)
-- **Sequence Diagram**: [Klik disini untuk melihat.](https://media.discordapp.net/attachments/909990115466682420/1330757700308701194/image.png?ex=678f2430&is=678dd2b0&hm=c0a2f4eb858bd1068e23efbc4cd2a25271a31297ee860009002732dbe8ceccd6&=&format=webp&quality=lossless)
-- **Activity Diagram**: [Klik disini untuk melihat.](https://media.discordapp.net/attachments/909990115466682420/1330757826339143810/image.png?ex=678f244e&is=678dd2ce&hm=10370cbac4df241ad450119bef396d5946002572e3064e534a8dbacecba69ee9&=&format=webp&quality=lossless&width=315&height=463)
-- **Use Case Diagram**: [Klik disini untuk melihat.](https://media.discordapp.net/attachments/909990115466682420/1330758104970952786/image.png?ex=678f2490&is=678dd310&hm=bb9cad0f6c5b4c6a9aa6d9e1f27cb462a841ece5becc2f1dd6c17ce1b91165f4&=&format=webp&quality=lossless&width=518&height=463)
-
----
-
 ## 🛠️ Technologies Used
 
 - **Node.js**: Lingkungan runtime JavaScript.
@@ -94,7 +85,7 @@ Sebelum menjalankan proyek ini, pastikan Anda telah menginstal:
 1. Clone repositori ini ke komputer Anda:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/b1theaven/Discord-Bot.git
    cd your-repo-name
 
    ```
