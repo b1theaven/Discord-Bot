@@ -7,6 +7,8 @@ const humanizeDuration = require("humanize-duration");
 const prefixSchema = require("../models/prefix");
 const Discord = require("discord.js");
 const lang = require("../language");
+const autoMessageSchema = require("../models/autoMessage");
+const cooldowns = new Map();
 exports.run = async (client, message) => {
   const msg = message;
   let prefix;
@@ -23,6 +25,25 @@ exports.run = async (client, message) => {
   let cmd = messageArray[0];
   let args = messageArray.slice(1);
   let commandfile;
+
+  const autoMessage = await autoMessageSchema.findOne({
+    guildId: message.guild.id,
+    trigger: message.content.toLowerCase(),
+  });
+
+  if (autoMessage) {
+    const userCooldownKey = `${message.author.id}-${autoMessage.trigger}`;
+
+    if (cooldowns.has(userCooldownKey)) {
+      return;
+    }
+
+    message.channel.send(autoMessage.response);
+
+    cooldowns.set(userCooldownKey, Date.now() + 60000);
+
+    setTimeout(() => cooldowns.delete(userCooldownKey), 60000);
+  }
 
   if (message.content.toLowerCase().includes("riztapayment")) {
     const embed = new MessageEmbed()
