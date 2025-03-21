@@ -31,7 +31,7 @@ module.exports = {
             "<:hammer:885195095840804885> Utility " +
             lang(msg.guild, "COMMANDS"),
           value: stripIndents`
-> \`avatar\`, \`ping\`, \`youtubedownload\`, \`emojilist\`, \`downloader\`, \`help\`, \`pinterest\`, \`movie\`, \`say\`, \`remindme\`, \`cancelremind\`, \`listreminder\`, \`snipe\`, \`google\`, \`ytstats\`, \`afk\`, \`nasa\`, \`cuddle\`, \`hug\`, \`kiss\`, \`pat\`, \`slap\`, \`youtube\``,
+> \`avatar\`, \`ping\`, \`banner\`, \`youtubedownload\`, \`emojilist\`, \`downloader\`, \`help\`, \`pinterest\`, \`movie\`, \`say\`, \`remindme\`, \`cancelremind\`, \`listreminder\`, \`snipe\`, \`google\`, \`ytstats\`, \`afk\`, \`nasa\`, \`cuddle\`, \`hug\`, \`kiss\`, \`pat\`, \`slap\`, \`youtube\``,
         },
         {
           name: "<:shield:885185036419219496> Moderation Commands & Slash Commands",
