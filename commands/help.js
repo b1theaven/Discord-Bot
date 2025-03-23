@@ -42,7 +42,7 @@ module.exports = {
           name:
             "<:chart:885185036419219496> Slash " + lang(msg.guild, "COMMANDS"),
           value: stripIndents`
-> \`avatar\`, \`imagine\`, \`confess\`, \`bmkg\`, \`rank\`, \`chat-gpt\`, \`lastfm\`, \`lastfm-set\`, \`lastfm-whoknows\`, \`lastfm-top\`, \`lookingforgroup\`, \`wordfight\`, \`translate\`, \`serveravatar\`, \`playstore\`, \`appstore\`, \`leaderboard\`, \`lyrics\`, \`movie\`, \`pinterest\`, \`youtubedownload\``,
+> \`avatar\`, \`imagine\`, \`confess\`, \`hsrinfo\`, \`bmkg\`, \`rank\`, \`chat-gpt\`, \`lastfm\`, \`lastfm-set\`, \`lastfm-whoknows\`, \`lastfm-top\`, \`lookingforgroup\`, \`wordfight\`, \`translate\`, \`serveravatar\`, \`playstore\`, \`appstore\`, \`leaderboard\`, \`lyrics\`, \`movie\`, \`pinterest\`, \`youtubedownload\``,
         },
         {
           name:
